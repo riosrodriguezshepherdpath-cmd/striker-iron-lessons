@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 2: The Heart of a Worker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 3px solid #000;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.1em;
+            line-height: 2;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson {
+            background: #f9f9f9;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #333;
+            font-size: 1.15em;
+            line-height: 1.9;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .question {
+            background: #ffe0e0;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff0000;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .answer-box {
+            margin: 20px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .answer-box textarea {
+            width: 100%;
+            padding: 18px;
+            border: 3px solid #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            transition: all 0.3s;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .answer-box textarea:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: #fffef0;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        .cursive-discipline {
+            background: linear-gradient(to bottom, transparent 92%, #999 92%);
+            background-size: 100% 45px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 3px solid #000;
+            min-height: 180px;
+        }
+        
+        .cursive-discipline label {
+            display: block;
+            font-weight: bold;
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+        }
+        
+        .cursive-discipline input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            font-size: 1.4em;
+            font-style: italic;
+            padding: 12px 5px;
+            color: #000;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 5px;
+        }
+        
+        .cursive-discipline input:focus {
+            outline: none;
+            background: rgba(255, 0, 0, 0.05);
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.15em;
+            line-height: 1.9;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: #e0e0e0;
+            border-top: 5px solid #000;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #8B0000 100%);
+            color: white;
+            padding: 22px 60px;
+            font-size: 1.6em;
+            font-weight: bold;
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .submit-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0,0,0,0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header h2 {
+                font-size: 1.1em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 2: THE HEART OF A WORKER</h2>
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, you need to understand something fundamental about reality. Work is not an inconvenience. It's your divine assignment. God created you to work before sin even entered the world. That means every task you're given is an opportunity to demonstrate character, build competence, and prove you can be trusted with greater responsibility. The difference between leaders and followers is simple. Leaders understand that excellence in small things qualifies you for big things. They don't complain about assignments. They execute with precision regardless of who's watching because they operate under divine accountability. Your mission today is to audit your stewardship and identify where you're cutting corners. Then fix it. Character is built in the details. Execute.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 1: THE THEOLOGY OF LABOR</div>
+            
+            <div class="lesson">
+                Work existed before the fall of man in Genesis 2:15, where God assigned Adam to cultivate and keep the garden, establishing labor as part of humanity's original design rather than divine punishment. This theological foundation means work is inherently dignified, purposeful, and reflective of the creative nature of God Himself, who worked six days to create the universe and rested on the seventh.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does understanding that work existed before sin change your perspective on daily labor?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="cursive-discipline">
+                <label>✍ CURSIVE DISCIPLINE (Write 5 times): "Labor is sacred, not secular"</label>
+                <input type="text" placeholder="Line 1">
+                <input type="text" placeholder="Line 2">
+                <input type="text" placeholder="Line 3">
+                <input type="text" placeholder="Line 4">
+                <input type="text" placeholder="Line 5">
+            </div>
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 2: DILIGENCE AS STRATEGIC DISCIPLINE</div>
+            
+            <div class="lesson">
+                Proverbs 21:5 states that the plans of the diligent lead to abundance while haste leads to poverty, establishing diligence not as mere effort but as strategic, sustained discipline applied consistently over time. Diligence creates compound returns in skill development, reputation, and achievement, while sporadic effort produces sporadic results regardless of intensity.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does Scripture emphasize consistent diligence over intense but inconsistent effort?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="cursive-discipline">
+                <label>✍ CURSIVE DISCIPLINE (Write 5 times): "Consistency compounds, intensity fades"</label>
+                <input type="text" placeholder="Line 1">
+                <input type="text" placeholder="Line 2">
+                <input type="text" placeholder="Line 3">
+                <input type="text" placeholder="Line 4">
+                <input type="text" placeholder="Line 5">
+            </div>
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 3: THE ETHICS OF EXCELLENCE</div>
+            
+            <div class="lesson">
+                Colossians 3:23 commands believers to work as unto the Lord rather than unto men, establishing a vertical accountability that transcends horizontal supervision and creates an internal standard of excellence. This principle means your work quality should remain constant regardless of who is observing, as you operate under the assumption of continuous divine evaluation.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does working "as unto the Lord" solve the principal-agent problem in economics?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="cursive-discipline">
+                <label>✍ CURSIVE DISCIPLINE (Write 5 times): "Divine accountability transcends human oversight"</label>
+                <input type="text" placeholder="Line 1">
+                <input type="text" placeholder="Line 2">
+                <input type="text" placeholder="Line 3">
+                <input type="text" placeholder="Line 4">
+                <input type="text" placeholder="Line 5">
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 4: SLOTHFULNESS AS SYSTEMIC FAILURE</div>
+            
+            <div class="lesson">
+                The book of Proverbs repeatedly warns against slothfulness not merely as laziness but as a character defect that produces cascading systemic failures in provision, preparation, and reliability. Proverbs 24:30-34 describes the slothful man's field as overgrown and broken down, illustrating how neglect in small daily disciplines creates compound deterioration in all areas of stewardship.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does Scripture treat slothfulness as a moral failing rather than merely a productivity issue?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="cursive-discipline">
+                <label>✍ CURSIVE DISCIPLINE (Write 5 times): "Neglect compounds, discipline multiplies"</label>
+                <input type="text" placeholder="Line 1">
+                <input type="text" placeholder="Line 2">
+                <input type="text" placeholder="Line 3">
+                <input type="text" placeholder="Line 4">
+                <input type="text" placeholder="Line 5">
+            </div>
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 5: VOCATION AS DIVINE ASSIGNMENT</div>
+            
+            <div class="lesson">
+                The Reformation doctrine of vocation teaches that God sovereignly assigns individuals to specific roles and tasks, meaning all legitimate work becomes sacred service when performed with faithful stewardship. This theology destroys the false hierarchy between sacred and secular work, as a farmer faithful to his calling glorifies God equally to a pastor faithful to his, because faithfulness in assignment matters more than perceived spiritual prestige.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does the doctrine of vocation eliminate class-based hierarchies of work value?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="cursive-discipline">
+                <label>✍ CURSIVE DISCIPLINE (Write 5 times): "All faithful work glorifies God equally"</label>
+                <input type="text" placeholder="Line 1">
+                <input type="text" placeholder="Line 2">
+                <input type="text" placeholder="Line 3">
+                <input type="text" placeholder="Line 4">
+                <input type="text" placeholder="Line 5">
+            </div>
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>⚙ PHYSICAL MISSION: THE STEWARDSHIP AUDIT</h3>
+            <p>
+                Conduct a comprehensive audit of your current stewardship responsibilities across five domains: academic, domestic, physical, relational, and spiritual. Create a matrix documenting each responsibility, your current execution level rated one through ten, and specific areas requiring systematic improvement. Develop a 30-day action plan identifying one key improvement in each domain with measurable outcomes and accountability mechanisms.
+            </p>
+            <div class="bible-verse">
+                <strong>📖 BIBLICAL FOUNDATION:</strong><br>
+                Luke 16:10 - "One who is faithful in a very little is also faithful in much, and one who is dishonest in a very little is also dishonest in much." This principle establishes that your character is revealed in small responsibilities, and God evaluates your readiness for greater assignments based on your faithfulness in current stewardship.
+            </div>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.3em; margin-bottom: 25px; color: #000; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                MISSION COMPLETE? SUBMIT YOUR WORK.
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✓ SUBMIT PROTOCOL
+            </a>
+            <p style="margin-top: 25px; color: #666; font-size: 0.95em; font-family: 'Courier New', monospace;">
+                (Submission form will open in new window)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
