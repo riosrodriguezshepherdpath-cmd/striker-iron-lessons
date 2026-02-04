@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 1: Math</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border: 3px solid #000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #8B0000;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+            border-bottom: 3px solid #000;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #4a0000;
+            border: 2px solid #000;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            width: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.3s ease;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .time-estimate {
+            background: #333;
+            color: #ff0000;
+            padding: 12px 20px;
+            border: 2px solid #ff0000;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #ff0000;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px 18px 90px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson-chunk {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 18px;
+            border-left: 5px solid #333;
+            font-size: 1.25em;
+            line-height: 2.2;
+        }
+        
+        .fraction-visual {
+            background: #E3F2FD;
+            padding: 25px;
+            border: 3px solid #000;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .fraction-visual .big-fraction {
+            font-size: 4.5em;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .fraction-visual .explanation {
+            font-size: 1.3em;
+            color: #0D47A1;
+            line-height: 2;
+        }
+        
+        .critical-principle {
+            background: #FFEBEE;
+            border: 3px solid #ff0000;
+            padding: 18px;
+            margin: 20px 0;
+            font-size: 1.25em;
+            line-height: 2;
+        }
+        
+        .critical-principle::before {
+            content: "⚠ CRITICAL PRINCIPLE: ";
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .break-reminder {
+            background: #333;
+            color: #ff0000;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #ff0000;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .example-box {
+            background: #FFF9E6;
+            border-left: 5px solid #ff0000;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .checklist {
+            background: #2d2d2d;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #000;
+        }
+        
+        .checklist h4 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .checkbox-item {
+            background: #1a1a1a;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ff0000;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #333;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #ff0000;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.1em;
+            cursor: pointer;
+            flex-grow: 1;
+            color: #fff;
+            line-height: 1.8;
+        }
+        
+        .mission-complete {
+            background: linear-gradient(135deg, #8B0000, #4a0000);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 20px;
+        }
+        
+        .next-steps {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px;
+            text-align: center;
+            border-top: 5px solid #ff0000;
+        }
+        
+        .next-steps h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .next-steps p {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        
+        .next-steps .instruction {
+            background: #ff0000;
+            padding: 25px;
+            margin: 25px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: 3px solid #000;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 1: THE LOGIC - FRACTION FUNDAMENTALS</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 25 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, today we address fractional mathematics. Fractions quantify partial quantities. Mission success rates. Resource allocation. Tactical percentages. All require fraction literacy. This is foundational. Master fractions now. They compound into advanced math later. Execute.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Fraction Definition & Structure</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                A fraction represents part of a whole. It quantifies incomplete sets.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">3/8</div>
+                <div class="explanation">
+                    This is fractional notation.<br>
+                    Two components: numerator and denominator.
+                </div>
+            </div>
+            
+            <div class="critical-principle">
+                Fractions are division operators. The bar represents division.
+            </div>
+            
+            <div class="lesson-chunk">
+                Structure analysis: Top number over bottom number.
+            </div>
+            
+            <div class="example-box">
+                <strong>TACTICAL EXAMPLE:</strong> Unit has 8 missions assigned. Unit completes 3 successfully. Success rate expressed as fraction: 3/8.
+            </div>
+            
+            <div class="lesson-chunk">
+                The fraction bar means "out of" or "divided by."
+            </div>
+            
+            <div class="lesson-chunk">
+                3/8 translates to: "3 out of 8" or "3 divided by 8."
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Fraction definition understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Structural components identified</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Numerator Analysis</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                The numerator is the top number. It quantifies parts obtained.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">5/10</div>
+                <div class="explanation">
+                    Numerator: 5<br>
+                    Represents quantity achieved or possessed.
+                </div>
+            </div>
+            
+            <div class="critical-principle">
+                Numerator indicates success quantity in ratio analysis.
+            </div>
+            
+            <div class="example-box">
+                <strong>RESOURCE ALLOCATION:</strong> Supply depot contains 10 crates. Your squad requisitions 5 crates. Numerator: 5. Your squad obtained 5 units.
+            </div>
+            
+            <div class="example-box">
+                <strong>MISSION SUCCESS:</strong> Battalion executes 10 operations. Battalion achieves 7 objectives. Numerator: 7. Success count.
+            </div>
+            
+            <div class="lesson-chunk">
+                The numerator cannot exceed the denominator in proper fractions.
+            </div>
+            
+            <div class="lesson-chunk">
+                You cannot obtain 10 crates from an 8-crate depot. Improper fraction.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Numerator function understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Tactical applications recognized</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HYDRATION AND POSTURAL ADJUSTMENT RECOMMENDED
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Denominator Analysis</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                The denominator is the bottom number. It quantifies total available units.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">5/10</div>
+                <div class="explanation">
+                    Denominator: 10<br>
+                    Represents total quantity or maximum capacity.
+                </div>
+            </div>
+            
+            <div class="critical-principle">
+                Denominator establishes operational scale. Context for numerator.
+            </div>
+            
+            <div class="example-box">
+                <strong>RESOURCE ALLOCATION:</strong> Supply depot contains 10 total crates. Denominator: 10. Total available resources.
+            </div>
+            
+            <div class="example-box">
+                <strong>MISSION SUCCESS:</strong> Battalion assigned 10 total operations. Denominator: 10. Total mission count.
+            </div>
+            
+            <div class="lesson-chunk">
+                The denominator defines how the whole is divided.
+            </div>
+            
+            <div class="lesson-chunk">
+                Denominator of 4: whole divided into 4 equal parts.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Denominator function understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Scale establishment recognized</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Fraction Nomenclature</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Verbal fraction expression follows specific protocol.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">3/4</div>
+                <div class="explanation">
+                    Pronunciation: "three fourths" or "three quarters"
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Protocol: State numerator normally. State denominator with ordinal suffix.
+            </div>
+            
+            <div class="example-box">
+                <strong>NOMENCLATURE REFERENCE:</strong><br>
+                • 2 → "halves" (1/2 = one half)<br>
+                • 3 → "thirds" (2/3 = two thirds)<br>
+                • 4 → "fourths" or "quarters" (3/4 = three fourths)<br>
+                • 5 → "fifths" (4/5 = four fifths)<br>
+                • 8 → "eighths" (7/8 = seven eighths)<br>
+                • 10 → "tenths" (9/10 = nine tenths)
+            </div>
+            
+            <div class="critical-principle">
+                Precise nomenclature prevents miscommunication in tactical operations.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Verbal expression protocol mastered</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ordinal suffix usage understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Operational Applications</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Fractions appear throughout military and tactical contexts.
+            </div>
+            
+            <div class="example-box">
+                <strong>MISSION SUCCESS RATES:</strong><br>
+                • Objectives achieved: 4 out of 10 missions = 4/10<br>
+                • Target acquisition: 15 out of 20 engagements = 15/20<br>
+                • Equipment operational: 60 out of 90 days = 60/90
+            </div>
+            
+            <div class="example-box">
+                <strong>RESOURCE MANAGEMENT:</strong><br>
+                • Ammunition expended: 8 out of 10 magazines = 8/10<br>
+                • Personnel deployment: 3 out of 5 squads = 3/5<br>
+                • Supply consumption: 8 out of 24 MREs = 8/24
+            </div>
+            
+            <div class="critical-principle">
+                Fraction literacy enables precise operational analysis and reporting.
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>⚙ PHYSICAL MISSION: FRACTION RECONNAISSANCE</h3>
+                <p>
+                    <strong>OBJECTIVE:</strong> Identify 5 fractional quantities in operational context.
+                </p>
+                <p>
+                    <strong>EXECUTION:</strong> This week, document 5 real-world fractions from your environment.
+                </p>
+                <p>
+                    <strong>EXAMPLES:</strong><br>
+                    • Task completion rates (homework, chores)<br>
+                    • Time allocation (hours spent on activities)<br>
+                    • Success metrics (accuracy rates, completion percentages)<br>
+                    • Resource consumption (water bottles, supplies)
+                </p>
+                <p>
+                    <strong>SUBMISSION:</strong> Report fractions in worksheet. Include context and numerical values.
+                </p>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Operational applications catalogued</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Physical mission parameters understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to complete worksheet submission</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - MISSION ACCOMPLISHED
+        </div>
+        
+        <!-- NEXT STEPS -->
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: WORKSHEET SUBMISSION ⚡</h2>
+            
+            <p>Lesson phase complete. Proceed to assessment protocol.</p>
+            
+            <div class="instruction">
+                📝 ACCESS GOOGLE CLASSROOM<br>
+                LOCATE: "Week 1 Day 1 - Math Worksheet"<br>
+                COMPLETE ALL FIELDS<br>
+                SUBMIT WHEN READY
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                Solid work, officer. 💪<br>
+                Mathematical precision builds operational excellence.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            const completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' OF 5 COMPLETE';
+        }
+    </script>
+</body>
+</html>
