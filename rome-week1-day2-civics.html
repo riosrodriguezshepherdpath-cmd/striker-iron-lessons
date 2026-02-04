@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 2: Federalist Structure and Jurisdictional Authority</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 3px solid #000;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.1em;
+            line-height: 2;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson {
+            background: #f9f9f9;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #333;
+            font-size: 1.15em;
+            line-height: 1.9;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .gov-structure {
+            background: #E8EAF6;
+            padding: 20px;
+            border: 3px solid #000;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .gov-structure .level {
+            color: #1A237E;
+            font-weight: bold;
+            font-size: 1.4em;
+            display: block;
+            margin: 15px 0 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .gov-structure .description {
+            color: #283593;
+            font-size: 1.05em;
+            display: block;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #3F51B5;
+        }
+        
+        .question {
+            background: #ffe0e0;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff0000;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .answer-box {
+            margin: 20px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .answer-box textarea {
+            width: 100%;
+            padding: 18px;
+            border: 3px solid #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            transition: all 0.3s;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .answer-box textarea:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: #fffef0;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.15em;
+            line-height: 1.9;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: #e0e0e0;
+            border-top: 5px solid #000;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #8B0000 100%);
+            color: white;
+            padding: 22px 60px;
+            font-size: 1.6em;
+            font-weight: bold;
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .submit-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0,0,0,0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header h2 {
+                font-size: 1.1em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 2: THE CITIZENS - FEDERALIST STRUCTURE</h2>
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, Arizona operates under a federalist system where power is divided between state and local governments, with cities governed by mayors and councils while the state is governed by a governor and legislature. This division exists not by accident but by strategic design: local governments can respond quickly to community-specific needs while state governments manage broader regional interests and coordinate resources across multiple jurisdictions. Understanding jurisdictional authority and the division of governmental powers is foundational to comprehending how policy is executed, how resources are allocated, and how citizens interface with governmental systems. Today's mission focuses on structural analysis of governmental organization. Master the hierarchy. Understand the authority chains. Execute.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 1: FEDERALISM AS STRUCTURAL DESIGN</div>
+            
+            <div class="lesson">
+                Federalism is the constitutional division of power between different levels of government, creating overlapping yet distinct jurisdictions that prevent excessive power concentration while enabling responsive governance. Arizona's system exemplifies vertical federalism, where municipal corporations (cities) possess delegated authority from the state, which itself possesses reserved powers under the Tenth Amendment, creating a hierarchical structure where each level has defined constitutional responsibilities and limitations.
+            </div>
+            
+            <div class="gov-structure">
+                <span class="level">FEDERAL LEVEL:</span>
+                <span class="description">Constitutional powers enumerated in Article I Section 8: national defense, interstate commerce regulation, currency, immigration, foreign policy. Supremacy Clause establishes federal law precedence over state law in areas of federal jurisdiction.</span>
+                
+                <span class="level">STATE LEVEL:</span>
+                <span class="description">Reserved powers under Tenth Amendment: education policy, intrastate commerce, criminal law, property law, election administration, public health regulation. Arizona Constitution establishes executive, legislative, and judicial branches at state level.</span>
+                
+                <span class="level">LOCAL LEVEL:</span>
+                <span class="description">Delegated authority from state through municipal charters: zoning, local taxation, public works, emergency services, parks and recreation. Operates as administrative subdivision of state government rather than sovereign entity.</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does Arizona's federalist system separate local municipal authority from state executive authority rather than creating a unified single-tier government, and what strategic advantages does this structural division provide?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 2: MUNICIPAL EXECUTIVE AUTHORITY</div>
+            
+            <div class="lesson">
+                Municipal mayors serve as chief executives of incorporated cities, wielding authority derived from city charters approved by voters and constrained by state enabling legislation. Mayoral power varies significantly based on governmental structure: strong-mayor systems concentrate executive authority in the mayor's office with independent budgetary and appointment powers, while weak-mayor systems distribute authority through city councils with the mayor serving primarily ceremonial functions, demonstrating how institutional design shapes effective governance capacity.
+            </div>
+            
+            <div class="gov-structure">
+                <span class="level">MAYORAL RESPONSIBILITIES:</span>
+                <span class="description">
+                • Execute and enforce municipal ordinances within city limits<br>
+                • Prepare and propose municipal budget for council approval<br>
+                • Appoint department heads and administrative officials (in strong-mayor systems)<br>
+                • Serve as ceremonial representative of city in official capacity<br>
+                • Exercise veto power over council legislation (varies by charter)<br>
+                • Coordinate emergency response and public safety operations
+                </span>
+                
+                <span class="level">JURISDICTIONAL LIMITS:</span>
+                <span class="description">
+                • Cannot exceed authority granted by state constitution and enabling legislation<br>
+                • Must operate within budgetary constraints approved by city council<br>
+                • Cannot unilaterally impose taxes without council authorization<br>
+                • Subject to state preemption on matters of statewide concern
+                </span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does the structural distinction between strong-mayor and weak-mayor systems affect executive decision-making capacity and governmental efficiency, and what trade-offs exist between concentrated authority and distributed power?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 3: STATE EXECUTIVE AUTHORITY</div>
+            
+            <div class="lesson">
+                The Arizona Governor serves as chief executive of the state, wielding constitutionally enumerated powers that supersede municipal authority while remaining subordinate to federal law in areas of federal jurisdiction. Gubernatorial authority includes executive order issuance, legislative agenda setting through State of the State addresses, budgetary proposal formulation, and appointment power for executive department heads and judicial vacancies, creating centralized executive control over state administrative apparatus subject to legislative oversight and judicial review.
+            </div>
+            
+            <div class="gov-structure">
+                <span class="level">GUBERNATORIAL POWERS:</span>
+                <span class="description">
+                • Sign or veto legislation passed by Arizona Legislature<br>
+                • Issue executive orders with force of law within constitutional limits<br>
+                • Appoint directors of state agencies and fill judicial vacancies<br>
+                • Command Arizona National Guard as commander-in-chief<br>
+                • Grant pardons, commutations, and reprieves for state offenses<br>
+                • Convene special legislative sessions on matters requiring immediate attention<br>
+                • Represent Arizona in interstate compacts and federal negotiations
+                </span>
+                
+                <span class="level">CONSTITUTIONAL CONSTRAINTS:</span>
+                <span class="description">
+                • Subject to legislative override of vetoes with two-thirds supermajority<br>
+                • Cannot appropriate funds without legislative authorization<br>
+                • Executive orders subject to judicial review for constitutional compliance<br>
+                • Term-limited to two consecutive four-year terms under Arizona Constitution
+                </span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does the Arizona Constitution grant the governor authority to veto legislation yet subject that veto to legislative override, and what principle of separated powers does this mechanism reflect?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 4: JURISDICTIONAL BOUNDARIES AND PREEMPTION</div>
+            
+            <div class="lesson">
+                State preemption doctrine establishes that state law supersedes conflicting municipal ordinances on matters of statewide concern, preventing jurisdictional fragmentation and ensuring policy consistency across Arizona. This doctrine operates through express preemption where state statutes explicitly prohibit local regulation, implied preemption where comprehensive state regulatory schemes occupy the field, and conflict preemption where local ordinances make state law compliance impossible, demonstrating how hierarchical authority resolves jurisdictional disputes in federalist systems.
+            </div>
+            
+            <div class="gov-structure">
+                <span class="level">LOCAL JURISDICTION:</span>
+                <span class="description">
+                • Zoning and land use regulation within city boundaries<br>
+                • Municipal taxation within statutory limits<br>
+                • Local traffic ordinances on city streets<br>
+                • Parks and recreation facility management<br>
+                • Building codes and permit issuance<br>
+                • Local emergency services coordination
+                </span>
+                
+                <span class="level">STATE JURISDICTION:</span>
+                <span class="description">
+                • Criminal law and sentencing guidelines statewide<br>
+                • Education standards and curriculum requirements<br>
+                • Professional licensing and regulatory oversight<br>
+                • State highway system and transportation infrastructure<br>
+                • Water rights allocation and environmental regulation<br>
+                • Election law and voting procedures
+                </span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does state preemption doctrine prevent cities from creating conflicting regulations on statewide matters, and what would be the systemic consequences of allowing complete municipal regulatory autonomy?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 5: SUBSIDIARITY AND OPTIMAL GOVERNANCE LEVELS</div>
+            
+            <div class="lesson">
+                Subsidiarity principle posits that governmental functions should be performed at the lowest competent level, allocating decisions to local authorities when local knowledge provides advantages and elevating to state or federal levels only when coordination, standardization, or resource pooling creates efficiencies. This principle explains why trash collection remains municipal while highway systems are state-managed and national defense is federal, demonstrating how optimal jurisdictional assignment balances localized responsiveness against economies of scale and coordination benefits.
+            </div>
+            
+            <div class="gov-structure">
+                <span class="level">SUBSIDIARITY IN PRACTICE:</span>
+                <span class="description">
+                LOCAL OPTIMAL: Neighborhood park maintenance (local knowledge, immediate responsiveness)<br>
+                STATE OPTIMAL: Interstate highway maintenance (coordination, standardization, funding scale)<br>
+                FEDERAL OPTIMAL: National defense (indivisible public good, nationwide coordination)<br><br>
+                LOCAL OPTIMAL: Residential zoning decisions (community character, local preference)<br>
+                STATE OPTIMAL: Water resource allocation (interstate externalities, scarcity management)<br>
+                FEDERAL OPTIMAL: Air traffic control (national network, safety standardization)
+                </span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does subsidiarity principle enable Arizona's federalist system to balance local autonomy with state coordination, and why is this balance essential for effective governance across diverse communities with varying needs?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>⚙ PHYSICAL MISSION: JURISDICTIONAL MAPPING AND POLICY ANALYSIS</h3>
+            <p>
+                Conduct comprehensive research on current policy disputes between Arizona state government and municipal governments in the state's three largest cities: Phoenix, Tucson, and Mesa. Identify one active preemption conflict where state law has overridden or is attempting to override local ordinances. Document the specific policy issue, the arguments presented by state officials for preemption, the arguments presented by municipal officials for local authority, and the constitutional or statutory basis for each position. Create a formal policy brief analyzing which level of government is optimally suited to regulate the disputed matter based on subsidiarity principles, externality considerations, and resource allocation efficiency. Your deliverable should demonstrate mastery of federalist structure analysis and policy-level reasoning about optimal jurisdictional assignment.
+            </p>
+            <div class="bible-verse">
+                <strong>📖 BIBLICAL FOUNDATION:</strong><br>
+                Romans 13:1-7 - "Let every person be subject to the governing authorities. For there is no authority except from God, and those that exist have been instituted by God." This passage establishes divine ordination of governmental authority while implicitly recognizing that such authority operates through institutional structures. Understanding how governmental power is divided and exercised enables citizens to engage responsibly with civic institutions, honoring legitimate authority while maintaining accountability through proper channels, which reflects biblical principles of order, justice, and stewardship in civic life.
+            </div>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.3em; margin-bottom: 25px; color: #000; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                MISSION COMPLETE? SUBMIT YOUR WORK.
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✓ SUBMIT PROTOCOL
+            </a>
+            <p style="margin-top: 25px; color: #666; font-size: 0.95em; font-family: 'Courier New', monospace;">
+                (Submission form will open in new window)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
