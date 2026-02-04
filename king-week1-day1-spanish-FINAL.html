@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 1: Spanish</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8800 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid #CC5500;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.3s ease;
+        }
+        
+        .coach-script {
+            background: #FFE5CC;
+            border-left: 5px solid #FF6600;
+            padding: 25px;
+            margin: 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .coach-script strong {
+            color: #FF6600;
+            font-size: 1.3em;
+        }
+        
+        .time-estimate {
+            background: #E3F2FD;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            color: #1565C0;
+            font-weight: bold;
+            border: 2px solid #2196F3;
+        }
+        
+        .phase {
+            background: #f9f9f9;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #FF6600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #FF6600;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #FF6600;
+            color: white;
+            padding: 15px 20px 15px 80px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lesson-chunk {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5298;
+            font-size: 1.3em;
+            line-height: 2.2;
+        }
+        
+        .phrase-box {
+            background: #FFF9E6;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #FFA726;
+        }
+        
+        .phrase-box .spanish {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #E65100;
+            margin-bottom: 10px;
+        }
+        
+        .phrase-box .pronunciation {
+            font-size: 1.5em;
+            color: #F57C00;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .phrase-box .english {
+            font-size: 1.6em;
+            color: #BF360C;
+            font-weight: bold;
+        }
+        
+        .key-point {
+            background: #FFEB3B;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #F57F17;
+            font-weight: bold;
+            font-size: 1.3em;
+            line-height: 2;
+        }
+        
+        .break-reminder {
+            background: #FFF9C4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #FFA726;
+            text-align: center;
+            font-size: 1.2em;
+            color: #F57C00;
+            font-weight: bold;
+        }
+        
+        .practice-box {
+            background: #E3F2FD;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #2196F3;
+        }
+        
+        .practice-box h4 {
+            color: #1565C0;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        
+        .practice-box .dialogue {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .checklist {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #4CAF50;
+        }
+        
+        .checklist h4 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .checkbox-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 2px solid #4CAF50;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #C8E6C9;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.15em;
+            cursor: pointer;
+            flex-grow: 1;
+            line-height: 1.8;
+        }
+        
+        .victory-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #FF8C00;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 15px;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .next-steps {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid #FF6600;
+        }
+        
+        .next-steps h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+        
+        .next-steps p {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-bottom: 15px;
+        }
+        
+        .next-steps .instruction {
+            background: #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header h2 {
+                font-size: 1.2em;
+            }
+            
+            .phase, .coach-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .phase-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <h2>Week 1 Day 1: On the Field - Basic Spanish Greetings</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            YOUR PROGRESS TODAY
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 of 5 Complete</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱️ TOTAL TIME: About 20 minutes
+        </div>
+        
+        <div class="coach-script">
+            <strong>COACH'S SCRIPT:</strong><br><br>
+            What's up striker! Today we start learning Spanish! Why Spanish? Because millions of people speak it. Including many soccer players! When you know Spanish, you can talk to more teammates. More coaches. More friends! Today we learn the BASICS. How to say hello. How to introduce yourself. Let's go!
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Saying Hello</div>
+            <div class="time-estimate">⏱️ 4 minutes</div>
+            
+            <div class="lesson-chunk">
+                The first thing you need to know: How to say HELLO!
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Hola</div>
+                <div class="pronunciation">(OH-lah)</div>
+                <div class="english">Hello / Hi</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                That's it! "Hola" is how you greet someone in Spanish.
+            </div>
+            
+            <div class="key-point">
+                🔑 PRACTICE: Say "Hola" out loud 5 times right now!
+            </div>
+            
+            <div class="lesson-chunk">
+                You can say "Hola" to ANYONE. Your friends. Your teacher. A stranger.
+            </div>
+            
+            <div class="lesson-chunk">
+                It works for hello AND hi. Easy!
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Buenos días</div>
+                <div class="pronunciation">(BWEH-nos DEE-ahs)</div>
+                <div class="english">Good morning</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Use "Buenos días" in the morning. Before lunch.
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 1 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can say "Hola"</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can say "Buenos días"</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ QUICK BREAK: Say "Hola" to someone nearby!
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Introducing Yourself</div>
+            <div class="time-estimate">⏱️ 4 minutes</div>
+            
+            <div class="lesson-chunk">
+                After saying hello, tell them your NAME!
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Me llamo...</div>
+                <div class="pronunciation">(may YAH-moh...)</div>
+                <div class="english">My name is...</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Example: "Me llamo King" = "My name is King"
+            </div>
+            
+            <div class="key-point">
+                🔑 PRACTICE: Say "Me llamo [YOUR NAME]" out loud 3 times!
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">¿Cómo te llamas?</div>
+                <div class="pronunciation">(KOH-moh tay YAH-mahs)</div>
+                <div class="english">What is your name?</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Use this to ask someone THEIR name.
+            </div>
+            
+            <div class="practice-box">
+                <h4>🎯 PRACTICE CONVERSATION:</h4>
+                <div class="dialogue">
+                    <strong>You:</strong> Hola! Me llamo King.<br>
+                    <strong>Friend:</strong> Hola! Me llamo Maria.<br>
+                    <strong>You:</strong> Nice to meet you!
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 2 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can introduce myself in Spanish</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can ask someone their name</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ HALFWAY THERE! Practice saying your name in Spanish!
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Saying Goodbye</div>
+            <div class="time-estimate">⏱️ 4 minutes</div>
+            
+            <div class="lesson-chunk">
+                When you leave, you need to say GOODBYE!
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Adiós</div>
+                <div class="pronunciation">(ah-dee-OHS)</div>
+                <div class="english">Goodbye</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                "Adiós" is formal goodbye. Use it when you're leaving for a while.
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Hasta luego</div>
+                <div class="pronunciation">(AH-stah loo-WAY-goh)</div>
+                <div class="english">See you later</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                "Hasta luego" means you'll see them again soon!
+            </div>
+            
+            <div class="key-point">
+                🔑 SOCCER TIP: Say "Hasta luego" to your teammates after practice!
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Nos vemos</div>
+                <div class="pronunciation">(nohs VEH-mohs)</div>
+                <div class="english">See you</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                "Nos vemos" is casual. Like saying "See ya!"
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 3 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I know 3 ways to say goodbye</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can pronounce all 3</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Being Polite</div>
+            <div class="time-estimate">⏱️ 4 minutes</div>
+            
+            <div class="lesson-chunk">
+                Always be polite! Here are two important words:
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Por favor</div>
+                <div class="pronunciation">(por fah-VOR)</div>
+                <div class="english">Please</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Always say "por favor" when you ask for something!
+            </div>
+            
+            <div class="phrase-box">
+                <div class="spanish">Gracias</div>
+                <div class="pronunciation">(GRAH-see-ahs)</div>
+                <div class="english">Thank you</div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Always say "gracias" when someone helps you!
+            </div>
+            
+            <div class="key-point">
+                🔑 REMEMBER: Polite people win respect!
+            </div>
+            
+            <div class="practice-box">
+                <h4>🎯 PRACTICE:</h4>
+                <div class="dialogue">
+                    <strong>You:</strong> Can I have water, por favor?<br>
+                    <strong>Coach:</strong> Here you go!<br>
+                    <strong>You:</strong> Gracias!
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 4 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can say "por favor"</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can say "gracias"</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ ALMOST DONE! One more phase!
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Putting It All Together</div>
+            <div class="time-estimate">⏱️ 4 minutes</div>
+            
+            <div class="lesson-chunk">
+                Now you know enough for a REAL conversation!
+            </div>
+            
+            <div class="practice-box">
+                <h4>🎯 FULL CONVERSATION:</h4>
+                <div class="dialogue">
+                    <strong>You:</strong> Hola! Buenos días!<br>
+                    <strong>New friend:</strong> Hola! Buenos días!<br>
+                    <strong>You:</strong> Me llamo King. ¿Cómo te llamas?<br>
+                    <strong>New friend:</strong> Me llamo Carlos.<br>
+                    <strong>You:</strong> Nice to meet you!<br>
+                    <strong>Carlos:</strong> You too!<br>
+                    <strong>You:</strong> Hasta luego!<br>
+                    <strong>Carlos:</strong> Adiós!
+                </div>
+            </div>
+            
+            <div class="key-point">
+                🔑 YOU JUST HAD A CONVERSATION IN SPANISH!
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>🏋️ PHYSICAL MISSION: 3 Spanish Conversations</h3>
+                <p>
+                    This week, have 3 conversations using your new Spanish!
+                </p>
+                <p>
+                    Each conversation must include:
+                </p>
+                <p>
+                    • Hola (hello)<br>
+                    • Me llamo... (your name)<br>
+                    • Gracias or por favor (be polite)<br>
+                    • Adiós or hasta luego (goodbye)
+                </p>
+                <p style="margin-top: 20px;">
+                    <strong>Talk to family, friends, or teammates! Write down who you talked to!</strong>
+                </p>
+                <div class="bible-verse">
+                    <strong>📖 BIBLE CONNECTION:</strong><br>
+                    Acts 2:4 - The disciples spoke in different languages to share God's love. When you learn Spanish, you can connect with MORE people and share kindness with MORE friends!
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 5 COMPLETION CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can have a basic Spanish conversation</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand the Physical Mission</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready to complete my worksheet</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="victory-badge">
+            🏆 YOU FINISHED THE LESSON! ¡EXCELENTE! 🏆
+        </div>
+        
+        <!-- NEXT STEPS -->
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: COMPLETE YOUR WORKSHEET ⚡</h2>
+            
+            <p>You just learned basic Spanish greetings!</p>
+            
+            <p>Now it's time to show what you learned.</p>
+            
+            <div class="instruction">
+                📝 GO TO GOOGLE CLASSROOM<br>
+                Find "Week 1 Day 1 - Spanish Worksheet"<br>
+                Answer the questions<br>
+                Submit when done!
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                ¡Muy bien, striker! (Very good!) 💪<br>
+                You're speaking Spanish!
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        let completedPhases = 0;
+        
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            // Calculate phases (3 checkboxes per phase)
+            completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' of 5 Complete';
+        }
+    </script>
+</body>
+</html>
