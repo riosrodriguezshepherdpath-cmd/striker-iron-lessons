@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 2: Fractions on the Field</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8800 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid #CC5500;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .coach-script {
+            background: #FFE5CC;
+            border-left: 5px solid #FF6600;
+            padding: 25px;
+            margin: 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .coach-script strong {
+            color: #FF6600;
+            font-size: 1.2em;
+        }
+        
+        .phase {
+            background: #f9f9f9;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #FF6600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .phase-header {
+            background: #FF6600;
+            color: white;
+            padding: 15px 20px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lesson {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5298;
+            font-size: 1.1em;
+        }
+        
+        .fraction-visual {
+            background: #E3F2FD;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #2196F3;
+            text-align: center;
+        }
+        
+        .fraction-visual .fraction {
+            font-size: 3em;
+            color: #1565C0;
+            font-weight: bold;
+            margin: 15px 0;
+            font-family: 'Arial Black', Arial, sans-serif;
+        }
+        
+        .fraction-visual .explanation {
+            font-size: 1.2em;
+            color: #0D47A1;
+            margin-top: 10px;
+        }
+        
+        .question {
+            background: #FFF3E0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF8800;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .answer-box {
+            margin: 15px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .answer-box input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #2a5298;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            transition: all 0.3s;
+        }
+        
+        .answer-box input[type="text"]:focus {
+            outline: none;
+            border-color: #FF6600;
+            background: white;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+        
+        .practice-problems {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #4CAF50;
+        }
+        
+        .practice-problems h4 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .practice-problems input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 40px 30px;
+            background: #f0f0f0;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header h2 {
+                font-size: 1.2em;
+            }
+            
+            .phase, .coach-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <h2>Week 1 Day 2: The Team Captains - Fractions on the Field</h2>
+        </div>
+        
+        <div class="coach-script">
+            <strong>COACH'S SCRIPT:</strong><br><br>
+            Alright striker, today we're talking fractions, and I know what you're thinking. Math? On the field? Listen up. Every game you play involves fractions. You control 3 out of 4 zones? That's three-fourths of the field. Your team scores 2 goals out of 5 shots? That's two-fifths shooting accuracy. Fractions help you understand parts of a whole, and that's critical for reading the game. The top players know their stats, they know what portion of passes they complete, they know what fraction of the game they dominated. Today you're learning to see the field in fractions, and once you do, you'll understand the game at a whole new level. Let's break it down!
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-header">Phase 1: What is a Fraction?</div>
+            
+            <div class="lesson">
+                A fraction represents a part of something whole. When you split a pizza into 8 equal slices and eat 3 slices, you've eaten 3/8 of the pizza. The bottom number is called the denominator and tells you how many equal parts the whole is divided into, and the top number is called the numerator and tells you how many of those parts you're talking about.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="fraction">3/8</div>
+                <div class="explanation">
+                    3 = Numerator (parts you have)<br>
+                    8 = Denominator (total equal parts)
+                </div>
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: If a soccer field is divided into 4 equal zones and your team controls 3 zones, what fraction of the field do you control?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here (example: 3/4)">
+            </div>
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-header">Phase 2: Fractions in Game Stats</div>
+            
+            <div class="lesson">
+                Soccer players use fractions to track their performance. If you take 10 shots and score 4 goals, your shooting fraction is 4/10, which coaches often call "4 out of 10." The bigger the top number gets compared to the bottom number, the better your stats. A player who scores 7 out of 10 is doing better than someone who scores 3 out of 10.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="fraction">4/10</div>
+                <div class="explanation">
+                    4 goals scored out of 10 shots taken<br>
+                    This is your shooting accuracy
+                </div>
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: If you complete 6 passes out of 8 attempts, what fraction represents your passing accuracy?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here">
+            </div>
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-header">Phase 3: Comparing Fractions</div>
+            
+            <div class="lesson">
+                When two fractions have the same bottom number (denominator), you can easily compare them by looking at the top number (numerator). If one player scores 5/10 goals and another scores 7/10 goals, the second player is doing better because 7 is bigger than 5. But when the denominators are different, like comparing 3/4 to 5/8, it's trickier and you need to find a common denominator.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="fraction">5/10  vs  7/10</div>
+                <div class="explanation">
+                    Same denominator = Easy comparison<br>
+                    7/10 is better than 5/10
+                </div>
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: Who has better stats: Player A who wins 4/10 tackles or Player B who wins 6/10 tackles?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here">
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-header">Phase 4: Adding Fractions with Same Denominators</div>
+            
+            <div class="lesson">
+                When fractions have the same denominator, adding them is simple. You just add the numerators (top numbers) and keep the denominator the same. If you run 2/8 of a mile in the morning and 3/8 of a mile in the afternoon, you've run 5/8 of a mile total. Think of it like pizza slices: if the slices are the same size, you just count how many you have total.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="fraction">2/8 + 3/8 = 5/8</div>
+                <div class="explanation">
+                    Add the numerators: 2 + 3 = 5<br>
+                    Keep the denominator: 8
+                </div>
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: If your team controls 1/4 of the field in the first half and gains another 2/4 in the second half, what fraction of the field do you control total?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here">
+            </div>
+            
+            <div class="practice-problems">
+                <h4>🎯 PRACTICE PROBLEMS: Try these additions</h4>
+                <input type="text" placeholder="1/5 + 2/5 = ?">
+                <input type="text" placeholder="3/10 + 4/10 = ?">
+                <input type="text" placeholder="2/6 + 3/6 = ?">
+            </div>
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-header">Phase 5: Real Game Scenarios</div>
+            
+            <div class="lesson">
+                Let's put fractions to work in real soccer situations. If your team plays 12 games and wins 9 of them, your winning fraction is 9/12. If you're on the field for 3/4 of the game and your team scores during that time, you were part of the action. Understanding fractions helps you see patterns in your game, track improvement, and set goals based on real numbers, not just feelings.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="fraction">9/12</div>
+                <div class="explanation">
+                    9 wins out of 12 games played<br>
+                    This is your team's winning record
+                </div>
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: If you play in 8 out of 10 games this season, what fraction of games did you play in?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here">
+            </div>
+            
+            <div class="practice-problems">
+                <h4>🎯 REAL GAME SCENARIOS: Solve these</h4>
+                <input type="text" placeholder="Your team has 15 players. If 11 start the game, what fraction starts?">
+                <input type="text" placeholder="You take 6 shots and 2 go on goal. What's your fraction on-target?">
+                <input type="text" placeholder="The game is 90 minutes. You play 60 minutes. What fraction did you play?">
+            </div>
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>🏋️ PHYSICAL MISSION: Track Your Fractions</h3>
+            <p>
+                Your mission is to track fractions in your real life for the next 24 hours. Record at least 5 different situations where you can use fractions. Examples: What fraction of your chores did you complete? What fraction of your homework is done? What fraction of dinner did you eat? What fraction of free throws did you make shooting hoops? Write down each situation as a fraction and explain what the numerator and denominator represent.
+            </p>
+            <div class="bible-verse">
+                <strong>📖 BIBLE CONNECTION:</strong><br>
+                Luke 16:10 - "Whoever can be trusted with very little can also be trusted with much." God cares about the details, even the small fractions of our work and effort. Whether you complete 2/10 or 9/10 of a task, God sees your effort. Learning to track fractions teaches you to pay attention to details and measure your faithfulness in small things, which prepares you for bigger responsibilities.
+            </div>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.2em; margin-bottom: 20px; color: #333;">
+                <strong>All done? Submit your completed work!</strong>
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✅ Submit Completed Work
+            </a>
+            <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                (This will open your submission form in a new tab)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
