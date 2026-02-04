@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 1: Spanish Formal Protocols</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 3px solid #000;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.1em;
+            line-height: 2;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson {
+            background: #f9f9f9;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #333;
+            font-size: 1.15em;
+            line-height: 1.9;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .spanish-protocol {
+            background: #FFF9E6;
+            padding: 20px;
+            border: 3px solid #000;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .spanish-protocol .formal {
+            color: #8B0000;
+            font-weight: bold;
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .spanish-protocol .pronunciation {
+            color: #666;
+            font-style: italic;
+            font-size: 1em;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .spanish-protocol .context {
+            color: #000;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid #ddd;
+        }
+        
+        .question {
+            background: #ffe0e0;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff0000;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .answer-box {
+            margin: 20px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .answer-box textarea {
+            width: 100%;
+            padding: 18px;
+            border: 3px solid #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            transition: all 0.3s;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .answer-box textarea:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: #fffef0;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        .protocol-practice {
+            background: #E8E8E8;
+            padding: 25px;
+            border: 3px solid #000;
+            margin: 25px 0;
+        }
+        
+        .protocol-practice h4 {
+            color: #8B0000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .protocol-practice input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            background: white;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.15em;
+            line-height: 1.9;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: #e0e0e0;
+            border-top: 5px solid #000;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #8B0000 100%);
+            color: white;
+            padding: 22px 60px;
+            font-size: 1.6em;
+            font-weight: bold;
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .submit-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0,0,0,0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header h2 {
+                font-size: 1.1em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 1: THE HANDSHAKE - SPANISH FORMAL PROTOCOLS</h2>
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, Spanish is the second most spoken language globally with over 500 million speakers across 21 countries. This is not recreational language study. This is strategic communication competency. In international business, diplomacy, and leadership, the ability to navigate formal Spanish protocols demonstrates cultural intelligence and professional respect. Today's mission focuses on formal register distinctions that separate competent communicators from amateurs. The difference between tú and usted can determine whether you're perceived as competent or disrespectful in professional contexts. Master these protocols. Execute with precision. Cultural fluency is a leadership multiplier. Begin.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 1: FORMAL VS INFORMAL REGISTER</div>
+            
+            <div class="lesson">
+                Spanish distinguishes between formal "usted" and informal "tú" when addressing others, a critical distinction that English lacks with its singular "you." Professional Spanish demands usted in business contexts, with supervisors, with elders, and in any situation requiring respect until explicitly invited to use the informal register. Misusing tú in formal contexts signals disrespect or cultural incompetence, while overusing usted in casual contexts can create unnecessary distance.
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">USTED</span>
+                <span class="pronunciation">(oo-STED)</span>
+                <span>Formal "you" - singular</span>
+                <span class="context">CONTEXT: Business meetings, authority figures, initial professional contact, formal correspondence</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">TÚ</span>
+                <span class="pronunciation">(too)</span>
+                <span>Informal "you" - singular</span>
+                <span class="context">CONTEXT: Peers, friends, family, after invitation to use informal address</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why is the distinction between tú and usted significant in international business contexts, and what does proper usage signal about cultural competence?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 2: PROFESSIONAL GREETINGS</div>
+            
+            <div class="lesson">
+                Professional Spanish greetings vary by time of day and formality level, with "Buenos días" serving morning contexts, "Buenas tardes" for afternoon, and "Buenas noches" for evening. "Mucho gusto" meaning "pleased to meet you" is the standard professional introduction response in Hispanic business culture, demonstrating both linguistic competence and cultural awareness of hierarchical communication norms.
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">BUENOS DÍAS</span>
+                <span class="pronunciation">(BWAY-nohs DEE-ahs)</span>
+                <span>Good morning / Good day</span>
+                <span class="context">CONTEXT: Professional greeting until approximately 2:00 PM</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">BUENAS TARDES</span>
+                <span class="pronunciation">(BWAY-nahs TAR-dehs)</span>
+                <span>Good afternoon</span>
+                <span class="context">CONTEXT: Professional greeting from 2:00 PM until sunset</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">BUENAS NOCHES</span>
+                <span class="pronunciation">(BWAY-nahs NOH-chehs)</span>
+                <span>Good evening / Good night</span>
+                <span class="context">CONTEXT: Professional greeting after sunset, also used as farewell</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does time-specific greeting protocol in Spanish reflect cultural values regarding attention to detail and contextual awareness in professional communication?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 3: FORMAL INTRODUCTIONS</div>
+            
+            <div class="lesson">
+                In formal Spanish introductions, "Me llamo" is acceptable but "Mi nombre es" carries slightly more formality appropriate for professional contexts. When asking someone's name formally, "¿Cómo se llama usted?" maintains proper register, while "¿Cómo te llamas?" would be inappropriately informal in business settings, potentially damaging professional relationships before they begin.
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">MI NOMBRE ES...</span>
+                <span class="pronunciation">(mee NOHM-breh es)</span>
+                <span>My name is...</span>
+                <span class="context">CONTEXT: Formal business introductions, professional correspondence</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">¿CÓMO SE LLAMA USTED?</span>
+                <span class="pronunciation">(KOH-moh seh YAH-mah oo-STED)</span>
+                <span>What is your name? (formal)</span>
+                <span class="context">CONTEXT: Asking name in professional or respectful contexts</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">MUCHO GUSTO</span>
+                <span class="pronunciation">(MOO-choh GOO-stoh)</span>
+                <span>Pleased to meet you</span>
+                <span class="context">CONTEXT: Standard response after introduction in professional settings</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does formal Spanish maintain grammatical distinctions (se llama vs te llamas) that English has eliminated, and what does this reveal about cultural hierarchy systems?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="protocol-practice">
+                <h4>⚙ PROTOCOL EXECUTION: Formal Introduction Sequence</h4>
+                <input type="text" placeholder="1. Time-appropriate greeting (Buenos días/tardes/noches)">
+                <input type="text" placeholder="2. Formal introduction (Mi nombre es...)">
+                <input type="text" placeholder="3. Professional courtesy (Mucho gusto)">
+                <input type="text" placeholder="4. Formal inquiry (¿Cómo se llama usted?)">
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 4: PROFESSIONAL COURTESY EXPRESSIONS</div>
+            
+            <div class="lesson">
+                "Por favor" and "gracias" are non-negotiable in professional Spanish communication, with "de nada" or the more formal "con mucho gusto" serving as appropriate responses. "Disculpe" is the formal apology or attention-getting phrase appropriate for professional contexts, while "perdón" is reserved for informal situations, again demonstrating the critical importance of register awareness in Hispanic professional culture.
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">POR FAVOR</span>
+                <span class="pronunciation">(por fah-VOR)</span>
+                <span>Please</span>
+                <span class="context">CONTEXT: Essential in all request contexts, professional or personal</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">GRACIAS</span>
+                <span class="pronunciation">(GRAH-see-ahs)</span>
+                <span>Thank you</span>
+                <span class="context">CONTEXT: Essential acknowledgment in all contexts</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">DISCULPE</span>
+                <span class="pronunciation">(dees-KOOL-peh)</span>
+                <span>Excuse me (formal) / I apologize</span>
+                <span class="context">CONTEXT: Professional apology or attention-getting with usted-level contacts</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How do mandatory courtesy expressions in Spanish professional communication compare to English norms, and what does this reveal about cultural expectations for explicit respect markers?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 5: FORMAL DEPARTURE PROTOCOLS</div>
+            
+            <div class="lesson">
+                Professional Spanish farewells maintain formality through expressions like "Hasta luego" for casual professional contexts, "Adiós" for more definitive departures, or "Que tenga un buen día" meaning "have a good day" for maximum professionalism. The choice of farewell communicates relationship distance and professional boundaries, with more elaborate farewells signaling greater respect and formality in hierarchical business cultures.
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">HASTA LUEGO</span>
+                <span class="pronunciation">(AH-stah loo-WAY-goh)</span>
+                <span>Until later / See you later</span>
+                <span class="context">CONTEXT: Professional departure when future contact is expected</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">QUE TENGA UN BUEN DÍA</span>
+                <span class="pronunciation">(keh TEN-gah oon bwen DEE-ah)</span>
+                <span>Have a good day (formal)</span>
+                <span class="context">CONTEXT: Maximum formality professional departure</span>
+            </div>
+            
+            <div class="spanish-protocol">
+                <span class="formal">ADIÓS</span>
+                <span class="pronunciation">(ah-dee-OHS)</span>
+                <span>Goodbye</span>
+                <span class="context">CONTEXT: More definitive professional farewell</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does professional Spanish culture utilize more elaborate farewell protocols than English business communication, and what strategic advantage does this cultural competence provide in international contexts?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>⚙ PHYSICAL MISSION: PROFESSIONAL PROTOCOL DOCUMENTATION</h3>
+            <p>
+                Conduct research on formal business communication protocols in three Spanish-speaking countries: Spain, Mexico, and Argentina. Document specific cultural variations in greeting formality, professional title usage, and business meeting etiquette. Create a comparative analysis matrix identifying commonalities and variations across these three Hispanic business cultures. Develop a one-page professional protocol guide for conducting business in Spanish-speaking contexts, including greeting sequences, title usage, and formality registers. This deliverable demonstrates your ability to synthesize cultural intelligence into actionable business communication strategy.
+            </p>
+            <div class="bible-verse">
+                <strong>📖 BIBLICAL FOUNDATION:</strong><br>
+                Colossians 4:6 - "Let your speech always be gracious, seasoned with salt, so that you may know how you ought to answer each person." This principle establishes that communication effectiveness requires contextual awareness and cultural adaptation, treating each interaction with the specific grace and respect appropriate to the situation, which directly parallels the Spanish formal register system's emphasis on situational communication protocols.
+            </div>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.3em; margin-bottom: 25px; color: #000; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                MISSION COMPLETE? SUBMIT YOUR WORK.
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✓ SUBMIT PROTOCOL
+            </a>
+            <p style="margin-top: 25px; color: #666; font-size: 0.95em; font-family: 'Courier New', monospace;">
+                (Submission form will open in new window)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
