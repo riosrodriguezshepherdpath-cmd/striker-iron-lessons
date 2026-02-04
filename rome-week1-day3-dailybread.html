@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 3: Daily Bread</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 3px solid #000;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #8B0000;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+            border-bottom: 3px solid #000;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #4a0000;
+            border: 2px solid #000;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .time-estimate {
+            background: #333;
+            color: #ff0000;
+            padding: 12px 20px;
+            border: 2px solid #ff0000;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #ff0000;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px 18px 90px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson-chunk {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 18px;
+            border-left: 5px solid #333;
+            font-size: 1.25em;
+            line-height: 2.2;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .bible-verse-box {
+            background: #E8F5E9;
+            padding: 20px;
+            border: 3px solid #000;
+            margin: 20px 0;
+        }
+        
+        .bible-verse-box .reference {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 10px;
+        }
+        
+        .bible-verse-box .verse {
+            font-size: 1.3em;
+            color: #2E7D32;
+            line-height: 2.2;
+            font-style: italic;
+        }
+        
+        .critical-principle {
+            background: #FFEBEE;
+            border: 3px solid #ff0000;
+            padding: 18px;
+            margin: 20px 0;
+            font-size: 1.25em;
+            line-height: 2;
+        }
+        
+        .critical-principle::before {
+            content: "⚠ CRITICAL PRINCIPLE: ";
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .break-reminder {
+            background: #333;
+            color: #ff0000;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #ff0000;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .question {
+            background: #ffe0e0;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff0000;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.2em;
+            line-height: 2;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .answer-box {
+            margin: 20px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .answer-box textarea {
+            width: 100%;
+            padding: 18px;
+            border: 3px solid #000;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            transition: all 0.3s;
+            min-height: 120px;
+            resize: vertical;
+            line-height: 2;
+        }
+        
+        .answer-box textarea:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: #fffef0;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        .cursive-practice {
+            background: #E3F2FD;
+            padding: 25px;
+            border: 3px solid #000;
+            margin: 20px 0;
+        }
+        
+        .cursive-practice h4 {
+            color: #1565C0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .cursive-practice .verse-to-copy {
+            font-size: 1.3em;
+            color: #0D47A1;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border: 2px solid #2196F3;
+            line-height: 2.5;
+        }
+        
+        .cursive-practice input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #000;
+            font-size: 1.2em;
+            font-family: 'Courier New', monospace;
+            background: white;
+            line-height: 2;
+        }
+        
+        .checklist {
+            background: #2d2d2d;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #000;
+        }
+        
+        .checklist h4 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .checkbox-item {
+            background: #1a1a1a;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ff0000;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #333;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #ff0000;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.1em;
+            cursor: pointer;
+            flex-grow: 1;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
+        
+        .mission-complete {
+            background: linear-gradient(135deg, #8B0000, #4a0000);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: #e0e0e0;
+            border-top: 5px solid #000;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #8B0000 100%);
+            color: white;
+            padding: 22px 60px;
+            font-size: 1.6em;
+            font-weight: bold;
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .submit-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0,0,0,0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header h2 {
+                font-size: 1.1em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .phase-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 3: DAILY BREAD - COMPLETION AS DISCIPLINE</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 30 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, today we address completion as strategic discipline. Initiation is common. Completion is rare. This principle separates operational effectiveness from amateur effort. Today's mission examines completion through theological, practical, and leadership frameworks. You will analyze why God models completion. Why Christ's final declaration matters. And how completion builds character that compounds over time. This is not motivational content. This is operational doctrine. Execute.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">God's Completion Principle</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="bible-verse-box">
+                <div class="reference">📖 Philippians 1:6</div>
+                <div class="verse">
+                    "He who began a good work in you will carry it on to completion until the day of Christ Jesus."
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                God does not abandon incomplete work.
+            </div>
+            
+            <div class="lesson-chunk">
+                What He initiates, He completes. This is divine character.
+            </div>
+            
+            <div class="lesson-chunk">
+                His commitment to completion means your sanctification is guaranteed.
+            </div>
+            
+            <div class="lesson-chunk">
+                God's faithfulness in completion provides the model for human reliability.
+            </div>
+            
+            <div class="critical-principle">
+                Completion reflects God's character. Incompletion reflects human weakness.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does God's commitment to completing His work in believers establish completion as a theological principle, and why does this obligate us to complete our own work?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">Biblical foundation examined</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">God's completion character understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Initiation vs. Completion Dynamics</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Starting requires enthusiasm. Completing requires discipline.
+            </div>
+            
+            <div class="lesson-chunk">
+                Enthusiasm is emotional. Discipline is systematic.
+            </div>
+            
+            <div class="lesson-chunk">
+                Most people can start. Few can finish consistently.
+            </div>
+            
+            <div class="lesson-chunk">
+                This creates competitive advantage. Reliability becomes rare.
+            </div>
+            
+            <div class="critical-principle">
+                Completion separates amateurs from professionals. Leaders finish.
+            </div>
+            
+            <div class="lesson-chunk">
+                In military operations, incomplete missions create vulnerability.
+            </div>
+            
+            <div class="lesson-chunk">
+                In academic work, incomplete projects waste invested time.
+            </div>
+            
+            <div class="lesson-chunk">
+                In character development, incomplete commitments erode integrity.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does consistent completion build reputation capital over time, and how does incompletion compound into systemic unreliability?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">Initiation vs completion dynamics understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">Competitive advantage recognized</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HYDRATION AND POSTURAL ADJUSTMENT RECOMMENDED
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Christ's Completion Declaration</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="bible-verse-box">
+                <div class="reference">📖 John 19:30</div>
+                <div class="verse">
+                    "When he had received the drink, Jesus said, 'It is finished.' With that, he bowed his head and gave up his spirit."
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Christ's final words were "Tetelestai" in Greek.
+            </div>
+            
+            <div class="lesson-chunk">
+                This means "It is finished. Paid in full. Completed."
+            </div>
+            
+            <div class="lesson-chunk">
+                Christ completed redemptive work under maximum hardship.
+            </div>
+            
+            <div class="lesson-chunk">
+                His completion means salvation is accomplished, not progressive.
+            </div>
+            
+            <div class="critical-principle">
+                Christ modeled completion under extreme adversity. No excuse negates completion responsibility.
+            </div>
+            
+            <div class="lesson-chunk">
+                If Christ completed the hardest mission in history, we can complete ours.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does Christ's completion of redemptive work under crucifixion conditions eliminate excuse-making for incomplete work in comfortable conditions?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">Tetelestai significance understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">Christ's completion model analyzed</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Completion Protocols</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Strategic completion requires systematic protocols.
+            </div>
+            
+            <div class="critical-principle">
+                PROTOCOL 1: Define completion criteria before starting.
+            </div>
+            
+            <div class="lesson-chunk">
+                Ambiguous endpoints enable rationalization. Clear criteria prevent it.
+            </div>
+            
+            <div class="critical-principle">
+                PROTOCOL 2: Break large tasks into verifiable milestones.
+            </div>
+            
+            <div class="lesson-chunk">
+                Small completions build momentum. Large tasks create paralysis.
+            </div>
+            
+            <div class="critical-principle">
+                PROTOCOL 3: Commit publicly to completion timelines.
+            </div>
+            
+            <div class="lesson-chunk">
+                Public commitment creates accountability. Private commitment enables excuse-making.
+            </div>
+            
+            <div class="critical-principle">
+                PROTOCOL 4: Treat incomplete work as character failure, not circumstance.
+            </div>
+            
+            <div class="lesson-chunk">
+                External attribution enables weakness. Internal attribution builds discipline.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Which completion protocol addresses your weakest area, and what specific implementation will you execute this week?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">Four completion protocols mastered</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check11">
+                    <label for="check11">Personal weakness identified</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check12">
+                    <label for="check12">Implementation plan documented</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING - MAINTAIN FOCUS
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Cursive Execution</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="cursive-practice">
+                <h4>✍ WRITE IN CURSIVE (5 TIMES):</h4>
+                
+                <div class="verse-to-copy">
+                    "It is finished." - John 19:30
+                </div>
+                
+                <input type="text" placeholder="Line 1: Execute verse in cursive">
+                <input type="text" placeholder="Line 2: Execute verse in cursive">
+                <input type="text" placeholder="Line 3: Execute verse in cursive">
+                <input type="text" placeholder="Line 4: Execute verse in cursive">
+                <input type="text" placeholder="Line 5: Execute verse in cursive">
+            </div>
+            
+            <div class="lesson-chunk">
+                Cursive practice builds fine motor discipline. Execute precisely.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check13">
+                    <label for="check13">Verse written 5 times in cursive</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check14">
+                    <label for="check14">Precision and legibility maintained</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check15">
+                    <label for="check15">Cursive execution complete</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - MISSION ACCOMPLISHED
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>⚙ PHYSICAL MISSION: COMPLETION AUDIT</h3>
+            <p>
+                Execute comprehensive audit of incomplete commitments.
+            </p>
+            <p>
+                <strong>PHASE 1: IDENTIFICATION</strong><br>
+                Document all incomplete projects, tasks, commitments across academic, personal, and family domains. Create exhaustive inventory.
+            </p>
+            <p>
+                <strong>PHASE 2: PRIORITIZATION</strong><br>
+                Rank incomplete items by: importance, time investment already made, and completion difficulty. Identify top 3 for immediate action.
+            </p>
+            <p>
+                <strong>PHASE 3: EXECUTION TIMELINE</strong><br>
+                Establish specific completion deadlines for top 3 items. Define completion criteria. Commit publicly to parent or mentor.
+            </p>
+            <p>
+                <strong>PHASE 4: COMPLETION AND DOCUMENTATION</strong><br>
+                Execute completion of 3 prioritized items this week. Document completion with photo evidence or written verification. Submit completion report.
+            </p>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.3em; margin-bottom: 25px; color: #000; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                MISSION COMPLETE? SUBMIT YOUR WORK.
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✓ SUBMIT PROTOCOL
+            </a>
+            <p style="margin-top: 25px; color: #666; font-size: 0.95em; font-family: 'Courier New', monospace;">
+                (Submission form will open in new window)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
