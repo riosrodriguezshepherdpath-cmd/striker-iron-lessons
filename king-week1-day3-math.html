@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 3: Fractions Part 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8800 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid #CC5500;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .coach-script {
+            background: #FFE5CC;
+            border-left: 5px solid #FF6600;
+            padding: 25px;
+            margin: 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .coach-script strong {
+            color: #FF6600;
+            font-size: 1.3em;
+        }
+        
+        .time-estimate {
+            background: #E3F2FD;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            color: #1565C0;
+            font-weight: bold;
+            border: 2px solid #2196F3;
+        }
+        
+        .phase {
+            background: #f9f9f9;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #FF6600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #FF6600;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #FF6600;
+            color: white;
+            padding: 15px 20px 15px 80px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lesson-chunk {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5298;
+            font-size: 1.3em;
+            line-height: 2.2;
+        }
+        
+        .fraction-visual {
+            background: #E3F2FD;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #2196F3;
+            text-align: center;
+        }
+        
+        .fraction-visual .big-fraction {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #1565C0;
+            margin: 15px 0;
+        }
+        
+        .fraction-visual .explanation {
+            font-size: 1.3em;
+            color: #0D47A1;
+            line-height: 2;
+        }
+        
+        .key-point {
+            background: #FFEB3B;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #F57F17;
+            font-weight: bold;
+            font-size: 1.3em;
+            line-height: 2;
+        }
+        
+        .break-reminder {
+            background: #FFF9C4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #FFA726;
+            text-align: center;
+            font-size: 1.2em;
+            color: #F57C00;
+            font-weight: bold;
+        }
+        
+        .question {
+            background: #FFF3E0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #FF8800;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .answer-box {
+            margin: 15px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        
+        .answer-box input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #2a5298;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            transition: all 0.3s;
+            line-height: 1.8;
+        }
+        
+        .answer-box input[type="text"]:focus {
+            outline: none;
+            border-color: #FF6600;
+            background: white;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+        
+        .practice-problems {
+            background: #E8F5E9;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #4CAF50;
+        }
+        
+        .practice-problems h4 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .practice-problems input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+        
+        .checklist {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #4CAF50;
+        }
+        
+        .checklist h4 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .checkbox-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 2px solid #4CAF50;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #C8E6C9;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.15em;
+            cursor: pointer;
+            flex-grow: 1;
+            line-height: 1.8;
+        }
+        
+        .victory-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #FF8C00;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 15px;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 40px 30px;
+            background: #f0f0f0;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header h2 {
+                font-size: 1.2em;
+            }
+            
+            .phase, .coach-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .phase-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <h2>Week 1 Day 3: Fractions Part 2</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            YOUR PROGRESS TODAY
+            <div class="progress-bar">
+                <div class="progress-fill">0 of 5 Complete</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱️ TOTAL TIME: About 25 minutes
+        </div>
+        
+        <div class="coach-script">
+            <strong>COACH'S SCRIPT:</strong><br><br>
+            Welcome back striker! You learned the basics of fractions. Today we go deeper. We're learning about equivalent fractions. And we're learning how to subtract fractions. These skills will help you understand stats better. Let's get to work!
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Equivalent Fractions</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Equivalent fractions are fractions that look different but mean the same thing.
+            </div>
+            
+            <div class="lesson-chunk">
+                Example: 1/2 and 2/4 are the same amount!
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">1/2 = 2/4</div>
+                <div class="explanation">
+                    Both equal half!
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                How do you make equivalent fractions? Multiply the top AND bottom by the same number.
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">1/2 × 2/2 = 2/4</div>
+                <div class="explanation">
+                    Top: 1 × 2 = 2<br>
+                    Bottom: 2 × 2 = 4
+                </div>
+            </div>
+            
+            <div class="key-point">
+                🔑 KEY POINT: Multiply top and bottom by the SAME number to get equivalent fractions
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: What is 2/3 times 2/2?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here (example: 4/6)">
+            </div>
+            
+            <div class="practice-problems">
+                <h4>🎯 PRACTICE: Make equivalent fractions</h4>
+                <input type="text" placeholder="1/3 × 2/2 = ?">
+                <input type="text" placeholder="3/4 × 2/2 = ?">
+                <input type="text" placeholder="2/5 × 3/3 = ?">
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 1 CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">I understand equivalent fractions</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">I know how to multiply to make them</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">I did the practice problems</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ QUICK BREAK: Stand up and stretch!
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Finding Common Denominators</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                To add or subtract fractions, the bottom numbers must be the same.
+            </div>
+            
+            <div class="lesson-chunk">
+                When bottom numbers are different, we need to find a common denominator.
+            </div>
+            
+            <div class="lesson-chunk">
+                Common denominator means: same bottom number.
+            </div>
+            
+            <div class="key-point">
+                🔑 KEY POINT: Find a number that both bottom numbers can multiply into
+            </div>
+            
+            <div class="lesson-chunk">
+                Example: Add 1/2 + 1/4
+            </div>
+            
+            <div class="lesson-chunk">
+                Bottom numbers are 2 and 4. What number works for both? 4!
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">1/2 = 2/4</div>
+                <div class="explanation">
+                    Now both have 4 on bottom!
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Now we can add: 2/4 + 1/4 = 3/4
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: What common denominator would you use for 1/3 and 1/6?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here">
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 2 CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">I know what common denominator means</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">I can find common denominators</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">I answered the question</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ HALFWAY THERE! Take a 2-minute break!
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Subtracting Fractions</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Subtracting fractions is just like adding. But you subtract the top numbers instead.
+            </div>
+            
+            <div class="lesson-chunk">
+                Rule: Bottom numbers must be the same!
+            </div>
+            
+            <div class="key-point">
+                🔑 STEP 1: Make sure bottom numbers match
+            </div>
+            
+            <div class="key-point">
+                🔑 STEP 2: Subtract the top numbers
+            </div>
+            
+            <div class="key-point">
+                🔑 STEP 3: Keep the bottom number the same
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">5/8 - 2/8 = 3/8</div>
+                <div class="explanation">
+                    Subtract tops: 5 - 2 = 3<br>
+                    Keep bottom: 8
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Soccer example: You play 7/10 of the season. Your friend plays 4/10. How much more did you play?
+            </div>
+            
+            <div class="lesson-chunk">
+                7/10 - 4/10 = 3/10 more!
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: What is 6/9 - 2/9?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here">
+            </div>
+            
+            <div class="practice-problems">
+                <h4>🎯 PRACTICE: Subtract these fractions</h4>
+                <input type="text" placeholder="8/10 - 3/10 = ?">
+                <input type="text" placeholder="5/6 - 2/6 = ?">
+                <input type="text" placeholder="7/12 - 4/12 = ?">
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 3 CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">I know the 3 steps for subtracting</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">I can subtract fractions</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">I did the practice problems</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Subtracting with Different Bottoms</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                What if the bottom numbers are different? First make them the same!
+            </div>
+            
+            <div class="lesson-chunk">
+                Example: 3/4 - 1/2
+            </div>
+            
+            <div class="lesson-chunk">
+                Step 1: Find common denominator. Use 4.
+            </div>
+            
+            <div class="lesson-chunk">
+                Step 2: Change 1/2 to 2/4 (multiply by 2/2)
+            </div>
+            
+            <div class="fraction-visual">
+                <div class="big-fraction">3/4 - 2/4 = 1/4</div>
+                <div class="explanation">
+                    Now we can subtract!
+                </div>
+            </div>
+            
+            <div class="key-point">
+                🔑 REMEMBER: First make bottoms match, then subtract tops
+            </div>
+            
+            <div class="lesson-chunk">
+                Soccer example: You scored in 3/4 of your games. Your teammate scored in 1/2 of theirs. Who scored more often?
+            </div>
+            
+            <div class="lesson-chunk">
+                3/4 - 1/2 = 3/4 - 2/4 = 1/4 more!
+            </div>
+            
+            <div class="question">
+                ❓ QUESTION: What is 2/3 - 1/6? (Hint: use 6 as common denominator)
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANSWER:</label>
+                <input type="text" placeholder="Type your answer here">
+            </div>
+            
+            <div class="practice-problems">
+                <h4>🎯 PRACTICE: Try these</h4>
+                <input type="text" placeholder="3/4 - 1/8 = ? (Hint: use 8)">
+                <input type="text" placeholder="5/6 - 1/3 = ? (Hint: use 6)">
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 4 CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">I can find common denominators first</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check11">
+                    <label for="check11">I can subtract with different bottoms</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check12">
+                    <label for="check12">I did the practice problems</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ ALMOST DONE! One more phase!
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Real Game Problems</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Let's use fractions to solve real soccer problems!
+            </div>
+            
+            <div class="practice-problems">
+                <h4>🎯 SOLVE THESE GAME PROBLEMS:</h4>
+                
+                <input type="text" placeholder="Problem 1: You played 7/8 of the game. Your friend played 3/4. How much more did you play?">
+                
+                <input type="text" placeholder="Problem 2: Your team won 5/6 of home games and 2/3 of away games. Which is better?">
+                
+                <input type="text" placeholder="Problem 3: You completed 8/10 passes in first half and 6/10 in second half. How many more in first half?">
+                
+                <input type="text" placeholder="Problem 4: Team has 12 players. 9 are forwards or midfielders. What fraction are defenders/goalies?">
+            </div>
+            
+            <div class="lesson-chunk">
+                Great job! You can now use fractions to understand your game stats!
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 5 CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check13">
+                    <label for="check13">I solved real game problems</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check14">
+                    <label for="check14">I can use fractions for soccer stats</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check15">
+                    <label for="check15">I understand fractions better now</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="victory-badge">
+            🏆 YOU DID IT! ALL 5 PHASES DONE! 🏆
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>🏋️ PHYSICAL MISSION: Create Your Own Stats</h3>
+            <p>
+                Your mission: Track your fractions for one week of activities!
+            </p>
+            <p>
+                <strong>Day 1-3:</strong> Keep track of something you do each day. Write it as a fraction. Example: I made 6 out of 10 free throws = 6/10.
+            </p>
+            <p>
+                <strong>Day 4-7:</strong> Compare your fractions from different days. Which day was best? Use subtraction to find the difference!
+            </p>
+            <p>
+                <strong>Final Report:</strong> Write down your best day and worst day. What was the difference? (Subtract the fractions!)
+            </p>
+            <div class="bible-verse">
+                <strong>📖 BIBLE CONNECTION:</strong><br>
+                Luke 16:10 - "Whoever is faithful in very little is also faithful in much." God cares about small things and big things. Fractions help us measure the small parts. When we're faithful with small fractions of our time and effort, God trusts us with more!
+            </div>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.2em; margin-bottom: 20px; color: #333;">
+                <strong>All done? Submit your work!</strong>
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✅ Submit Work
+            </a>
+            <p style="margin-top: 20px; color: #666; font-size: 0.9em;">
+                (Opens in a new tab)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
