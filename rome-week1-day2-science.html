@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 2: Advanced Inertial Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 3px solid #000;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #8B0000;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+            border-bottom: 3px solid #000;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #4a0000;
+            border: 2px solid #000;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.1em;
+            line-height: 2;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .time-estimate {
+            background: #333;
+            color: #ff0000;
+            padding: 12px 20px;
+            border: 2px solid #ff0000;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #ff0000;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px 18px 90px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson-chunk {
+            background: #f9f9f9;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-left: 5px solid #333;
+            font-size: 1.1em;
+            line-height: 1.9;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .critical-concept {
+            background: #FFEBEE;
+            border: 3px solid #ff0000;
+            padding: 15px;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 1.15em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .critical-concept::before {
+            content: "⚠ CRITICAL CONCEPT: ";
+            color: #ff0000;
+            font-weight: bold;
+        }
+        
+        .equation-box {
+            background: #E8F5E9;
+            border: 3px solid #000;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .equation-box .equation {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #1B5E20;
+            margin: 15px 0;
+        }
+        
+        .equation-box .explanation {
+            font-size: 1.05em;
+            color: #2E7D32;
+            margin-top: 10px;
+        }
+        
+        .break-reminder {
+            background: #333;
+            color: #ff0000;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #ff0000;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .question {
+            background: #ffe0e0;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff0000;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .answer-box {
+            margin: 20px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .answer-box textarea {
+            width: 100%;
+            padding: 18px;
+            border: 3px solid #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            transition: all 0.3s;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .answer-box textarea:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: #fffef0;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        .checklist {
+            background: #2d2d2d;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #000;
+        }
+        
+        .checklist h4 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .checkbox-item {
+            background: #1a1a1a;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ff0000;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #333;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #ff0000;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.05em;
+            cursor: pointer;
+            flex-grow: 1;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .mission-complete {
+            background: linear-gradient(135deg, #8B0000, #4a0000);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.15em;
+            line-height: 1.9;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: #e0e0e0;
+            border-top: 5px solid #000;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #8B0000 100%);
+            color: white;
+            padding: 22px 60px;
+            font-size: 1.6em;
+            font-weight: bold;
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .submit-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0,0,0,0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header h2 {
+                font-size: 1.1em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .phase-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 2: THE BUILD - ADVANCED INERTIAL SYSTEMS</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 30 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, yesterday's briefing covered foundational inertial principles. Today we advance to quantitative analysis and system-level applications. You will master the mathematical formalization of Newton's First Law, analyze momentum as a vector quantity, understand center of mass calculations, and examine how inertial reference frames determine observational validity. This is not conceptual review. This is operational physics that governs aerospace engineering, collision analysis, and mechanical system design. Precision is mandatory. Execute.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Quantifying Inertia: Mass as Resistance</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Inertia is quantified through mass, measured in kilograms in SI units.
+            </div>
+            
+            <div class="lesson-chunk">
+                Mass represents an object's resistance to acceleration—not its weight, which is gravitational force.
+            </div>
+            
+            <div class="critical-concept">
+                Mass is invariant across locations. A 10 kg object has 10 kg mass on Earth, Moon, or in deep space. Weight varies with gravitational field strength.
+            </div>
+            
+            <div class="lesson-chunk">
+                Higher mass requires proportionally greater force to achieve identical acceleration. This relationship is formalized in Newton's Second Law: F = ma.
+            </div>
+            
+            <div class="equation-box">
+                <div class="equation">F = ma</div>
+                <div class="explanation">
+                    Force equals mass times acceleration<br>
+                    Rearranged: a = F/m<br>
+                    This reveals that for constant force, acceleration inversely relates to mass
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Practical application: Vehicle collision severity depends on mass. Higher mass vehicles require greater force to decelerate, producing more destructive energy transfer in impacts.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why do safety regulations mandate different crash test standards for light passenger vehicles versus heavy commercial trucks, and how does mass-dependent inertia explain these distinctions?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">Mass vs. weight distinction clarified</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">F=ma relationship understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Momentum as Vector Quantity</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Momentum (p) is defined as the product of mass and velocity: p = mv.
+            </div>
+            
+            <div class="lesson-chunk">
+                Unlike scalar quantities, momentum is a vector with both magnitude and direction.
+            </div>
+            
+            <div class="critical-concept">
+                Momentum conservation is directional. Two objects with equal mass and speed but opposite directions have zero net momentum despite having individual momentum magnitudes.
+            </div>
+            
+            <div class="equation-box">
+                <div class="equation">p = mv</div>
+                <div class="explanation">
+                    Momentum (kg⋅m/s) = mass (kg) × velocity (m/s)<br>
+                    Example: 1000 kg vehicle at 20 m/s = 20,000 kg⋅m/s momentum
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Newton's First Law can be restated: An object's momentum remains constant unless external forces act upon it.
+            </div>
+            
+            <div class="lesson-chunk">
+                This formulation reveals why momentum conservation is fundamental in collision analysis—total system momentum before equals total after, assuming no external forces.
+            </div>
+            
+            <div class="lesson-chunk">
+                Application: Rocket propulsion functions through momentum conservation. Expelled fuel momentum in one direction produces equal opposite momentum in the spacecraft, despite no external forces in space.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does momentum's vector nature explain why changing direction requires force even when speed remains constant, and why does this validate Newton's First Law's inclusion of direction in its statement about motion?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">Momentum as vector quantity understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">p=mv calculations comprehended</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HYDRATION AND POSTURAL ADJUSTMENT RECOMMENDED
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Friction as Systematic Force</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Friction arises from electromagnetic interactions at molecular contact surfaces.
+            </div>
+            
+            <div class="lesson-chunk">
+                Two friction types exist: static friction (prevents motion initiation) and kinetic friction (opposes ongoing motion).
+            </div>
+            
+            <div class="critical-concept">
+                Static friction coefficient typically exceeds kinetic friction coefficient, explaining why initiating motion requires more force than maintaining it.
+            </div>
+            
+            <div class="equation-box">
+                <div class="equation">f = μN</div>
+                <div class="explanation">
+                    Friction force = coefficient of friction × normal force<br>
+                    μ (mu) represents surface interaction characteristics<br>
+                    N equals perpendicular force pressing surfaces together
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Friction magnitude depends on surface characteristics (μ) and normal force (N), not contact area—a counterintuitive principle.
+            </div>
+            
+            <div class="lesson-chunk">
+                Engineering applications: Brake systems convert kinetic energy into thermal energy through controlled friction. Anti-lock brake systems (ABS) prevent wheel lock to maintain higher static friction coefficient.
+            </div>
+            
+            <div class="lesson-chunk">
+                Without friction, Newton's First Law would be directly observable—objects in motion would continue indefinitely at constant velocity. Friction is why terrestrial motion appears to naturally decay.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does friction force not depend on contact area despite intuitive expectations, and how does this principle enable tire pressure optimization for vehicle performance?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">Static vs. kinetic friction distinguished</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">f=μN relationship mastered</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Center of Mass and System Dynamics</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Center of mass represents the mass-weighted average position of a system's components.
+            </div>
+            
+            <div class="lesson-chunk">
+                For system analysis, entire object mass can be conceptually concentrated at center of mass point.
+            </div>
+            
+            <div class="critical-concept">
+                In absence of external forces, a system's center of mass maintains constant velocity regardless of internal forces between components—Newton's First Law applied to systems.
+            </div>
+            
+            <div class="equation-box">
+                <div class="equation">x_cm = (m₁x₁ + m₂x₂) / (m₁ + m₂)</div>
+                <div class="explanation">
+                    Center of mass position = weighted average of component positions<br>
+                    Extends to three dimensions and multiple objects
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                Application: Exploding firework shell's center of mass continues parabolic trajectory despite fragments scattering in all directions. External force (gravity) governs center of mass motion; internal explosion forces don't.
+            </div>
+            
+            <div class="lesson-chunk">
+                Engineering significance: Vehicle stability analysis, spacecraft attitude control, and robotic manipulator design all depend on center of mass calculations and control.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does center of mass analysis enable prediction of system motion even when individual component motions are complex, and why is this simplification valid under Newton's First Law?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">Center of mass concept understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check11">
+                    <label for="check11">System dynamics principles grasped</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check12">
+                    <label for="check12">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING - MAINTAIN FOCUS
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Inertial Reference Frames</div>
+            <div class="time-estimate">⏱ 7 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Newton's First Law only holds in inertial reference frames—coordinate systems that are not accelerating.
+            </div>
+            
+            <div class="lesson-chunk">
+                In non-inertial (accelerating) frames, fictitious forces appear to act without physical source.
+            </div>
+            
+            <div class="critical-concept">
+                Earth's surface is technically non-inertial due to rotation, but effects are negligible for most applications. This approximation enables terrestrial physics without relativistic corrections.
+            </div>
+            
+            <div class="lesson-chunk">
+                Example: In accelerating car, passengers feel pushed backward. No actual backward force exists—it's inertia resisting forward acceleration. From passenger's non-inertial frame, a fictitious force appears. From external inertial frame, passengers simply resist acceleration per Newton's First Law.
+            </div>
+            
+            <div class="lesson-chunk">
+                Rotating reference frames produce centrifugal and Coriolis fictitious forces. These aren't "real" forces in inertial frames but must be included in equations of motion within rotating frames.
+            </div>
+            
+            <div class="lesson-chunk">
+                Advanced application: GPS satellite navigation requires inertial frame corrections. Satellite orbital motion creates non-inertial effects requiring relativistic adjustments for centimeter-level positioning accuracy.
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does Newton's First Law require specification of inertial reference frames, and how does this requirement reveal that motion itself is relative rather than absolute?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check13">
+                    <label for="check13">Inertial vs. non-inertial frames distinguished</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check14">
+                    <label for="check14">Fictitious forces concept understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="check15">
+                    <label for="check15">Analytical question completed</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - MISSION ACCOMPLISHED
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>⚙ PHYSICAL MISSION: QUANTITATIVE INERTIAL ANALYSIS</h3>
+            <p>
+                Execute comprehensive experimental protocol measuring inertial properties across varied conditions.
+            </p>
+            <p>
+                <strong>EXPERIMENT 1: Mass-Dependent Acceleration</strong><br>
+                Apparatus: Inclined plane, three objects of known mass (200g, 500g, 1000g), stopwatch, meterstick. Procedure: Release each object from identical height on 30° incline. Measure time to traverse 1-meter distance. Calculate acceleration using kinematic equation: a = 2d/t². Record data in structured table. Analysis: Explain why identical acceleration occurs despite mass differences, referencing net force and friction coefficients.
+            </p>
+            <p>
+                <strong>EXPERIMENT 2: Momentum Conservation Verification</strong><br>
+                Apparatus: Two identical rolling objects, smooth surface, video recording device. Procedure: Roll object 1 at measured velocity into stationary object 2. Record collision using slow-motion video. Measure pre- and post-collision velocities using video frame analysis. Calculate total momentum before and after collision. Quantify percentage conservation (should approach 100% in elastic collision).
+            </p>
+            <p>
+                <strong>EXPERIMENT 3: Friction Coefficient Determination</strong><br>
+                Apparatus: Wooden block, string, spring scale, various surfaces (wood, metal, carpet). Procedure: Attach spring scale to block. Measure force required to initiate motion (static friction) and maintain constant-velocity motion (kinetic friction) on each surface. Calculate μ_static and μ_kinetic using f=μN, where N equals block weight. Construct comparative table ranking surfaces by friction coefficient.
+            </p>
+            <div class="bible-verse">
+                <strong>📖 BIBLICAL FOUNDATION:</strong><br>
+                Colossians 1:16-17 - "For by him all things were created, in heaven and on earth, visible and invisible...And he is before all things, and in him all things hold together." Physical laws like Newton's First Law are not arbitrary—they reflect God's ordered design of creation. Understanding these laws enables us to exercise dominion through engineering and technology while recognizing their ultimate source in divine wisdom and consistency.
+            </div>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.3em; margin-bottom: 25px; color: #000; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                MISSION COMPLETE? SUBMIT YOUR WORK.
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✓ SUBMIT PROTOCOL
+            </a>
+            <p style="margin-top: 25px; color: #666; font-size: 0.95em; font-family: 'Courier New', monospace;">
+                (Submission form will open in new window)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
