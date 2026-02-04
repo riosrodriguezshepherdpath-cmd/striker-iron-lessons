@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 1: Science</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border: 3px solid #000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #8B0000;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+            border-bottom: 3px solid #000;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #4a0000;
+            border: 2px solid #000;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            width: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.3s ease;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .time-estimate {
+            background: #333;
+            color: #ff0000;
+            padding: 12px 20px;
+            border: 2px solid #ff0000;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #ff0000;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px 18px 90px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson-chunk {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 18px;
+            border-left: 5px solid #333;
+            font-size: 1.25em;
+            line-height: 2.2;
+        }
+        
+        .critical-principle {
+            background: #FFEBEE;
+            border: 3px solid #ff0000;
+            padding: 18px;
+            margin: 20px 0;
+            font-size: 1.25em;
+            line-height: 2;
+        }
+        
+        .critical-principle::before {
+            content: "⚠ CRITICAL PRINCIPLE: ";
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .break-reminder {
+            background: #333;
+            color: #ff0000;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #ff0000;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .example-box {
+            background: #E8F5E9;
+            padding: 20px;
+            border: 3px solid #000;
+            margin: 20px 0;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .checklist {
+            background: #2d2d2d;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #000;
+        }
+        
+        .checklist h4 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .checkbox-item {
+            background: #1a1a1a;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ff0000;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #333;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #ff0000;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.1em;
+            cursor: pointer;
+            flex-grow: 1;
+            color: #fff;
+            line-height: 1.8;
+        }
+        
+        .mission-complete {
+            background: linear-gradient(135deg, #8B0000, #4a0000);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 20px;
+        }
+        
+        .bible-verse-mission {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-left: 5px solid white;
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .next-steps {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px;
+            text-align: center;
+            border-top: 5px solid #ff0000;
+        }
+        
+        .next-steps h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .next-steps p {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        
+        .next-steps .instruction {
+            background: #ff0000;
+            padding: 25px;
+            margin: 25px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: 3px solid #000;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 1: THE BUILD - INERTIAL DYNAMICS</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 30 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, today we address Newton's 1st Law of Motion. This law governs all kinetic systems. Projectile motion. Vehicle dynamics. Orbital mechanics. All obey this principle. This is fundamental physics. Master inertial dynamics. Apply to tactical analysis. Execute.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Inertia: Objects At Rest</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Newton's 1st Law, Part 1: Objects at rest remain at rest.
+            </div>
+            
+            <div class="critical-principle">
+                Stationary objects maintain stasis absent external force application.
+            </div>
+            
+            <div class="lesson-chunk">
+                Inertia is resistance to motion change. Objects resist movement from rest.
+            </div>
+            
+            <div class="example-box">
+                <strong>TACTICAL EXAMPLE:</strong> Unmanned ground vehicle (UGV) in standby mode. No propulsion active. Vehicle remains stationary. Requires force input to initiate motion. This demonstrates inertial resistance.
+            </div>
+            
+            <div class="lesson-chunk">
+                Why this matters: Motion requires force. You cannot achieve kinetic change without force application.
+            </div>
+            
+            <div class="lesson-chunk">
+                Force types: Push, pull, thrust, impact. All overcome inertial resistance.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Inertial concept understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Rest state maintenance recognized</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Inertia: Objects In Motion</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Newton's 1st Law, Part 2: Objects in motion remain in motion.
+            </div>
+            
+            <div class="critical-principle">
+                Moving objects maintain velocity absent external force application.
+            </div>
+            
+            <div class="lesson-chunk">
+                Velocity = speed + direction. Objects maintain both without force interference.
+            </div>
+            
+            <div class="example-box">
+                <strong>PROJECTILE EXAMPLE:</strong> Artillery round exits barrel. Initial velocity: 800 m/s. In vacuum (no air resistance), projectile maintains 800 m/s indefinitely. On Earth, air resistance and gravity alter trajectory. These are forces.
+            </div>
+            
+            <div class="lesson-chunk">
+                Key insight: Motion continuation is default state. Stopping requires force application.
+            </div>
+            
+            <div class="lesson-chunk">
+                Forces that stop motion: Friction, air resistance, impact, braking systems.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Motion maintenance principle understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Force requirement for velocity change recognized</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HALFWAY POINT - 90-SECOND BREAK
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Force as Change Agent</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Forces change motion state. This is the unifying principle.
+            </div>
+            
+            <div class="critical-principle">
+                All motion state changes require force application. No exceptions.
+            </div>
+            
+            <div class="lesson-chunk">
+                Force capabilities:
+            </div>
+            
+            <div class="lesson-chunk">
+                • Initiate motion (overcome static inertia)<br>
+                • Terminate motion (apply opposing force)<br>
+                • Alter direction (apply lateral force)<br>
+                • Modify speed (apply parallel or opposing force)
+            </div>
+            
+            <div class="example-box">
+                <strong>VEHICLE DYNAMICS:</strong><br>
+                • Engine thrust: Initiates motion<br>
+                • Brake friction: Terminates motion<br>
+                • Steering force: Alters direction<br>
+                • Throttle modulation: Modifies speed
+            </div>
+            
+            <div class="lesson-chunk">
+                Force magnitude determines change magnitude. Greater force = greater change.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Force as change agent understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Force applications catalogued</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Mass and Inertial Magnitude</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Mass quantifies inertia. Greater mass = greater inertial resistance.
+            </div>
+            
+            <div class="critical-principle">
+                Force required to change motion scales with mass. Heavier objects resist more.
+            </div>
+            
+            <div class="example-box">
+                <strong>COMPARATIVE ANALYSIS:</strong> Light infantry carrier vs. main battle tank. Both stationary. Infantry carrier: 10 tons. Tank: 60 tons. Tank requires 6x more force to achieve same acceleration. This is mass-inertia relationship.
+            </div>
+            
+            <div class="lesson-chunk">
+                Tactical implication: High-mass systems trade maneuverability for durability. Low-mass systems prioritize agility.
+            </div>
+            
+            <div class="lesson-chunk">
+                This principle applies universally. From equipment selection to vehicle deployment.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Mass-inertia relationship understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Tactical implications recognized</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Operational Applications</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Newton's 1st Law enables predictive motion analysis.
+            </div>
+            
+            <div class="example-box">
+                <strong>BALLISTICS:</strong> Projectile trajectory calculation requires inertial understanding. Initial velocity, gravity force, air resistance combine to determine impact point.
+            </div>
+            
+            <div class="example-box">
+                <strong>VEHICLE PURSUIT:</strong> Target vehicle mass affects braking distance. Heavier vehicles require longer stopping distance. Inertia determines interception timing.
+            </div>
+            
+            <div class="critical-principle">
+                Every physical system obeys Newton's 1st Law. Understanding this enables tactical prediction.
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>⚙ PHYSICAL MISSION: INERTIAL OBSERVATION PROTOCOL</h3>
+                <p>
+                    <strong>OBJECTIVE:</strong> Document 3 inertial demonstrations this week.
+                </p>
+                <p>
+                    <strong>REQUIREMENTS:</strong><br>
+                    • One demonstration of objects at rest<br>
+                    • One demonstration of objects in motion<br>
+                    • One demonstration of force changing motion
+                </p>
+                <p>
+                    <strong>ANALYSIS:</strong> For each demonstration, identify: initial state, force applied (if any), resulting state, inertial principle demonstrated.
+                </p>
+                <p>
+                    <strong>SUBMISSION:</strong> Report all 3 observations in worksheet with complete analysis.
+                </p>
+                <div class="bible-verse-mission">
+                    <strong>THEOLOGICAL FOUNDATION:</strong> Colossians 1:17 - "In him all things hold together." Physical laws reflect divine order. God established inertial mechanics. Study reveals Creator's design.
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Operational applications understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Physical mission parameters clear</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to complete worksheet submission</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - MISSION ACCOMPLISHED
+        </div>
+        
+        <!-- NEXT STEPS -->
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: WORKSHEET SUBMISSION ⚡</h2>
+            
+            <p>Lesson phase complete. Proceed to assessment protocol.</p>
+            
+            <div class="instruction">
+                📝 ACCESS GOOGLE CLASSROOM<br>
+                LOCATE: "Week 1 Day 1 - Science Worksheet"<br>
+                COMPLETE ALL FIELDS<br>
+                SUBMIT WHEN READY
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                Solid analytical work, officer. 💪<br>
+                Physical understanding builds tactical advantage.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            const completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' OF 5 COMPLETE';
+        }
+    </script>
+</body>
+</html>
