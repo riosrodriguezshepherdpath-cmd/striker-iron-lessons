@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 2: Fractions as Division Operations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border-radius: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 3px solid #000;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.1em;
+            line-height: 2;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson {
+            background: #f9f9f9;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #333;
+            font-size: 1.15em;
+            line-height: 1.9;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .math-example {
+            background: #E8F5E9;
+            padding: 20px;
+            border: 3px solid #000;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .math-example .equation {
+            color: #1B5E20;
+            font-weight: bold;
+            font-size: 1.8em;
+            display: block;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .math-example .explanation {
+            color: #2E7D32;
+            font-size: 1.1em;
+            display: block;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid #4CAF50;
+        }
+        
+        .question {
+            background: #ffe0e0;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #ff0000;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .answer-box {
+            margin: 20px 0;
+        }
+        
+        .answer-box label {
+            display: block;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .answer-box textarea {
+            width: 100%;
+            padding: 18px;
+            border: 3px solid #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            background: #fff;
+            transition: all 0.3s;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .answer-box textarea:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: #fffef0;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+        }
+        
+        .problem-set {
+            background: #FFF3E0;
+            padding: 25px;
+            border: 3px solid #000;
+            margin: 25px 0;
+        }
+        
+        .problem-set h4 {
+            color: #E65100;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .problem-set input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #000;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            background: white;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.2em;
+            line-height: 2;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            margin-top: 25px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.15em;
+            line-height: 1.9;
+        }
+        
+        .submit-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: #e0e0e0;
+            border-top: 5px solid #000;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #8B0000 100%);
+            color: white;
+            padding: 22px 60px;
+            font-size: 1.6em;
+            font-weight: bold;
+            border: 3px solid #000;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .submit-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 7px 7px 0 rgba(0,0,0,0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translate(0, 0);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header h2 {
+                font-size: 1.1em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 2: THE LOGIC - FRACTIONS AS DIVISION OPERATIONS</h2>
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, fractions are not isolated mathematical concepts. They are division operations encoded in ratio form. Understanding this fundamental equivalence unlocks algebra, calculus, and applied mathematics. Most students memorize fraction rules without comprehending the underlying division structure, which creates systemic failure in advanced mathematics. Your mission today is to master the conceptual foundation that fractions, decimals, and percentages are interconnected representations of the same proportional relationships. This is not arithmetic drill. This is structural understanding that separates mathematical competence from mechanical repetition. Master the logic. Execute the operations. Advance.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 1: FRACTIONS AS RATIO SYSTEMS</div>
+            
+            <div class="lesson">
+                Fractions represent parts of a whole expressed as a ratio where the denominator establishes the total equal divisions and the numerator identifies the quantity being referenced. This ratio system allows precise quantification of proportional relationships, with the horizontal bar functioning as a division operator that can be executed to convert the fraction into decimal form, revealing that 3/4 and 0.75 are merely different notations for the same mathematical relationship.
+            </div>
+            
+            <div class="math-example">
+                <span class="equation">3/4 = 3 ÷ 4 = 0.75</span>
+                <span class="explanation">The fraction bar IS the division operator. Numerator divided by denominator produces the decimal equivalent. This reveals that fractions and decimals are interchangeable representations of proportional values.</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why is understanding fractions as division operations critical to higher mathematics, and how does this conceptual framework prevent common computational errors?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 2: EQUIVALENT FRACTIONS AS PROPORTIONAL SCALING</div>
+            
+            <div class="lesson">
+                Equivalent fractions are created by multiplying both numerator and denominator by the same value, which maintains the proportional relationship because you're essentially multiplying by one in disguised form. Understanding that 2/3 = 4/6 = 8/12 represents the same ratio scaled to different denominators is crucial for fraction addition, comparison, and simplification, as it reveals that mathematical truth remains constant regardless of notational scaling.
+            </div>
+            
+            <div class="math-example">
+                <span class="equation">2/3 = (2×2)/(3×2) = 4/6</span>
+                <span class="equation">2/3 = (2×4)/(3×4) = 8/12</span>
+                <span class="explanation">Multiplying both terms by the same value maintains the ratio because you're multiplying by equivalent forms of 1. The proportion 2:3 remains constant across all equivalent representations.</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: How does the concept of equivalent fractions demonstrate that mathematics operates on structural relationships rather than superficial notation, and why is this principle foundational for algebraic thinking?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="problem-set">
+                <h4>⚙ OPERATIONAL EXECUTION: Generate Equivalent Fractions</h4>
+                <input type="text" placeholder="3/5 × 2/2 = ?">
+                <input type="text" placeholder="3/5 × 3/3 = ?">
+                <input type="text" placeholder="3/5 × 4/4 = ?">
+                <input type="text" placeholder="Why are all these fractions mathematically equivalent?">
+            </div>
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 3: COMMON DENOMINATORS AS STRATEGIC STANDARDIZATION</div>
+            
+            <div class="lesson">
+                Adding or comparing fractions requires common denominators because you cannot combine quantities measured in different units without conversion to a standard measure. Finding the least common denominator is a strategic efficiency operation that minimizes computational complexity while enabling accurate fraction operations, demonstrating that mathematical elegance prioritizes systematic standardization over brute-force calculation.
+            </div>
+            
+            <div class="math-example">
+                <span class="equation">1/3 + 1/4 = ?</span>
+                <span class="equation">LCD = 12</span>
+                <span class="equation">4/12 + 3/12 = 7/12</span>
+                <span class="explanation">Converting to common denominator 12 allows addition because now both fractions reference the same unit size. Without standardization, addition is mathematically undefined.</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does fraction addition require common denominators while multiplication does not, and what does this reveal about the fundamental difference between these operations?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 4: FRACTION MULTIPLICATION AS SCALING OPERATIONS</div>
+            
+            <div class="lesson">
+                Multiplying fractions involves multiplying numerators together and denominators together because you're calculating a fraction OF a fraction, which is a scaling operation. Understanding that 1/2 × 3/4 asks "what is one-half of three-fourths" reveals why the operation produces 3/8, and explains why multiplication makes values smaller when both fractions are less than one, contrary to whole number multiplication patterns.
+            </div>
+            
+            <div class="math-example">
+                <span class="equation">1/2 × 3/4 = (1×3)/(2×4) = 3/8</span>
+                <span class="explanation">This calculates "one-half OF three-fourths." You're taking half of the 3/4 quantity, which produces a smaller result. Fraction multiplication is fundamentally a proportional scaling operation.</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why does multiplying two proper fractions (both less than 1) produce a smaller result, contradicting whole number multiplication intuition, and how does understanding this prevent conceptual errors in applied mathematics?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="problem-set">
+                <h4>⚙ OPERATIONAL EXECUTION: Fraction Multiplication</h4>
+                <input type="text" placeholder="2/3 × 3/5 = ?">
+                <input type="text" placeholder="1/4 × 2/7 = ?">
+                <input type="text" placeholder="5/6 × 3/10 = ?">
+                <input type="text" placeholder="Simplify your final answers to lowest terms">
+            </div>
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-header">PHASE 5: FRACTION DIVISION AS RECIPROCAL MULTIPLICATION</div>
+            
+            <div class="lesson">
+                Dividing by a fraction is equivalent to multiplying by its reciprocal because division asks "how many of this divisor fit into the dividend," and the reciprocal inverts the ratio to enable this calculation through multiplication. Understanding that 3/4 ÷ 1/2 means "how many halves are in three-fourths" and equals 3/4 × 2/1 = 6/4 = 3/2 demonstrates why "invert and multiply" works algorithmically and conceptually.
+            </div>
+            
+            <div class="math-example">
+                <span class="equation">3/4 ÷ 1/2 = 3/4 × 2/1 = 6/4 = 3/2</span>
+                <span class="explanation">Dividing by 1/2 asks "how many halves fit in 3/4?" Answer: 1.5 halves. The reciprocal multiplication method produces this result systematically. Division by fractions uses reciprocal multiplication because it's mathematically equivalent to the "how many fit" operation.</span>
+            </div>
+            
+            <div class="question">
+                ▸ ANALYTICAL QUESTION: Why is fraction division defined as multiplication by the reciprocal rather than attempting to divide denominators and numerators directly, and what mathematical principle makes this operation valid?
+            </div>
+            
+            <div class="answer-box">
+                <label>YOUR ANALYSIS:</label>
+                <textarea placeholder="Type your analytical response here..."></textarea>
+            </div>
+            
+            <div class="problem-set">
+                <h4>⚙ OPERATIONAL EXECUTION: Fraction Division</h4>
+                <input type="text" placeholder="2/3 ÷ 1/4 = 2/3 × ? = ?">
+                <input type="text" placeholder="5/8 ÷ 2/3 = 5/8 × ? = ?">
+                <input type="text" placeholder="3/5 ÷ 4/7 = 3/5 × ? = ?">
+                <input type="text" placeholder="Explain why you multiply by the reciprocal">
+            </div>
+        </div>
+        
+        <!-- PHYSICAL MISSION -->
+        <div class="physical-mission">
+            <h3>⚙ PHYSICAL MISSION: REAL-WORLD FRACTION APPLICATION ANALYSIS</h3>
+            <p>
+                Identify five real-world scenarios where fraction operations are essential: cooking recipe scaling, construction measurements, financial calculations, time management, or resource allocation. For each scenario, document the specific fraction operation required (addition, multiplication, division), execute the calculation showing all work, and explain why that particular operation is appropriate for the context. Create a comprehensive report demonstrating how fraction literacy enables practical problem-solving across professional and personal domains. This deliverable proves that mathematical competence translates directly to operational effectiveness in real-world applications.
+            </p>
+            <div class="bible-verse">
+                <strong>📖 BIBLICAL FOUNDATION:</strong><br>
+                Proverbs 21:5 - "The plans of the diligent lead surely to abundance, but everyone who is hasty comes only to poverty." Mathematical precision and systematic calculation reflect the diligence Scripture commands. Fraction operations require careful attention to procedural detail, and mastery of these foundational skills enables the accurate quantitative reasoning that supports wise stewardship, strategic planning, and informed decision-making in all areas of life and leadership.
+            </div>
+        </div>
+        
+        <!-- SUBMIT SECTION -->
+        <div class="submit-section">
+            <p style="font-size: 1.3em; margin-bottom: 25px; color: #000; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">
+                MISSION COMPLETE? SUBMIT YOUR WORK.
+            </p>
+            <a href="https://forms.gle/YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="submit-btn">
+                ✓ SUBMIT PROTOCOL
+            </a>
+            <p style="margin-top: 25px; color: #666; font-size: 0.95em; font-family: 'Courier New', monospace;">
+                (Submission form will open in new window)
+            </p>
+        </div>
+    </div>
+</body>
+</html>
