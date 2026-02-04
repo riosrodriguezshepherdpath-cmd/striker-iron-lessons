@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 1: Daily Bread</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            border: 3px solid #000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+            position: relative;
+        }
+        
+        .header::before {
+            content: "⚙";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header::after {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.3em;
+            font-weight: normal;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #8B0000;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+            border-bottom: 3px solid #000;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #4a0000;
+            border: 2px solid #000;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0000, #cc0000);
+            width: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.3s ease;
+        }
+        
+        .commander-script {
+            background: #1a1a1a;
+            color: #fff;
+            border-left: 5px solid #ff0000;
+            padding: 30px;
+            margin: 30px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .commander-script strong {
+            color: #ff0000;
+            font-size: 1.3em;
+            display: block;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .time-estimate {
+            background: #333;
+            color: #ff0000;
+            padding: 12px 20px;
+            border: 2px solid #ff0000;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .phase {
+            background: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            background: #ff0000;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+        }
+        
+        .phase-header {
+            background: #000;
+            color: #fff;
+            padding: 18px 25px 18px 90px;
+            margin: -35px -35px 25px -35px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
+            border-bottom: 3px solid #ff0000;
+        }
+        
+        .lesson-chunk {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 18px;
+            border-left: 5px solid #333;
+            font-size: 1.25em;
+            line-height: 2.2;
+        }
+        
+        .bible-verse-box {
+            background: #E8F5E9;
+            padding: 20px;
+            border: 3px solid #000;
+            margin: 20px 0;
+        }
+        
+        .bible-verse-box .reference {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #1B5E20;
+            margin-bottom: 10px;
+        }
+        
+        .bible-verse-box .verse {
+            font-size: 1.3em;
+            color: #2E7D32;
+            line-height: 2.2;
+            font-style: italic;
+        }
+        
+        .critical-principle {
+            background: #FFEBEE;
+            border: 3px solid #ff0000;
+            padding: 18px;
+            margin: 20px 0;
+            font-size: 1.25em;
+            line-height: 2;
+        }
+        
+        .critical-principle::before {
+            content: "⚠ CRITICAL PRINCIPLE: ";
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .break-reminder {
+            background: #333;
+            color: #ff0000;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #ff0000;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .checklist {
+            background: #2d2d2d;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #000;
+        }
+        
+        .checklist h4 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .checkbox-item {
+            background: #1a1a1a;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #ff0000;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #333;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #ff0000;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.1em;
+            cursor: pointer;
+            flex-grow: 1;
+            color: #fff;
+            line-height: 1.8;
+        }
+        
+        .mission-complete {
+            background: linear-gradient(135deg, #8B0000, #4a0000);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.6em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.4);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%);
+            color: white;
+            margin: 30px;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-bottom: 3px solid #fff;
+            padding-bottom: 15px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 20px;
+        }
+        
+        .bible-verse-mission {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-left: 5px solid white;
+            margin-top: 20px;
+            font-style: italic;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .next-steps {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px;
+            text-align: center;
+            border-top: 5px solid #ff0000;
+        }
+        
+        .next-steps h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .next-steps p {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        
+        .next-steps .instruction {
+            background: #ff0000;
+            padding: 25px;
+            margin: 25px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+            border: 3px solid #000;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .header h2 {
+                font-size: 1.1em;
+            }
+            
+            .phase, .commander-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .phase-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 1: DAILY BREAD - OPERATIONAL DISCIPLINE</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 25 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, today we address operational discipline. Your attitude in work determines operational effectiveness. God evaluates internal posture, not just external output. This is character infrastructure. Character infrastructure determines leadership capacity. Today's mission: analyze work attitude from strategic, theological, and practical frameworks. Execute.
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Attitude as Strategic Asset</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Attitude is your internal response to external demands.
+            </div>
+            
+            <div class="lesson-chunk">
+                Positive attitude enables sustained performance. Negative attitude degrades it.
+            </div>
+            
+            <div class="critical-principle">
+                Attitude determines whether challenges strengthen or break you.
+            </div>
+            
+            <div class="lesson-chunk">
+                In military operations, attitude separates effective units from ineffective ones.
+            </div>
+            
+            <div class="lesson-chunk">
+                Two soldiers. Same training. Same equipment. Different attitudes. Different outcomes.
+            </div>
+            
+            <div class="lesson-chunk">
+                One soldier maintains discipline under pressure. The other complains and quits.
+            </div>
+            
+            <div class="lesson-chunk">
+                Attitude is force multiplier in any mission domain.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Attitude's strategic value understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Force multiplier concept grasped</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Biblical Work Doctrine</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="bible-verse-box">
+                <div class="reference">📖 Colossians 3:23</div>
+                <div class="verse">
+                    "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                This verse establishes work as worship. Not just employment.
+            </div>
+            
+            <div class="lesson-chunk">
+                Your primary audience is God. Not your boss. Not your teacher. God.
+            </div>
+            
+            <div class="critical-principle">
+                Work quality reflects your relationship with God. Not just task completion.
+            </div>
+            
+            <div class="lesson-chunk">
+                When you study? You work for God. When you train? You work for God.
+            </div>
+            
+            <div class="lesson-chunk">
+                This changes everything. Human observers are temporary. God is eternal.
+            </div>
+            
+            <div class="lesson-chunk">
+                Excellence becomes non-negotiable. You represent the Creator.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Scripture analyzed</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Work as worship principle understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HALFWAY POINT - 90-SECOND BREAK
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Complaint as System Failure</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Complaining is verbal expression of internal resistance.
+            </div>
+            
+            <div class="lesson-chunk">
+                Complaint patterns indicate lack of mental discipline.
+            </div>
+            
+            <div class="critical-principle">
+                Complaining solves nothing. It compounds problems through negativity.
+            </div>
+            
+            <div class="lesson-chunk">
+                Analysis of complaint effects:
+            </div>
+            
+            <div class="lesson-chunk">
+                Effect 1: Degrades your own morale. You reinforce negative thinking.
+            </div>
+            
+            <div class="lesson-chunk">
+                Effect 2: Degrades unit morale. Negativity spreads rapidly.
+            </div>
+            
+            <div class="lesson-chunk">
+                Effect 3: Provides no tactical value. Complaint identifies problems but offers no solutions.
+            </div>
+            
+            <div class="lesson-chunk">
+                Effect 4: Dishonors God. Complaint suggests His provision is insufficient.
+            </div>
+            
+            <div class="critical-principle">
+                Acceptable alternative: Problem identification with solution proposals.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Complaint's negative effects catalogued</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Solution-focused alternative identified</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Cursive Execution Protocol</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Cursive writing builds fine motor control. Execute with precision.
+            </div>
+            
+            <div class="lesson-chunk">
+                Write this verse in cursive 5 times. Maintain consistent form.
+            </div>
+            
+            <div class="bible-verse-box">
+                <div class="verse" style="font-size: 1.5em; font-style: normal;">
+                    "Work at it with all your heart."<br>
+                    - Colossians 3:23
+                </div>
+            </div>
+            
+            <div class="lesson-chunk">
+                After completion, you will document this in your worksheet submission.
+            </div>
+            
+            <div class="critical-principle">
+                Precision in small tasks builds discipline for larger operations.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Verse written in cursive 5 times</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Consistent form maintained</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Weekly Operation Assignment</div>
+            <div class="time-estimate">⏱ 5 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Theory without application is useless. Execute practical mission.
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>⚙ PHYSICAL MISSION: ATTITUDE AUDIT</h3>
+                <p>
+                    <strong>OBJECTIVE:</strong> Identify and correct one area of attitude weakness.
+                </p>
+                <p>
+                    <strong>PHASE 1:</strong> Select one task you resist. Homework. Chores. Training. Any task where your attitude is poor.
+                </p>
+                <p>
+                    <strong>PHASE 2:</strong> This week, execute that task with excellent attitude. Zero complaints. Maximum effort. Full completion.
+                </p>
+                <p>
+                    <strong>PHASE 3:</strong> Document the task. Note internal resistance points. Analyze how discipline overcame resistance.
+                </p>
+                <p>
+                    <strong>SUBMISSION:</strong> Report task selection and execution results in your worksheet.
+                </p>
+                <div class="bible-verse-mission">
+                    <strong>THEOLOGICAL FOUNDATION:</strong> God evaluates heart posture, not just external compliance. Internal excellence matters.
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Physical mission parameters understood</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Task for attitude audit selected</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to complete worksheet submission</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - MISSION ACCOMPLISHED
+        </div>
+        
+        <!-- NEXT STEPS -->
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: WORKSHEET SUBMISSION ⚡</h2>
+            
+            <p>Lesson phase complete. Proceed to assessment protocol.</p>
+            
+            <div class="instruction">
+                📝 ACCESS GOOGLE CLASSROOM<br>
+                LOCATE: "Week 1 Day 1 - Daily Bread Worksheet"<br>
+                COMPLETE ALL FIELDS<br>
+                UPLOAD CURSIVE DOCUMENTATION<br>
+                SUBMIT WHEN READY
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                Solid work, officer. 💪<br>
+                Discipline builds leaders.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        let completedPhases = 0;
+        
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            // Calculate phases (3 checkboxes per phase)
+            completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' OF 5 COMPLETE';
+        }
+    </script>
+</body>
+</html>
