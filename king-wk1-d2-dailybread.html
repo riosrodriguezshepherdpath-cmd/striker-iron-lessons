@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 2: Daily Bread</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8800 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid #CC5500;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.3s ease;
+        }
+        
+        .coach-script {
+            background: #FFE5CC;
+            border-left: 5px solid #FF6600;
+            padding: 25px;
+            margin: 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .coach-script strong {
+            color: #FF6600;
+            font-size: 1.3em;
+        }
+        
+        .time-estimate {
+            background: #E3F2FD;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            color: #1565C0;
+            font-weight: bold;
+            border: 2px solid #2196F3;
+        }
+        
+        .phase {
+            background: #f9f9f9;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #FF6600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #FF6600;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #FF6600;
+            color: white;
+            padding: 15px 20px 15px 80px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lesson-chunk {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5298;
+            font-size: 1.3em;
+            line-height: 2.2;
+        }
+        
+        .key-point {
+            background: #FFEB3B;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #F57F17;
+            font-weight: bold;
+            font-size: 1.3em;
+            line-height: 2;
+        }
+        
+        .break-reminder {
+            background: #FFF9C4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #FFA726;
+            text-align: center;
+            font-size: 1.2em;
+            color: #F57C00;
+            font-weight: bold;
+        }
+        
+        .example-box {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .checklist {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #4CAF50;
+        }
+        
+        .checklist h4 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .checkbox-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 2px solid #4CAF50;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #C8E6C9;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.15em;
+            cursor: pointer;
+            flex-grow: 1;
+            line-height: 1.8;
+        }
+        
+        .victory-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #FF8C00;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 15px;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .next-steps {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid #FF6600;
+        }
+        
+        .next-steps h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+        
+        .next-steps p {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-bottom: 15px;
+        }
+        
+        .next-steps .instruction {
+            background: #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header h2 {
+                font-size: 1.2em;
+            }
+            
+            .phase, .coach-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .phase-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <h2>Week 1 Day 2: Daily Bread - The Heart of a Worker</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            YOUR PROGRESS TODAY
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 of 5 Complete</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱️ TOTAL TIME: About 25 minutes
+        </div>
+        
+        <div class="coach-script">
+            <strong>COACH'S SCRIPT:</strong><br><br>
+            Welcome back to the pitch, King! Today we talk about your heart. A great striker doesn't just play for himself. He plays for the team and his Coach. We are going to learn how to work with a heart that honors God. Let's get to work!
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Who Are You Working For?</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                In soccer, you play for your teammates. In life, you work for the Lord. Every drill matters to Him. Every chore matters to Him. He sees your effort when no one else does.
+            </div>
+            
+            <div class="key-point">
+                🔑 KEY POINT: Work for God, not just for people.
+            </div>
+            
+            <div class="example-box">
+                <strong>SOCCER EXAMPLE:</strong> Practice your dribbling as if God is your Head Coach.
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 1 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I know who my ultimate Boss is.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand that God sees my hard work.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ QUICK BREAK: Stand up and stretch!
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">The "Whole Heart" Method</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Don't do things halfway. Give it 100% of your heart. Half-hearted work is like walking during a fast break. It lets the whole team down. God loves a worker who gives everything.
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 2 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I will avoid doing "halfway" work.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="inputProgress()">
+                    <label>I want to give 100% effort today.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ HALFWAY THERE! Take a 1-minute break!
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Attitude Over Skill</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Skills can be learned. Attitude comes from the heart. A worker with a bad heart complains often. A worker with a God-heart stays thankful. Which heart will you choose today?
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 3 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I will watch my attitude while working.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I will try not to complain today.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Finding Joy in the Grind</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                The "grind" is the hard part of training. It is the boring math or the long runs. God gives us joy even in the hard parts. Think of the goal at the end.
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 4 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can find joy in hard things.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I know the hard parts make me stronger.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ ALMOST DONE! One more phase!
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Mission Briefing</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Now it is time to put your heart into action. We don't just talk about it. We do it. Your mission today is to work with excellence.
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>🏋️ PHYSICAL MISSION: The Excellence Drill</h3>
+                <p>
+                    Choose one chore or soccer drill. Do it perfectly. Do not rush to finish.
+                </p>
+                <p>
+                    While you do it, say "I am doing this for God." Notice how it feels!
+                </p>
+                <div class="bible-verse">
+                    <strong>📖 BIBLE CONNECTION:</strong><br>
+                    Colossians 3:23 - "Whatever you do, work at it with all your heart, as working for the Lord."
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 5 COMPLETION CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I picked my excellence drill.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand the Physical Mission</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready to complete my worksheet</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="victory-badge">
+            🏆 YOU FINISHED THE LESSON! AWESOME! 🏆
+        </div>
+        
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: COMPLETE YOUR WORKSHEET ⚡</h2>
+            
+            <p>You just learned about The Heart of a Worker!</p>
+            
+            <p>Now it's time to show what you learned.</p>
+            
+            <div class="instruction">
+                📝 GO TO GOOGLE CLASSROOM<br>
+                Find "Week 1 Day 2 - Daily Bread Worksheet"<br>
+                Answer the questions<br>
+                Submit when done!
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                Great work today, striker! 💪<br>
+                Keep it up!
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            const completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' of 5 Complete';
+        }
+    </script>
+</body>
+</html>
