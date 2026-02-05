@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 2: Math</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial Black', Arial, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #333; padding: 20px; line-height: 2; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #FF6600 0%, #FF8800 100%); color: white; padding: 30px; text-align: center; border-bottom: 5px solid #CC5500; }
+        .header h1 { font-size: 2.5em; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 10px; }
+        .header h2 { font-size: 1.5em; font-weight: normal; opacity: 0.9; }
+        .progress-tracker { background: #1a1a1a; color: white; padding: 20px 30px; text-align: center; font-size: 1.3em; }
+        .progress-bar { width: 100%; height: 30px; background: #333; border-radius: 15px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #4CAF50, #8BC34A); width: 0%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em; transition: width 0.3s ease; }
+        .coach-script { background: #FFE5CC; border-left: 5px solid #FF6600; padding: 25px; margin: 30px; border-radius: 10px; font-size: 1.2em; line-height: 2.2; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .coach-script strong { color: #FF6600; font-size: 1.3em; }
+        .time-estimate { background: #E3F2FD; padding: 12px 20px; border-radius: 25px; display: inline-block; margin: 15px 30px; font-size: 1.1em; color: #1565C0; font-weight: bold; border: 2px solid #2196F3; }
+        .phase { background: #f9f9f9; margin: 30px; padding: 30px; border-radius: 15px; border: 3px solid #FF6600; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; }
+        .phase-number { position: absolute; top: -15px; left: 20px; background: #FF6600; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8em; font-weight: bold; border: 4px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .phase-header { background: #FF6600; color: white; padding: 15px 20px 15px 80px; margin: -30px -30px 20px -30px; border-radius: 12px 12px 0 0; font-size: 1.4em; text-transform: uppercase; letter-spacing: 1px; }
+        .lesson-chunk { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2a5298; font-size: 1.3em; line-height: 2.2; }
+        .key-point { background: #FFEB3B; padding: 15px 20px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #F57F17; font-weight: bold; font-size: 1.3em; line-height: 2; }
+        .example-box { background: #E8F5E9; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #4CAF50; font-size: 1.2em; line-height: 2; }
+        .break-reminder { background: #FFF9C4; padding: 15px; border-radius: 10px; margin: 20px 0; border: 2px dashed #FFA726; text-align: center; font-size: 1.2em; color: #F57C00; font-weight: bold; }
+        .checklist { background: #E8F5E9; padding: 20px; border-radius: 10px; margin: 20px 0; border: 3px solid #4CAF50; }
+        .checklist h4 { color: #2E7D32; margin-bottom: 15px; font-size: 1.3em; }
+        .checkbox-item { background: white; padding: 12px; margin: 8px 0; border-radius: 8px; border: 2px solid #4CAF50; display: flex; align-items: center; cursor: pointer; transition: all 0.3s; }
+        .checkbox-item:hover { background: #C8E6C9; transform: translateX(5px); }
+        .checkbox-item input[type="checkbox"] { width: 25px; height: 25px; margin-right: 15px; cursor: pointer; }
+        .checkbox-item label { font-size: 1.15em; cursor: pointer; flex-grow: 1; line-height: 1.8; }
+        .victory-badge { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; padding: 20px; border-radius: 15px; text-align: center; font-size: 1.5em; font-weight: bold; margin: 20px 0; border: 4px solid #FF8C00; box-shadow: 0 6px 12px rgba(0,0,0,0.3); }
+        .physical-mission { background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; margin: 30px; padding: 30px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
+        .physical-mission h3 { font-size: 2em; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .bible-verse { background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid white; font-style: italic; font-size: 1.2em; line-height: 2; }
+        .next-steps { background: #1a1a1a; color: white; padding: 40px; text-align: center; border-top: 5px solid #FF6600; }
+        .next-steps .instruction { background: #FF6600; padding: 20px; border-radius: 10px; margin: 20px 0; font-size: 1.3em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <h2>Week 1 Day 2: Math - Basic Fractions</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            YOUR PROGRESS TODAY
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 of 5 Complete</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱️ TOTAL TIME: 25 minutes
+        </div>
+        
+        <div class="coach-script">
+            <strong>COACH'S SCRIPT:</strong><br><br>
+            Time to divide the pitch, King! Fractions show us parts of a whole. Imagine a soccer ball or a team roster. We use fractions to see what piece we have. Let's master the basics!
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">What is a Fraction?</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                A fraction is a part of a whole thing. The top number is the <b>Numerator</b>. It shows the parts we have. The bottom number is the <b>Denominator</b>. It shows the total parts.
+            </div>
+            <div class="key-point">🔑 KEY POINT: The bottom number is the total pieces.</div>
+            <div class="example-box"><strong>SOCCER EXAMPLE:</strong> One half of a soccer ball is written as 1/2.</div>
+            <div class="checklist">
+                <h4>✅ PHASE 1 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I know the top number is the Numerator.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I know the bottom number is the Denominator.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 2</label></div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">The Denominator (The Team)</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                Think of the denominator as the whole team. If there are 11 players, the denominator is 11. It tells us how many equal parts exist.
+            </div>
+            <div class="example-box"><strong>SOCCER EXAMPLE:</strong> A game has 2 halves. Each half is 1 part of 2.</div>
+            <div class="checklist">
+                <h4>✅ PHASE 2 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can identify the total number of parts.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I see why 4 quarters make a whole.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 3</label></div>
+            </div>
+        </div>
+
+        <div class="break-reminder">☕ HALFWAY THERE! Take a 1-minute break!</div>
+
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">The Numerator (The Players)</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                The numerator counts the specific parts we are discussing. If 3 players are wearing red, the numerator is 3. We write it above the line.
+            </div>
+            <div class="key-point">🔑 KEY POINT: The Numerator "counts" the pieces.</div>
+            <div class="checklist">
+                <h4>✅ PHASE 3 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can find the numerator in a fraction.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I know the numerator goes on top.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 4</label></div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Visualizing Fractions</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                Imagine a pizza cut into 4 slices. If you eat 1 slice, you ate 1/4. If you eat 2, you ate 2/4. That is the same as 1/2!
+            </div>
+            <div class="checklist">
+                <h4>✅ PHASE 4 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can draw a fraction circle.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I understand that parts must be equal.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 5</label></div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Mission Briefing</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="physical-mission">
+                <h3>🏋️ PHYSICAL MISSION: Fraction Footwork</h3>
+                <p>Set out 4 markers (cones or shoes) in a line.</p>
+                <p>Dribble through 2 of them. You finished 2/4 of the drill!</p>
+                <div class="bible-verse"><strong>📖 BIBLE CONNECTION:</strong><br>God gives us "our daily bread." He provides exactly the portion we need!</div>
+            </div>
+            <div class="checklist">
+                <h4>✅ PHASE 5 COMPLETION CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I finished my Fraction Footwork.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I understand the Numerator and Denominator.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready to complete my worksheet</label></div>
+            </div>
+        </div>
+
+        <div class="victory-badge">🏆 YOU FINISHED THE LESSON! AWESOME! 🏆</div>
+
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: COMPLETE YOUR WORKSHEET ⚡</h2>
+            <div class="instruction">
+                📝 GO TO GOOGLE CLASSROOM<br>
+                Find "Week 1 Day 2 - Math Worksheet"<br>
+                Answer the questions and Submit!
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+            const progressPercent = (checkedCount / checkboxes.length) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            progressBar.textContent = Math.floor(checkedCount / 3) + ' of 5 Complete';
+        }
+    </script>
+</body>
+</html>
