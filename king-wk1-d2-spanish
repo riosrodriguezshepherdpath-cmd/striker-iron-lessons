@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 2: Spanish</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial Black', Arial, sans-serif; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: #333; padding: 20px; line-height: 2; }
+        .container { max-width: 900px; margin: 0 auto; background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #FF6600 0%, #FF8800 100%); color: white; padding: 30px; text-align: center; border-bottom: 5px solid #CC5500; }
+        .header h1 { font-size: 2.5em; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 10px; }
+        .header h2 { font-size: 1.5em; font-weight: normal; opacity: 0.9; }
+        .progress-tracker { background: #1a1a1a; color: white; padding: 20px 30px; text-align: center; font-size: 1.3em; }
+        .progress-bar { width: 100%; height: 30px; background: #333; border-radius: 15px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #4CAF50, #8BC34A); width: 0%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em; transition: width 0.3s ease; }
+        .coach-script { background: #FFE5CC; border-left: 5px solid #FF6600; padding: 25px; margin: 30px; border-radius: 10px; font-size: 1.2em; line-height: 2.2; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .coach-script strong { color: #FF6600; font-size: 1.3em; }
+        .time-estimate { background: #E3F2FD; padding: 12px 20px; border-radius: 25px; display: inline-block; margin: 15px 30px; font-size: 1.1em; color: #1565C0; font-weight: bold; border: 2px solid #2196F3; }
+        .phase { background: #f9f9f9; margin: 30px; padding: 30px; border-radius: 15px; border: 3px solid #FF6600; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative; }
+        .phase-number { position: absolute; top: -15px; left: 20px; background: #FF6600; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8em; font-weight: bold; border: 4px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .phase-header { background: #FF6600; color: white; padding: 15px 20px 15px 80px; margin: -30px -30px 20px -30px; border-radius: 12px 12px 0 0; font-size: 1.4em; text-transform: uppercase; letter-spacing: 1px; }
+        .lesson-chunk { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2a5298; font-size: 1.3em; line-height: 2.2; }
+        .key-point { background: #FFEB3B; padding: 15px 20px; border-radius: 8px; margin: 20px 0; border-left: 5px solid #F57F17; font-weight: bold; font-size: 1.3em; line-height: 2; }
+        .example-box { background: #E8F5E9; padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #4CAF50; font-size: 1.2em; line-height: 2; }
+        .break-reminder { background: #FFF9C4; padding: 15px; border-radius: 10px; margin: 20px 0; border: 2px dashed #FFA726; text-align: center; font-size: 1.2em; color: #F57C00; font-weight: bold; }
+        .checklist { background: #E8F5E9; padding: 20px; border-radius: 10px; margin: 20px 0; border: 3px solid #4CAF50; }
+        .checklist h4 { color: #2E7D32; margin-bottom: 15px; font-size: 1.3em; }
+        .checkbox-item { background: white; padding: 12px; margin: 8px 0; border-radius: 8px; border: 2px solid #4CAF50; display: flex; align-items: center; cursor: pointer; transition: all 0.3s; }
+        .checkbox-item:hover { background: #C8E6C9; transform: translateX(5px); }
+        .checkbox-item input[type="checkbox"] { width: 25px; height: 25px; margin-right: 15px; cursor: pointer; }
+        .checkbox-item label { font-size: 1.15em; cursor: pointer; flex-grow: 1; line-height: 1.8; }
+        .victory-badge { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; padding: 20px; border-radius: 15px; text-align: center; font-size: 1.5em; font-weight: bold; margin: 20px 0; border: 4px solid #FF8C00; box-shadow: 0 6px 12px rgba(0,0,0,0.3); }
+        .physical-mission { background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; margin: 30px; padding: 30px; border-radius: 15px; box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
+        .physical-mission h3 { font-size: 2em; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .bible-verse { background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid white; font-style: italic; font-size: 1.2em; line-height: 2; }
+        .next-steps { background: #1a1a1a; color: white; padding: 40px; text-align: center; border-top: 5px solid #FF6600; }
+        .next-steps .instruction { background: #FF6600; padding: 20px; border-radius: 10px; margin: 20px 0; font-size: 1.3em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <h2>Week 1 Day 2: Spanish - Soccer Vocabulary</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            YOUR PROGRESS TODAY
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 of 5 Complete</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱️ TOTAL TIME: 25 minutes
+        </div>
+        
+        <div class="coach-script">
+            <strong>COACH'S SCRIPT:</strong><br><br>
+            ¡Hola King! Some of the world's best strikers speak Spanish. To play on the big stage, you need the lingo. Let’s learn the names of the gear and the game!
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">The Game & The Ball</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                In Spanish, soccer is called <b>el fútbol</b>. The ball is called <b>el balón</b>. Notice the accent on the 'u' and 'o'—that means you say those parts stronger!
+            </div>
+            <div class="key-point">🔑 VOCAB: el fútbol (soccer) | el balón (ball)</div>
+            <div class="checklist">
+                <h4>✅ PHASE 1 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can say "el fútbol" correctly.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can say "el balón" while pointing to a ball.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 2</label></div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">The Players</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                A male player is <b>el jugador</b>. Since you are a striker, you are <b>el delantero</b>. The goalie is <b>el portero</b>.
+            </div>
+            <div class="key-point">🔑 VOCAB: el delantero (striker) | el portero (goalie)</div>
+            <div class="checklist">
+                <h4>✅ PHASE 2 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I know my title is "el delantero."</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can identify the portero.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 3</label></div>
+            </div>
+        </div>
+
+        <div class="break-reminder">☕ RECREO! (Break time!) Take 1 minute!</div>
+
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">The Field (La Cancha)</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                The field is <b>la cancha</b>. The goal (the physical net) is <b>la portería</b>. When you score, you scream <b>¡GOL!</b>
+            </div>
+            <div class="example-box"><strong>PRONUNCIATION:</strong> Cancha sounds like "Kahn-chah."</div>
+            <div class="checklist">
+                <h4>✅ PHASE 3 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can say "la cancha."</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I know that "¡Gol!" is the same in both languages.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 4</label></div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Action Words</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="lesson-chunk">
+                To kick is <b>patear</b>. To run is <b>correr</b>. To win is <b>ganar</b>. These are the moves of a champion!
+            </div>
+            <div class="key-point">🔑 ACTION: patear (to kick) | ganar (to win)</div>
+            <div class="checklist">
+                <h4>✅ PHASE 4 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I can say "correr" while jogging in place.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I know that "ganar" is the goal of the game.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for Phase 5</label></div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Mission Briefing</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            <div class="physical-mission">
+                <h3>🏋️ PHYSICAL MISSION: Vocab Drill</h3>
+                <p>Find your soccer ball (el balón) and go to your yard (la cancha).</p>
+                <p>Kick (patear) the ball and shout "¡Gol!"</p>
+                <div class="bible-verse"><strong>📖 BIBLE CONNECTION:</strong><br>God's word is for all people and all languages! (Revelation 7:9)</div>
+            </div>
+            <div class="checklist">
+                <h4>✅ PHASE 5 COMPLETION CHECK:</h4>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I did my Vocab Drill outside.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I know at least 4 new Spanish words.</label></div>
+                <div class="checkbox-item"><input type="checkbox" onclick="updateProgress()"><label>I'm ready for my quiz!</label></div>
+            </div>
+        </div>
+
+        <div class="victory-badge">🏆 ¡EXCELENTE! YOU FINISHED! 🏆</div>
+
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: COMPLETE YOUR QUIZ ⚡</h2>
+            <div class="instruction">
+                📝 GO TO GOOGLE CLASSROOM<br>
+                Find "Week 1 Day 2 - Spanish Quiz"<br>
+                Answer the questions and Submit!
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+            const progressPercent = (checkedCount / checkboxes.length) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            progressBar.textContent = Math.floor(checkedCount / 3) + ' of 5 Complete';
+        }
+    </script>
+</body>
+</html>
