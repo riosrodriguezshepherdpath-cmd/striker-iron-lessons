@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 1 Day 2: Civics</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Courier New', monospace; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #333; padding: 20px; line-height: 2; }
+        .container { max-width: 1000px; margin: 0 auto; background: #f5f5f5; border: 3px solid #000; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #000000 0%, #333333 100%); color: #fff; padding: 40px; text-align: center; border-bottom: 5px solid #ff0000; }
+        .header h1 { font-size: 2.8em; text-transform: uppercase; letter-spacing: 5px; font-weight: bold; margin-bottom: 10px; }
+        .header h2 { font-size: 1.3em; font-weight: normal; letter-spacing: 3px; opacity: 0.9; }
+        .progress-tracker { background: #8B0000; color: white; padding: 20px 30px; text-align: center; font-size: 1.3em; border-bottom: 3px solid #000; }
+        .progress-bar { width: 100%; height: 30px; background: #4a0000; border: 2px solid #000; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ff0000, #cc0000); width: 0%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em; transition: width 0.3s ease; }
+        .commander-script { background: #1a1a1a; color: #fff; border-left: 5px solid #ff0000; padding: 30px; margin: 30px; font-size: 1.2em; line-height: 2.2; }
+        .commander-script strong { color: #ff0000; font-size: 1.3em; display: block; margin-bottom: 15px; letter-spacing: 2px; }
+        .time-estimate { background: #333; color: #ff0000; padding: 12px 20px; border: 2px solid #ff0000; display: inline-block; margin: 15px 30px; font-size: 1.1em; font-weight: bold; }
+        .phase { background: white; margin: 30px; padding: 35px; border: 3px solid #000; position: relative; }
+        .phase-number { position: absolute; top: -20px; left: 30px; background: #ff0000; color: white; width: 60px; height: 60px; border: 4px solid #000; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: bold; }
+        .phase-header { background: #000; color: #fff; padding: 18px 25px 18px 90px; margin: -35px -35px 25px -35px; font-size: 1.5em; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; border-bottom: 3px solid #ff0000; }
+        .lesson-chunk { background: #f9f9f9; padding: 20px; margin-bottom: 18px; border-left: 5px solid #333; font-size: 1.25em; line-height: 2.2; }
+        .critical-principle { background: #FFEBEE; border: 3px solid #ff0000; padding: 18px; margin: 20px 0; font-size: 1.25em; line-height: 2; }
+        .critical-principle::before { content: "⚠ TACTICAL PRINCIPLE: "; color: #ff0000; font-weight: bold; }
+        .break-reminder { background: #333; color: #ff0000; padding: 15px; margin: 20px 0; border: 2px solid #ff0000; text-align: center; font-size: 1.2em; font-weight: bold; }
+        .example-box { background: #E8F5E9; padding: 20px; border: 3px solid #000; margin: 20px 0; font-size: 1.2em; line-height: 2; }
+        .checklist { background: #2d2d2d; padding: 20px; margin: 20px 0; border: 3px solid #000; }
+        .checklist h4 { color: #ff0000; margin-bottom: 15px; font-size: 1.3em; text-transform: uppercase; }
+        .checkbox-item { background: #1a1a1a; padding: 12px; margin: 8px 0; border: 2px solid #ff0000; display: flex; align-items: center; cursor: pointer; }
+        .checkbox-item:hover { background: #333; }
+        .checkbox-item input { width: 25px; height: 25px; margin-right: 15px; accent-color: #ff0000; cursor: pointer; }
+        .checkbox-item label { font-size: 1.1em; color: #fff; flex-grow: 1; cursor: pointer; }
+        .mission-complete { background: linear-gradient(135deg, #8B0000, #4a0000); color: white; padding: 25px; text-align: center; font-size: 1.6em; font-weight: bold; margin: 20px 0; border: 4px solid #000; text-transform: uppercase; }
+        .physical-mission { background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%); color: white; margin: 30px; padding: 35px; border: 3px solid #000; }
+        .physical-mission h3 { font-size: 2.2em; margin-bottom: 25px; text-transform: uppercase; border-bottom: 3px solid #fff; padding-bottom: 15px; }
+        .physical-mission p { font-size: 1.3em; line-height: 2.2; margin-bottom: 20px; }
+        .next-steps { background: #1a1a1a; color: white; padding: 50px; text-align: center; border-top: 5px solid #ff0000; }
+        .next-steps h2 { font-size: 2.2em; margin-bottom: 25px; color: #ff0000; text-transform: uppercase; }
+        .next-steps .instruction { background: #ff0000; padding: 25px; margin: 25px 0; font-size: 1.3em; font-weight: bold; border: 3px solid #000; }
+        .answer-area { background: #fff; border: 2px solid #000; padding: 15px; margin-top: 10px; min-height: 60px; font-style: italic; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 1 DAY 2: THE CITIZENS - FEDERALISM</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 30 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, today we address the structure of operational authority. The United States government divides power between national and state authorities. This system is called Federalism. Analyze this structure to understand jurisdictional authority.
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Jurisdictional Authority</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Sir, you must understand who holds authority. The Constitution divides power between the Federal government and State governments. This system is called Federalism. Think of it as different military branches having specific roles.
+            </div>
+            
+            
+            
+            <div class="example-box">
+                <strong>TACTICAL EXAMPLE:</strong> The Army (Federal) handles national defense, while the National Guard (State) handles local emergencies.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Define Federalism.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Identify two levels of authority.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for Phase 2.</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Federal Authority</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                The Federal government handles national defense, international relations, and money. They hold supreme authority over issues affecting the entire nation. Just as a commander manages a whole battalion, the Federal government manages the country.
+            </div>
+            
+            <div class="example-box">
+                <strong>TACTICAL EXAMPLE:</strong> Only the Federal government can declare war.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Identify Federal responsibilities.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>List one Federal power.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for Phase 3.</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HALFWAY POINT - 90-SECOND BREAK
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">State Authority</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                State governments manage local issues, such as education and traffic laws. They operate within their own borders. A State governor is like a platoon leader managing a specific area.
+            </div>
+            
+            <div class="example-box">
+                <strong>TACTICAL EXAMPLE:</strong> States manage their own driver license requirements.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Identify State responsibilities.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>List one State power.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="checkAll() ">
+                    <label>Ready for Phase 4.</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Shared Authority</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Some powers are shared between Federal and State governments. Both can collect taxes and establish courts. This ensures a functional, multi-layered system of control.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Identify shared powers.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Analyze purpose of shared power.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for Phase 5.</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Your Role & Mission</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                As a citizen, you must understand this structure to engage properly. Knowing which level of government to petition is crucial for efficiency. Analyze local issues versus national issues to determine appropriate action.
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>⚙ PHYSICAL MISSION: Authority Recon</h3>
+                <p>
+                    <strong>OBJECTIVE:</strong> Document different levels of government presence.
+                </p>
+                <p>
+                    <strong>EXECUTION:</strong> Locate a road sign (State) and a US Post Office box (Federal). Take photos of both.
+                </p>
+                <p>
+                    <strong>SUBMISSION:</strong> Submit photos in Google Classroom.
+                </p>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Mission parameters understood.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Mission targets identified.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for worksheet submission.</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - MISSION ACCOMPLISHED
+        </div>
+        
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: WORKSHEET SUBMISSION ⚡</h2>
+            
+            <div class="instruction">
+                📝 ACCESS GOOGLE CLASSROOM<br>
+                LOCATE: "Week 1 Day 2 - Civics Worksheet"<br>
+                COMPLETE ALL FIELDS<br>
+                SUBMIT WHEN READY
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                Precise work, officer. 💪<br>
+                Understanding structure ensures efficiency.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            const completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' OF 5 COMPLETE';
+        }
+    </script>
+</body>
+</html>
