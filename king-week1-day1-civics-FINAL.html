@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 1: Civics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 2;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #FF8800 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 5px solid #CC5500;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        
+        .progress-tracker {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            width: 0%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.3s ease;
+        }
+        
+        .coach-script {
+            background: #FFE5CC;
+            border-left: 5px solid #FF6600;
+            padding: 25px;
+            margin: 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            line-height: 2.2;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .coach-script strong {
+            color: #FF6600;
+            font-size: 1.3em;
+        }
+        
+        .time-estimate {
+            background: #E3F2FD;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin: 15px 30px;
+            font-size: 1.1em;
+            color: #1565C0;
+            font-weight: bold;
+            border: 2px solid #2196F3;
+        }
+        
+        .phase {
+            background: #f9f9f9;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid #FF6600;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #FF6600;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .phase-header {
+            background: #FF6600;
+            color: white;
+            padding: 15px 20px 15px 80px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 12px 12px 0 0;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .lesson-chunk {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2a5298;
+            font-size: 1.3em;
+            line-height: 2.2;
+        }
+        
+        .gov-box {
+            background: #E3F2FD;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #2196F3;
+        }
+        
+        .gov-box .title {
+            font-size: 1.6em;
+            font-weight: bold;
+            color: #1565C0;
+            margin-bottom: 15px;
+        }
+        
+        .gov-box .leader {
+            font-size: 1.4em;
+            color: #0D47A1;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .gov-box .duties {
+            font-size: 1.2em;
+            line-height: 2;
+            color: #333;
+        }
+        
+        .key-point {
+            background: #FFEB3B;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #F57F17;
+            font-weight: bold;
+            font-size: 1.3em;
+            line-height: 2;
+        }
+        
+        .break-reminder {
+            background: #FFF9C4;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed #FFA726;
+            text-align: center;
+            font-size: 1.2em;
+            color: #F57C00;
+            font-weight: bold;
+        }
+        
+        .example-box {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .compare-box {
+            background: #FFF9E6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #FF9800;
+        }
+        
+        .compare-box h4 {
+            font-size: 1.4em;
+            color: #E65100;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .compare-row {
+            display: flex;
+            margin: 10px 0;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .compare-row .local {
+            flex: 1;
+            color: #2196F3;
+            font-weight: bold;
+            padding: 10px;
+        }
+        
+        .compare-row .state {
+            flex: 1;
+            color: #4CAF50;
+            font-weight: bold;
+            padding: 10px;
+        }
+        
+        .checklist {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 3px solid #4CAF50;
+        }
+        
+        .checklist h4 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .checkbox-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 2px solid #4CAF50;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-item:hover {
+            background: #C8E6C9;
+            transform: translateX(5px);
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            font-size: 1.15em;
+            cursor: pointer;
+            flex-grow: 1;
+            line-height: 1.8;
+        }
+        
+        .victory-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 4px solid #FF8C00;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .physical-mission {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        .physical-mission h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .physical-mission p {
+            font-size: 1.3em;
+            line-height: 2.2;
+            margin-bottom: 15px;
+        }
+        
+        .bible-verse {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 5px solid white;
+            font-style: italic;
+            font-size: 1.2em;
+            line-height: 2;
+        }
+        
+        .next-steps {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-top: 5px solid #FF6600;
+        }
+        
+        .next-steps h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+        
+        .next-steps p {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-bottom: 15px;
+        }
+        
+        .next-steps .instruction {
+            background: #FF6600;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .header h2 {
+                font-size: 1.2em;
+            }
+            
+            .phase, .coach-script, .physical-mission {
+                margin: 15px;
+                padding: 20px;
+            }
+            
+            .phase-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.4em;
+            }
+            
+            .compare-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <h2>Week 1 Day 1: The Citizens - Local vs State Government</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            YOUR PROGRESS TODAY
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 of 5 Complete</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱️ TOTAL TIME: About 25 minutes
+        </div>
+        
+        <div class="coach-script">
+            <strong>COACH'S SCRIPT:</strong><br><br>
+            What's up striker! Today we learn about government. Government is like the coaches and referees of our country. They make rules. They help people. There are different LEVELS of government. Today we learn about LOCAL government and STATE government. Think of it like your team captain and your head coach. Both important! Let's go!
+        </div>
+        
+        <!-- PHASE 1 -->
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">What Is Government?</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Government is a group of people who lead a city, state, or country.
+            </div>
+            
+            <div class="lesson-chunk">
+                What does government do?
+            </div>
+            
+            <div class="lesson-chunk">
+                • Makes laws (rules)<br>
+                • Protects people<br>
+                • Builds roads and parks<br>
+                • Runs schools<br>
+                • Helps when there's trouble
+            </div>
+            
+            <div class="key-point">
+                🔑 KEY POINT: Government helps organize our community
+            </div>
+            
+            <div class="example-box">
+                <strong>SOCCER COMPARISON:</strong> Just like a soccer team needs coaches and referees to organize the game, our community needs government to organize society!
+            </div>
+            
+            <div class="lesson-chunk">
+                There are DIFFERENT LEVELS of government. Like different coaches!
+            </div>
+            
+            <div class="lesson-chunk">
+                Today we learn about TWO levels: LOCAL and STATE.
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 1 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand what government does</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I know there are different levels</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ QUICK BREAK: Stand up and stretch for 30 seconds!
+        </div>
+        
+        <!-- PHASE 2 -->
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Local Government (Your City)</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                LOCAL government runs your CITY.
+            </div>
+            
+            <div class="lesson-chunk">
+                Local means NEARBY. Close to you. Your neighborhood.
+            </div>
+            
+            <div class="gov-box">
+                <div class="title">🏛️ LOCAL GOVERNMENT</div>
+                <div class="leader">Leader: MAYOR</div>
+                <div class="duties">
+                    The mayor is like the team captain. They lead the city!
+                </div>
+            </div>
+            
+            <div class="key-point">
+                🔑 WHAT LOCAL GOVERNMENT DOES:
+            </div>
+            
+            <div class="lesson-chunk">
+                • Fixes your neighborhood streets<br>
+                • Runs your city parks<br>
+                • Controls city police and firefighters<br>
+                • Picks up your trash<br>
+                • Manages city water<br>
+                • Runs city libraries
+            </div>
+            
+            <div class="example-box">
+                <strong>EXAMPLE:</strong> If there's a pothole on your street, LOCAL government fixes it. If your neighborhood park needs new swings, LOCAL government does that!
+            </div>
+            
+            <div class="lesson-chunk">
+                Local government takes care of things CLOSE TO YOU.
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 2 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand what local means</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I know the mayor leads the city</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ HALFWAY THERE! Take a 1-minute break!
+        </div>
+        
+        <!-- PHASE 3 -->
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">State Government (Arizona)</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                STATE government runs your whole STATE.
+            </div>
+            
+            <div class="lesson-chunk">
+                You live in Arizona. That's your state!
+            </div>
+            
+            <div class="gov-box">
+                <div class="title">🏛️ STATE GOVERNMENT</div>
+                <div class="leader">Leader: GOVERNOR</div>
+                <div class="duties">
+                    The governor is like the head coach. They lead the whole state!
+                </div>
+            </div>
+            
+            <div class="key-point">
+                🔑 WHAT STATE GOVERNMENT DOES:
+            </div>
+            
+            <div class="lesson-chunk">
+                • Fixes highways between cities<br>
+                • Runs big state parks (like Grand Canyon)<br>
+                • Makes laws for all of Arizona<br>
+                • Controls driver's licenses (DMV)<br>
+                • Oversees all schools in the state<br>
+                • Manages state police
+            </div>
+            
+            <div class="example-box">
+                <strong>EXAMPLE:</strong> If you drive from Phoenix to Tucson on the highway, STATE government maintains that road. If you visit the Grand Canyon, STATE government runs that park!
+            </div>
+            
+            <div class="lesson-chunk">
+                State government takes care of BIGGER things that affect the whole state.
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 3 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand what state means</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I know the governor leads the state</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHASE 4 -->
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Comparing The Two</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Let's compare local and state government!
+            </div>
+            
+            <div class="compare-box">
+                <h4>WHO DOES WHAT?</h4>
+                
+                <div class="compare-row">
+                    <div class="local">LOCAL: Your neighborhood park</div>
+                    <div class="state">STATE: Grand Canyon National Park</div>
+                </div>
+                
+                <div class="compare-row">
+                    <div class="local">LOCAL: City streets</div>
+                    <div class="state">STATE: I-10 Highway</div>
+                </div>
+                
+                <div class="compare-row">
+                    <div class="local">LOCAL: Trash pickup</div>
+                    <div class="state">STATE: Driver's licenses</div>
+                </div>
+                
+                <div class="compare-row">
+                    <div class="local">LOCAL: City library</div>
+                    <div class="state">STATE: School rules</div>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                🔑 EASY WAY TO REMEMBER:
+            </div>
+            
+            <div class="lesson-chunk">
+                <strong>MAYOR</strong> = Team Captain (your city)<br>
+                <strong>GOVERNOR</strong> = Head Coach (your whole state)
+            </div>
+            
+            <div class="lesson-chunk">
+                Both are important! Both help you! Just at different levels!
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 4 UNDERSTANDING CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I can tell the difference between local and state</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I know who does what</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready for Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ☕ ALMOST DONE! One more phase!
+        </div>
+        
+        <!-- PHASE 5 -->
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Why You Should Care</div>
+            <div class="time-estimate">⏱️ 5 minutes</div>
+            
+            <div class="lesson-chunk">
+                Why should YOU care about government?
+            </div>
+            
+            <div class="key-point">
+                🔑 REASON 1: They affect YOUR life every day!
+            </div>
+            
+            <div class="lesson-chunk">
+                Every time you use a park. Drive on a road. Go to school. Drink water. Government made that possible!
+            </div>
+            
+            <div class="key-point">
+                🔑 REASON 2: You can participate!
+            </div>
+            
+            <div class="lesson-chunk">
+                Even now, you can share your ideas. When you're 18, you can VOTE!
+            </div>
+            
+            <div class="key-point">
+                🔑 REASON 3: God wants us to respect leaders!
+            </div>
+            
+            <div class="lesson-chunk">
+                The Bible says to respect authority. Government is part of God's plan.
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>🏋️ PHYSICAL MISSION: Government Detective</h3>
+                <p>
+                    This week, find 5 things government provides!
+                </p>
+                <p>
+                    Look for:
+                </p>
+                <p>
+                    • 3 things LOCAL government does in your neighborhood<br>
+                    • 2 things STATE government does in Arizona
+                </p>
+                <p style="margin-top: 20px;">
+                    <strong>Write them down! You'll share in your worksheet!</strong>
+                </p>
+                <div class="bible-verse">
+                    <strong>📖 BIBLE CONNECTION:</strong><br>
+                    Romans 13:1 - "Let everyone be subject to the governing authorities, for there is no authority except that which God has established." God created government to help organize society and protect people!
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✅ PHASE 5 COMPLETION CHECK:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand why government matters</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I understand the Physical Mission</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>I'm ready to complete my worksheet</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="victory-badge">
+            🏆 YOU FINISHED THE LESSON! EXCELLENT! 🏆
+        </div>
+        
+        <!-- NEXT STEPS -->
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: COMPLETE YOUR WORKSHEET ⚡</h2>
+            
+            <p>You just learned about local and state government!</p>
+            
+            <p>Now it's time to show what you learned.</p>
+            
+            <div class="instruction">
+                📝 GO TO GOOGLE CLASSROOM<br>
+                Find "Week 1 Day 1 - Civics Worksheet"<br>
+                Answer the questions<br>
+                Submit when done!
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                You're becoming a great citizen, striker! 💪<br>
+                Knowledge is power!
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        let completedPhases = 0;
+        
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            // Calculate phases (3 checkboxes per phase)
+            completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' of 5 Complete';
+        }
+    </script>
+</body>
+</html>
