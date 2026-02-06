@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRIKER ACADEMY - Week 1 Day 3: Daily Bread</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial Black', sans-serif; background: #1e3c72; color: #333; padding: 20px; line-height: 1.6; }
+        .container { max-width: 850px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .header { background: #FF6600; color: white; padding: 30px; text-align: center; border-bottom: 5px solid #CC5500; }
+        .coach-script { background: #FFE5CC; border-left: 8px solid #FF6600; padding: 20px; margin: 20px; border-radius: 5px; font-size: 1.1em; }
+        .phase { background: #fdfdfd; margin: 20px; padding: 20px; border: 2px solid #eee; border-radius: 15px; position: relative; }
+        .phase-header { background: #FF6600; color: white; padding: 10px 20px; margin: -20px -20px 20px -20px; border-radius: 12px 12px 0 0; display: block; font-size: 1.2em; }
+        .key-point { background: #FFEB3B; padding: 10px; border-radius: 5px; margin: 15px 0; font-weight: bold; border-left: 4px solid #F57F17; }
+        .example-box { background: #E8F5E9; padding: 15px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #4CAF50; }
+        .mission { background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 25px; margin: 20px; border-radius: 15px; text-align: center; }
+        .victory { background: #FF6600; color: white; text-align: center; padding: 20px; font-size: 1.4em; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ STRIKER ACADEMY ⚽</h1>
+            <p>Week 1 Day 3: Daily Bread - Endurance</p>
+        </div>
+
+        <div class="coach-script">
+            "¡Hola King! As a center midfielder (*el mediocampista*), you run more than anyone else on the field. You need stamina to keep going when everyone else is tired!"
+        </div>
+
+        <div class="phase">
+            <span class="phase-header">PHASE 1: Setting the Pace</span>
+            <p>You can't sprint for 90 minutes. A smart midfielder sets a steady pace, saving energy for when it really matters.</p>
+            <div class="key-point">🔑 LESSON: Life is a marathon, not a sprint. Pace yourself to endure!</div>
+        </div>
+
+        <div class="phase">
+            <span class="phase-header">PHASE 2: Standing Firm</span>
+            <p>When the opposing team pushes hard, you have to stand your ground and keep moving forward.</p>
+            <div class="example-box">📖 <strong>BIBLE VERSE:</strong> "But you, take courage! Do not let your hands be weak, for your work shall be rewarded." - 2 Chronicles 15:7</div>
+        </div>
+
+        <div class="phase">
+            <span class="phase-header">PHASE 3: Fueling Up</span>
+            <p>You need to eat good food to keep your body strong. Your soul needs God's word to stay strong!</p>
+        </div>
+
+        <div class="mission">
+            <h2>🏆 STRIKER MISSION: THE STEADY RUN</h2>
+            <p style="margin-top: 10px;">Go for a jog or run for 10 minutes at a steady pace without stopping. Focus on your breathing!</p>
+        </div>
+
+        <div class="victory">
+            MISSION COMPLETE! GO TO GOOGLE FORMS NEXT!
+        </div>
+    </div>
+</body>
+</html>
