@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRI Registry Practice Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            height: 8px;
+            position: relative;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .question-container {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .question-container.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .question-number {
+            font-size: 0.9em;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .domain-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+        
+        .question-text {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #e8eaf6;
+        }
+        
+        .option.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+        
+        .option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+        
+        .explanation {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+        }
+        
+        .explanation.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .explanation h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .explanation p {
+            color: #856404;
+            line-height: 1.6;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .results {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .results h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .results p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .category-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .category-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .category-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .category-card p {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 MRI Registry Practice Test</h1>
+            <p>Comprehensive Exam Preparation</p>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <div class="content">
+            <div id="questionsContainer"></div>
+            
+            <div class="results" id="results">
+                <div class="score-circle" id="scoreCircle">0%</div>
+                <h2>Test Complete!</h2>
+                <p id="resultMessage"></p>
+                
+                <div class="category-breakdown" id="categoryBreakdown"></div>
+                
+                <div class="buttons">
+                    <button class="btn btn-primary" onclick="restartTest()">Take Test Again</button>
+                    <button class="btn btn-secondary" onclick="reviewAnswers()">Review Answers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            // PATIENT CARE (20 questions)
+            {
+                domain: "Patient Care",
+                question: "What is the primary purpose of obtaining informed consent before an MRI examination?",
+                options: [
+                    "To protect the facility from legal liability",
+                    "To ensure the patient understands the procedure, risks, and benefits",
+                    "To document that the patient paid for the service",
+                    "To verify the patient's insurance information"
+                ],
+                correct: 1,
+                explanation: "Informed consent ensures that patients understand the procedure, its risks, benefits, and alternatives before agreeing to undergo the examination. This respects patient autonomy and their right to make informed decisions about their healthcare."
+            },
+            {
+                domain: "Patient Care",
+                question: "Which of the following is considered a breach of patient confidentiality according to HIPAA?",
+                options: [
+                    "Discussing a patient's case with the radiologist",
+                    "Sharing patient information with family members without consent",
+                    "Documenting findings in the patient's medical record",
+                    "Consulting with another technologist about technical parameters"
+                ],
+                correct: 1,
+                explanation: "HIPAA protects patient privacy and confidentiality. Sharing patient information with family members without the patient's explicit consent is a breach, unless there are specific circumstances that allow it (such as emergencies or when the patient is incapacitated)."
+            },
+            {
+                domain: "Patient Care",
+                question: "What is the most effective method to prevent the spread of infection in the MRI suite?",
+                options: [
+                    "Wearing gloves at all times",
+                    "Hand hygiene before and after patient contact",
+                    "Using antibacterial soap exclusively",
+                    "Limiting the number of patients per day"
+                ],
+                correct: 1,
+                explanation: "Hand hygiene is the single most effective method to prevent the spread of infections. It should be performed before and after every patient contact, and before and after touching any potentially contaminated surfaces."
+            },
+            {
+                domain: "Patient Care",
+                question: "Standard precautions should be used:",
+                options: [
+                    "Only with patients known to have infectious diseases",
+                    "Only when blood is visible",
+                    "With all patients at all times",
+                    "Only in the emergency department"
+                ],
+                correct: 2,
+                explanation: "Standard precautions are a set of infection control practices used to prevent transmission of diseases. They should be used with ALL patients, ALL the time, regardless of their diagnosis or presumed infection status."
+            },
+            {
+                domain: "Patient Care",
+                question: "When communicating with a hearing-impaired patient, the technologist should:",
+                options: [
+                    "Speak louder to ensure they can hear",
+                    "Face the patient and speak clearly at normal volume",
+                    "Write everything down without attempting to speak",
+                    "Avoid eye contact to reduce patient anxiety"
+                ],
+                correct: 1,
+                explanation: "When communicating with hearing-impaired patients, face them directly so they can read lips if needed, maintain eye contact, and speak clearly at normal volume. Shouting distorts speech and can make lip-reading more difficult."
+            },
+            {
+                domain: "Patient Care",
+                question: "A patient begins to show signs of an adverse reaction to contrast. The first action should be:",
+                options: [
+                    "Complete the scan quickly",
+                    "Stop the injection and notify the radiologist",
+                    "Document the reaction after the scan",
+                    "Give the patient water to drink"
+                ],
+                correct: 1,
+                explanation: "If a patient shows signs of an adverse reaction to contrast, immediately stop the injection and notify the radiologist or physician. Patient safety is the priority, and prompt recognition and response can prevent serious complications."
+            },
+            {
+                domain: "Patient Care",
+                question: "What is the normal range for adult resting heart rate?",
+                options: [
+                    "40-60 beats per minute",
+                    "60-100 beats per minute",
+                    "80-120 beats per minute",
+                    "100-140 beats per minute"
+                ],
+                correct: 1,
+                explanation: "The normal resting heart rate for adults ranges from 60-100 beats per minute. Rates below 60 (bradycardia) or above 100 (tachycardia) may indicate underlying conditions that require evaluation."
+            },
+            {
+                domain: "Patient Care",
+                question: "Which vital sign should be monitored most closely in a sedated patient?",
+                options: [
+                    "Blood pressure only",
+                    "Temperature only",
+                    "Oxygen saturation and respiratory rate",
+                    "Heart rate only"
+                ],
+                correct: 2,
+                explanation: "Respiratory depression is a primary concern with sedation. Oxygen saturation (SpO2) and respiratory rate should be monitored continuously, as sedatives can suppress breathing. All vital signs are important, but respiratory function is most critical."
+            },
+            {
+                domain: "Patient Care",
+                question: "The main purpose of NPO status before a contrast-enhanced MRI is to:",
+                options: [
+                    "Improve image quality",
+                    "Reduce the risk of aspiration in case of emergency",
+                    "Decrease contrast enhancement",
+                    "Prevent allergic reactions"
+                ],
+                correct: 1,
+                explanation: "NPO (nothing by mouth) status reduces the risk of aspiration if the patient experiences an adverse reaction requiring intervention or develops nausea/vomiting. This is a safety precaution, not related to image quality or contrast effectiveness."
+            },
+            {
+                domain: "Patient Care",
+                question: "What is the correct blood pressure classification for a reading of 140/90 mmHg?",
+                options: [
+                    "Normal",
+                    "Elevated",
+                    "Stage 1 Hypertension",
+                    "Stage 2 Hypertension"
+                ],
+                correct: 2,
+                explanation: "According to current guidelines, Stage 1 Hypertension is defined as systolic BP 130-139 mmHg OR diastolic BP 80-89 mmHg. A reading of 140/90 meets these criteria."
+            },
+            {
+                domain: "Patient Care",
+                question: "Which contrast agent property is measured by the glomerular filtration rate (GFR)?",
+                options: [
+                    "Allergic potential",
+                    "Renal function",
+                    "Liver function",
+                    "Cardiac function"
+                ],
+                correct: 1,
+                explanation: "GFR measures kidney function and the kidneys' ability to filter and eliminate gadolinium-based contrast agents. Patients with impaired renal function (low GFR) are at higher risk for nephrogenic systemic fibrosis (NSF)."
+            },
+            {
+                domain: "Patient Care",
+                question: "What is the minimum GFR value generally considered safe for administering gadolinium-based contrast?",
+                options: [
+                    "60 mL/min/1.73m²",
+                    "45 mL/min/1.73m²",
+                    "30 mL/min/1.73m²",
+                    "15 mL/min/1.73m²"
+                ],
+                correct: 2,
+                explanation: "Most guidelines suggest extra caution with GFR below 30 mL/min/1.73m². While specific protocols vary by institution and contrast agent, GFR <30 indicates significantly impaired renal function requiring careful risk-benefit assessment."
+            },
+            {
+                domain: "Patient Care",
+                question: "The half-life of gadolinium-based contrast agents in patients with normal renal function is approximately:",
+                options: [
+                    "30 minutes",
+                    "1.5 hours",
+                    "6 hours",
+                    "24 hours"
+                ],
+                correct: 1,
+                explanation: "In patients with normal renal function, gadolinium-based contrast agents have a half-life of approximately 1.5 hours (90 minutes). Over 90% is eliminated within 24 hours through the kidneys."
+            },
+            {
+                domain: "Patient Care",
+                question: "Extravasation of contrast material is best managed by:",
+                options: [
+                    "Applying heat to increase absorption",
+                    "Elevating the affected limb and applying cold compresses",
+                    "Massaging the area vigorously",
+                    "Continuing the injection in the same site"
+                ],
+                correct: 1,
+                explanation: "If extravasation occurs, stop the injection immediately, elevate the affected limb, and apply cold compresses to reduce swelling and discomfort. Document the incident and monitor the site. Heat can worsen the injury."
+            },
+            {
+                domain: "Patient Care",
+                question: "Which type of precautions requires the use of an N95 respirator?",
+                options: [
+                    "Standard precautions",
+                    "Droplet precautions",
+                    "Airborne precautions",
+                    "Contact precautions"
+                ],
+                correct: 2,
+                explanation: "Airborne precautions are used for diseases transmitted via airborne particles (like tuberculosis, measles, varicella). These require N95 respirators or higher level protection, as standard surgical masks are insufficient."
+            },
+            {
+                domain: "Patient Care",
+                question: "A tort is defined as:",
+                options: [
+                    "A criminal offense",
+                    "A civil wrong resulting in harm or injury",
+                    "A breach of contract",
+                    "A HIPAA violation"
+                ],
+                correct: 1,
+                explanation: "A tort is a civil wrong (as opposed to criminal) that causes harm or injury to another person. In healthcare, this includes negligence, malpractice, assault, battery, false imprisonment, and invasion of privacy."
+            },
+            {
+                domain: "Patient Care",
+                question: "Respondeat superior means:",
+                options: [
+                    "The patient has the right to refuse treatment",
+                    "Let the employer answer for the employee's actions",
+                    "Standard of care must be maintained",
+                    "All healthcare workers must be certified"
+                ],
+                correct: 1,
+                explanation: "Respondeat superior is a legal doctrine meaning 'let the master answer.' It holds employers liable for the actions of their employees performed within the scope of employment. However, employees can still be held personally liable."
+            },
+            {
+                domain: "Patient Care",
+                question: "Which medication is an antihistamine commonly used to treat allergic reactions to contrast?",
+                options: [
+                    "Epinephrine",
+                    "Diphenhydramine (Benadryl)",
+                    "Atropine",
+                    "Furosemide (Lasix)"
+                ],
+                correct: 1,
+                explanation: "Diphenhydramine (Benadryl) is an antihistamine used to treat mild to moderate allergic reactions. It blocks histamine receptors and helps relieve symptoms like itching, hives, and mild respiratory distress."
+            },
+            {
+                domain: "Patient Care",
+                question: "Oxygen saturation (SpO2) levels below what percentage require immediate intervention?",
+                options: [
+                    "95%",
+                    "92%",
+                    "90%",
+                    "85%"
+                ],
+                correct: 2,
+                explanation: "While normal SpO2 is 95-100%, levels below 90% indicate hypoxemia and require immediate intervention. Between 90-92% warrants close monitoring. Levels below 90% can lead to tissue hypoxia and organ damage."
+            },
+            {
+                domain: "Patient Care",
+                question: "The ethical principle of autonomy refers to:",
+                options: [
+                    "Doing no harm to the patient",
+                    "The patient's right to make their own healthcare decisions",
+                    "Treating all patients equally",
+                    "Acting in the patient's best interest"
+                ],
+                correct: 1,
+                explanation: "Autonomy is the ethical principle that respects a patient's right to make informed decisions about their own healthcare. This includes the right to refuse treatment, even if healthcare providers disagree with the decision."
+            },
+
+            // SAFETY (20 questions)
+            {
+                domain: "Safety",
+                question: "What is the threshold for labeling a device as 'MR Safe'?",
+                options: [
+                    "The device poses no known hazards in all MR environments",
+                    "The device has been tested at 1.5T only",
+                    "The device can be scanned with some risk",
+                    "The device is safe only outside the scan room"
+                ],
+                correct: 0,
+                explanation: "MR Safe devices pose no known hazards in ALL MR environments. These items are typically non-metallic, non-electronic, and non-magnetic. Examples include certain plastics and ceramics. This is the safest category."
+            },
+            {
+                domain: "Safety",
+                question: "At what distance from the magnet is the 5 Gauss line typically located for a 1.5T MRI system?",
+                options: [
+                    "1-2 meters",
+                    "3-4 meters",
+                    "5-6 meters",
+                    "10-12 meters"
+                ],
+                correct: 1,
+                explanation: "The 5 Gauss (0.5 mT) line is typically 3-4 meters from a 1.5T magnet, though this varies by magnet design and shielding. This line marks the boundary where pacemakers and other sensitive devices may be affected. It's the boundary for Zone III."
+            },
+            {
+                domain: "Safety",
+                question: "Which zone in the MRI suite requires active screening of all individuals before entry?",
+                options: [
+                    "Zone I",
+                    "Zone II",
+                    "Zone III",
+                    "Zone IV"
+                ],
+                correct: 2,
+                explanation: "Zone III is the area where active MRI safety screening must occur before entry. It includes areas within the 5 Gauss line where ferromagnetic objects can become projectiles. Zone IV is the MRI scan room itself."
+            },
+            {
+                domain: "Safety",
+                question: "The specific absorption rate (SAR) limits are designed to prevent:",
+                options: [
+                    "Magnetic field exposure",
+                    "Acoustic noise damage",
+                    "Excessive tissue heating from RF energy",
+                    "Gradient-induced nerve stimulation"
+                ],
+                correct: 2,
+                explanation: "SAR measures the rate at which RF energy is absorbed by body tissues, measured in watts per kilogram (W/kg). SAR limits prevent excessive heating that could cause thermal injury. Limits vary by body region and patient condition."
+            },
+            {
+                domain: "Safety",
+                question: "What is the FDA-recommended SAR limit for the whole body?",
+                options: [
+                    "2 W/kg",
+                    "4 W/kg",
+                    "8 W/kg",
+                    "10 W/kg"
+                ],
+                correct: 1,
+                explanation: "The FDA guideline for whole-body averaged SAR is 4 W/kg for 15 minutes. Local SAR limits are 8 W/kg per gram of tissue in the head and 12 W/kg per gram in the extremities, also averaged over 15 minutes."
+            },
+            {
+                domain: "Safety",
+                question: "Which patient population is at highest risk for nephrogenic systemic fibrosis (NSF)?",
+                options: [
+                    "Diabetic patients",
+                    "Patients with severe renal impairment (GFR <30)",
+                    "Elderly patients over 80",
+                    "Pediatric patients under 5"
+                ],
+                correct: 1,
+                explanation: "NSF is a serious condition associated with gadolinium-based contrast agents in patients with severe renal impairment (GFR <30 mL/min/1.73m²). These patients cannot efficiently eliminate gadolinium, leading to tissue deposition."
+            },
+            {
+                domain: "Safety",
+                question: "The primary safety concern with gradient magnetic fields is:",
+                options: [
+                    "Permanent magnetization of tissue",
+                    "Peripheral nerve stimulation",
+                    "Radiation exposure",
+                    "Contrast extravasation"
+                ],
+                correct: 1,
+                explanation: "Rapidly switching gradient fields can induce electric currents in tissues, potentially causing peripheral nerve stimulation (tingling, twitching). At very high levels, cardiac stimulation is theoretically possible, though gradient limits prevent this."
+            },
+            {
+                domain: "Safety",
+                question: "MRI acoustic noise is primarily caused by:",
+                options: [
+                    "The RF coil",
+                    "The cryogen cooling system",
+                    "Lorentz forces on gradient coils",
+                    "The main magnetic field"
+                ],
+                correct: 2,
+                explanation: "MRI acoustic noise results from Lorentz forces acting on gradient coils in the static magnetic field. When current flows through gradients during rapid switching, they vibrate, producing loud sounds (up to 120 dB). Hearing protection is essential."
+            },
+            {
+                domain: "Safety",
+                question: "A patient with a pacemaker implanted before what year should generally NOT undergo MRI without specific device information?",
+                options: [
+                    "2000",
+                    "2008",
+                    "2015",
+                    "2020"
+                ],
+                correct: 1,
+                explanation: "MRI-conditional pacemakers became available around 2008-2011. Pacemakers implanted before this time are generally contraindicated for MRI. Modern MR-conditional devices can be scanned safely under specific conditions with proper protocols."
+            },
+            {
+                domain: "Safety",
+                question: "Which statement about pregnancy and MRI is correct?",
+                options: [
+                    "MRI is absolutely contraindicated throughout pregnancy",
+                    "MRI can be performed safely, especially after the first trimester",
+                    "MRI can only be performed with gadolinium contrast",
+                    "MRI requires a signed waiver from the obstetrician"
+                ],
+                correct: 1,
+                explanation: "MRI is generally considered safe during pregnancy, particularly after the first trimester. No adverse effects on the fetus have been documented. However, gadolinium contrast should be avoided unless absolutely necessary due to potential risk."
+            },
+            {
+                domain: "Safety",
+                question: "Cryogen safety includes understanding that liquid helium boils at:",
+                options: [
+                    "-196°C (-321°F)",
+                    "-269°C (-452°F)",
+                    "-183°C (-297°F)",
+                    "-78°C (-109°F)"
+                ],
+                correct: 1,
+                explanation: "Liquid helium boils at -269°C (-452°F), making it extremely cold. Cryogen burns, asphyxiation from oxygen displacement, and overpressure from rapid vaporization (quench) are serious hazards requiring proper handling and ventilation."
+            },
+            {
+                domain: "Safety",
+                question: "During a quench, the primary immediate danger is:",
+                options: [
+                    "Magnetic field exposure",
+                    "Oxygen displacement and asphyxiation",
+                    "Equipment overheating",
+                    "Contrast agent leakage"
+                ],
+                correct: 1,
+                explanation: "A quench involves rapid vaporization of liquid helium. The expanding gas can displace oxygen, creating an asphyxiation hazard. Proper ventilation and immediate evacuation of the scan room are critical. Oxygen monitoring should be in place."
+            },
+            {
+                domain: "Safety",
+                question: "The 'missile effect' or projectile risk in MRI is greatest in which zone?",
+                options: [
+                    "Zone I",
+                    "Zone II",
+                    "Zone III and IV",
+                    "Outside the facility"
+                ],
+                correct: 2,
+                explanation: "Zone III (beyond the 5 Gauss line) and Zone IV (scan room) present projectile risks. Ferromagnetic objects become projectiles when they enter the strong magnetic field, potentially causing serious injury or death. The closer to the magnet, the greater the force."
+            },
+            {
+                domain: "Safety",
+                question: "What action should be taken if a ferromagnetic object becomes a projectile and pins a patient against the magnet?",
+                options: [
+                    "Attempt to pull the object off immediately",
+                    "Quench the magnet while providing patient care",
+                    "Turn off the gradients",
+                    "Increase oxygen flow to the patient"
+                ],
+                correct: 1,
+                explanation: "If a patient is pinned by a ferromagnetic projectile, the magnet must be quenched to eliminate the magnetic field while simultaneously providing emergency care. Do not attempt to pull the object off - the magnetic force is too strong and could cause additional injury."
+            },
+            {
+                domain: "Safety",
+                question: "Patients should be screened for which of the following before entering the MRI environment?",
+                options: [
+                    "Implanted medical devices only",
+                    "Metallic foreign bodies only",
+                    "Tattoos and permanent makeup only",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Comprehensive screening includes implanted devices, metallic foreign bodies (especially ocular), tattoos/permanent makeup (may contain metallic pigments), surgical clips, shrapnel, occupational metal exposure, and any other potential ferromagnetic materials."
+            },
+            {
+                domain: "Safety",
+                question: "The time-varying gradient magnetic fields are measured in:",
+                options: [
+                    "Tesla (T)",
+                    "Gauss (G)",
+                    "Tesla per second (T/s)",
+                    "Watts per kilogram (W/kg)"
+                ],
+                correct: 2,
+                explanation: "Time-varying gradients are measured in Tesla per second (T/s), which indicates the rate of change of the magnetic field. The faster the change (higher dB/dt), the greater the potential for peripheral nerve stimulation."
+            },
+            {
+                domain: "Safety",
+                question: "MR Conditional devices:",
+                options: [
+                    "Can be scanned without any restrictions",
+                    "Pose no hazards in any MR environment",
+                    "Can be scanned safely under specific conditions",
+                    "Should never enter the MR environment"
+                ],
+                correct: 2,
+                explanation: "MR Conditional devices can be scanned safely under specified conditions (specific field strength, SAR limits, gradient limits, etc.). The conditions must be strictly followed. Examples include certain pacemakers, neurostimulators, and orthopedic implants."
+            },
+            {
+                domain: "Safety",
+                question: "What is the primary purpose of the MRI screening form?",
+                options: [
+                    "To collect insurance information",
+                    "To identify contraindications and potential safety hazards",
+                    "To obtain marketing data",
+                    "To document the referring physician"
+                ],
+                correct: 1,
+                explanation: "The MRI screening form is a critical safety tool to identify contraindications (devices, implants, foreign bodies) and potential hazards before allowing patients or visitors into the MRI environment. It must be thorough and reviewed by trained personnel."
+            },
+            {
+                domain: "Safety",
+                question: "Tattoos may cause problems in MRI because:",
+                options: [
+                    "They contain metallic pigments that can heat or cause artifacts",
+                    "They indicate poor patient compliance",
+                    "They interfere with the RF coil",
+                    "They are always contraindications"
+                ],
+                correct: 0,
+                explanation: "Some tattoo inks, particularly older ones and darker colors, contain metallic compounds (iron oxide, titanium dioxide) that can heat during scanning or cause artifacts. Most tattoos can be scanned, but patients should be monitored for discomfort."
+            },
+            {
+                domain: "Safety",
+                question: "Eye protection during MRI should be provided to:",
+                options: [
+                    "Patients only",
+                    "Personnel staying in the scan room",
+                    "All personnel and patients for acoustic noise",
+                    "No one, as it's not required"
+                ],
+                correct: 2,
+                explanation: "While 'eye protection' typically refers to acoustic noise protection (earplugs/headphones for ears), proper hearing protection must be provided to patients AND personnel remaining in the scan room due to potentially damaging noise levels (up to 120 dB)."
+            },
+
+            // IMAGE PRODUCTION (30 questions)
+            {
+                domain: "Image Production",
+                question: "The Larmor equation describes the relationship between:",
+                options: [
+                    "Magnetic field strength and precessional frequency",
+                    "TE and T2 relaxation",
+                    "Pixel size and spatial resolution",
+                    "RF pulse and tissue excitation angle"
+                ],
+                correct: 0,
+                explanation: "The Larmor equation (ω = γB₀) relates the precessional frequency of hydrogen protons to the strength of the external magnetic field. The gyromagnetic ratio (γ) for hydrogen is 42.58 MHz/T, so at 1.5T, protons precess at ~63.87 MHz."
+            },
+            {
+                domain: "Image Production",
+                question: "T1 relaxation is also known as:",
+                options: [
+                    "Transverse relaxation",
+                    "Spin-spin relaxation",
+                    "Longitudinal relaxation",
+                    "Free induction decay"
+                ],
+                correct: 2,
+                explanation: "T1 relaxation (longitudinal relaxation) describes the recovery of longitudinal magnetization along the B₀ axis after an RF pulse. It represents the time for 63% of longitudinal magnetization to recover and varies by tissue type."
+            },
+            {
+                domain: "Image Production",
+                question: "T2 relaxation is caused by:",
+                options: [
+                    "Recovery of longitudinal magnetization",
+                    "Spin-spin interactions causing dephasing",
+                    "Static magnetic field inhomogeneities",
+                    "RF pulse transmission"
+                ],
+                correct: 1,
+                explanation: "T2 relaxation (transverse or spin-spin relaxation) occurs as protons lose phase coherence due to interactions with neighboring spins. This causes decay of transverse magnetization. T2 is always shorter than T1 for a given tissue."
+            },
+            {
+                domain: "Image Production",
+                question: "Which tissue has the longest T1 relaxation time?",
+                options: [
+                    "Fat",
+                    "White matter",
+                    "CSF",
+                    "Gray matter"
+                ],
+                correct: 2,
+                explanation: "CSF (cerebrospinal fluid) has the longest T1 relaxation time (~4000ms at 1.5T) because it's primarily water with few macromolecules. Fat has the shortest T1 (~250ms), appearing bright on T1-weighted images."
+            },
+            {
+                domain: "Image Production",
+                question: "To create a T1-weighted image, use:",
+                options: [
+                    "Short TR, short TE",
+                    "Short TR, long TE",
+                    "Long TR, short TE",
+                    "Long TR, long TE"
+                ],
+                correct: 0,
+                explanation: "T1-weighted images require SHORT TR (reduces T2 effects by not allowing full T2 relaxation) and SHORT TE (reduces T2 effects). This maximizes contrast based on T1 differences. Fat appears bright, CSF appears dark."
+            },
+            {
+                domain: "Image Production",
+                question: "To create a T2-weighted image, use:",
+                options: [
+                    "Short TR, short TE",
+                    "Short TR, long TE",
+                    "Long TR, short TE",
+                    "Long TR, long TE"
+                ],
+                correct: 3,
+                explanation: "T2-weighted images require LONG TR (allows full T1 recovery, reducing T1 effects) and LONG TE (allows T2 relaxation to occur). This maximizes contrast based on T2 differences. CSF appears bright, fat appears intermediate."
+            },
+            {
+                domain: "Image Production",
+                question: "Echo time (TE) is defined as:",
+                options: [
+                    "Time from one RF pulse to the next RF pulse",
+                    "Time from RF pulse to peak of echo signal",
+                    "Time for complete T1 recovery",
+                    "Duration of the RF pulse"
+                ],
+                correct: 1,
+                explanation: "TE (echo time) is the time from the initial 90° RF pulse to the center of the echo (peak signal). It determines the amount of T2 decay and therefore T2 weighting. Longer TE = more T2 weighting."
+            },
+            {
+                domain: "Image Production",
+                question: "Repetition time (TR) is defined as:",
+                options: [
+                    "Time from one RF pulse to the same RF pulse in the next sequence",
+                    "Time from RF pulse to echo formation",
+                    "Total scan time",
+                    "Time between echo acquisitions"
+                ],
+                correct: 0,
+                explanation: "TR (repetition time) is the time from one 90° RF pulse to the next 90° RF pulse in the sequence. It controls the amount of T1 recovery between repetitions. Longer TR = more T1 recovery = less T1 weighting."
+            },
+            {
+                domain: "Image Production",
+                question: "Increasing the flip angle in a gradient echo sequence will:",
+                options: [
+                    "Decrease signal intensity",
+                    "Increase T1 weighting",
+                    "Decrease T1 weighting",
+                    "Have no effect on contrast"
+                ],
+                correct: 1,
+                explanation: "In gradient echo sequences, larger flip angles (closer to 90°) increase T1 weighting by creating more longitudinal magnetization conversion. Smaller flip angles (20-30°) provide more proton density weighting with faster acquisition."
+            },
+            {
+                domain: "Image Production",
+                question: "The main difference between spin echo and gradient echo sequences is:",
+                options: [
+                    "Use of 180° refocusing pulse vs. gradient reversal",
+                    "Field strength requirements",
+                    "Contrast agent requirement",
+                    "Patient positioning"
+                ],
+                correct: 0,
+                explanation: "Spin echo uses a 180° refocusing pulse to rephase spins and refocus signal. Gradient echo uses gradient reversal (no 180° pulse), making it faster but more susceptible to susceptibility artifacts. T2* decay occurs instead of pure T2."
+            },
+            {
+                domain: "Image Production",
+                question: "Spatial resolution is primarily determined by:",
+                options: [
+                    "TR and TE values",
+                    "Pixel size and slice thickness",
+                    "Field strength only",
+                    "Coil type"
+                ],
+                correct: 1,
+                explanation: "Spatial resolution is determined by voxel dimensions: pixel size (in-plane resolution from FOV and matrix) and slice thickness. Smaller voxels = better resolution but lower SNR. Resolution trade-offs are fundamental in MRI."
+            },
+            {
+                domain: "Image Production",
+                question: "Signal-to-noise ratio (SNR) is increased by:",
+                options: [
+                    "Decreasing voxel size",
+                    "Decreasing number of signal averages (NSA)",
+                    "Increasing voxel size",
+                    "Increasing receiver bandwidth"
+                ],
+                correct: 2,
+                explanation: "Larger voxels contain more protons, generating more signal and higher SNR. However, this reduces spatial resolution. SNR also increases with more averages, narrower bandwidth, higher field strength, and better coils."
+            },
+            {
+                domain: "Image Production",
+                question: "Decreasing the field of view (FOV) while maintaining matrix size will:",
+                options: [
+                    "Increase pixel size and decrease resolution",
+                    "Decrease pixel size and increase resolution",
+                    "Have no effect on resolution",
+                    "Only affect scan time"
+                ],
+                correct: 1,
+                explanation: "Pixel size = FOV ÷ matrix. Smaller FOV with same matrix = smaller pixels = better resolution but lower SNR (fewer protons per pixel). This is a common way to improve resolution for small anatomical areas."
+            },
+            {
+                domain: "Image Production",
+                question: "Increasing the receiver bandwidth will:",
+                options: [
+                    "Increase SNR and chemical shift artifact",
+                    "Decrease SNR and chemical shift artifact",
+                    "Increase SNR, decrease chemical shift",
+                    "Decrease SNR, increase chemical shift"
+                ],
+                correct: 1,
+                explanation: "Wider bandwidth samples more frequencies, including more noise (decreasing SNR) but reduces chemical shift artifacts by decreasing the pixel shift between fat and water. Bandwidth choices involve trading SNR for artifact reduction."
+            },
+            {
+                domain: "Image Production",
+                question: "Fat appears dark on STIR (Short Tau Inversion Recovery) images because:",
+                options: [
+                    "Fat has long T1 relaxation time",
+                    "The inversion time is set to null fat signal",
+                    "Fat has short T2 relaxation time",
+                    "STIR sequences use fat saturation pulses"
+                ],
+                correct: 1,
+                explanation: "STIR uses an inversion pulse followed by a specific inversion time (TI ≈ 140-175ms at 1.5T) chosen so fat's longitudinal magnetization crosses zero, producing no signal. This provides uniform fat suppression even with field inhomogeneity."
+            },
+            {
+                domain: "Image Production",
+                question: "The K-space center contains information about:",
+                options: [
+                    "Edge detail and high spatial frequencies",
+                    "Image contrast and low spatial frequencies",
+                    "Artifact information only",
+                    "RF pulse parameters"
+                ],
+                correct: 1,
+                explanation: "K-space center contains low spatial frequency data determining overall image contrast and brightness. K-space periphery contains high spatial frequency data determining edge detail and resolution. Data is filled systematically during acquisition."
+            },
+            {
+                domain: "Image Production",
+                question: "Phase encoding gradient determines:",
+                options: [
+                    "Slice selection",
+                    "Spatial localization in the horizontal direction",
+                    "Spatial localization in the vertical direction",
+                    "Echo formation timing"
+                ],
+                correct: 2,
+                explanation: "Phase encoding gradient provides spatial localization in one in-plane direction (typically vertical/superior-inferior). Each phase encoding step applies different gradient amplitude, creating different phase shifts. Number of steps determines matrix size in phase direction."
+            },
+            {
+                domain: "Image Production",
+                question: "Frequency encoding gradient determines:",
+                options: [
+                    "Slice thickness",
+                    "Spatial localization during signal readout",
+                    "T1 relaxation time",
+                    "RF pulse bandwidth"
+                ],
+                correct: 1,
+                explanation: "Frequency encoding (readout) gradient creates spatial localization during signal acquisition by causing different precessional frequencies at different locations. Applied during echo formation. Determines matrix size in frequency direction."
+            },
+            {
+                domain: "Image Production",
+                question: "Magnetic susceptibility artifacts are caused by:",
+                options: [
+                    "Patient motion",
+                    "Differences in magnetic properties of adjacent tissues",
+                    "RF interference",
+                    "Aliasing"
+                ],
+                correct: 1,
+                explanation: "Magnetic susceptibility artifacts occur at interfaces between materials with different magnetic properties (e.g., metal implants, air-tissue boundaries). Field distortion causes signal loss and geometric distortion. Worse at higher field strengths and with gradient echo."
+            },
+            {
+                domain: "Image Production",
+                question: "Chemical shift artifact appears in the:",
+                options: [
+                    "Phase encoding direction only",
+                    "Frequency encoding direction only",
+                    "Slice selection direction only",
+                    "All directions equally"
+                ],
+                correct: 1,
+                explanation: "Chemical shift artifact (misregistration between fat and water) occurs in the frequency encoding direction because fat protons precess at slightly lower frequency (~3.5 ppm difference). This creates spatial misregistration along the frequency axis."
+            },
+            {
+                domain: "Image Production",
+                question: "Aliasing (wrap-around) artifact occurs when:",
+                options: [
+                    "TR is too short",
+                    "Field of view is smaller than the imaged object",
+                    "TE is too long",
+                    "Receiver bandwidth is too wide"
+                ],
+                correct: 1,
+                explanation: "Aliasing occurs when anatomy outside the FOV is folded back into the image. This happens because the sampling frequency is too low to properly represent the spatial frequencies present. Prevented by increasing FOV or using saturation bands."
+            },
+            {
+                domain: "Image Production",
+                question: "Gibbs (truncation) artifact appears as:",
+                options: [
+                    "Blurring in the frequency direction",
+                    "Parallel lines or ripples at high-contrast boundaries",
+                    "Random noise throughout the image",
+                    "Geometric distortion"
+                ],
+                correct: 1,
+                explanation: "Gibbs artifact (truncation or ringing artifact) appears as multiple parallel lines at sharp transitions (e.g., CSF-cord interface). Caused by insufficient sampling of high spatial frequencies. Reduced by increasing matrix size or using filtering."
+            },
+            {
+                domain: "Image Production",
+                question: "Motion artifact appears in the:",
+                options: [
+                    "Frequency direction only",
+                    "Phase direction only",
+                    "Phase direction predominantly",
+                    "All directions equally"
+                ],
+                correct: 2,
+                explanation: "Motion artifact (ghosting) appears predominantly in the phase encoding direction because phase encoding occurs over the entire TR period, while frequency encoding is very brief. Each phase encode step samples at different motion states, creating ghosts."
+            },
+            {
+                domain: "Image Production",
+                question: "Fast Spin Echo (FSE) or Turbo Spin Echo (TSE) differs from conventional spin echo by:",
+                options: [
+                    "Using no RF pulses",
+                    "Acquiring multiple echoes per TR with multiple 180° pulses",
+                    "Using gradient reversal instead of 180° pulses",
+                    "Requiring contrast agents"
+                ],
+                correct: 1,
+                explanation: "FSE/TSE uses an echo train with multiple 180° refocusing pulses per TR, each followed by a different phase encoding step. This dramatically reduces scan time. The number of echoes per TR is the echo train length (ETL) or turbo factor."
+            },
+            {
+                domain: "Image Production",
+                question: "Increasing echo train length (ETL) in FSE sequences will:",
+                options: [
+                    "Increase scan time and SNR",
+                    "Decrease scan time but increase blurring",
+                    "Improve spatial resolution",
+                    "Reduce artifact"
+                ],
+                correct: 1,
+                explanation: "Longer ETL = more echoes per TR = faster scan, but increases blurring due to T2 decay across the echo train. Effective TE determines contrast. Fat appears brighter in FSE T2 due to J-coupling. Trade-off between speed and image quality."
+            },
+            {
+                domain: "Image Production",
+                question: "Parallel imaging techniques (SENSE, GRAPPA) reduce scan time by:",
+                options: [
+                    "Using a shorter TR",
+                    "Reducing the number of phase encoding steps",
+                    "Eliminating the frequency encoding gradient",
+                    "Increasing the flip angle"
+                ],
+                correct: 1,
+                explanation: "Parallel imaging uses multiple coil elements with known sensitivity profiles to acquire fewer phase encoding steps (undersampling). Coil information reconstructs missing data. Acceleration factor of 2 = half the phase encodes = half the scan time, but lower SNR."
+            },
+            {
+                domain: "Image Production",
+                question: "The advantage of 3D acquisition over 2D acquisition is:",
+                options: [
+                    "Faster scan time",
+                    "Better SNR and thinner slices without gaps",
+                    "Less susceptibility artifacts",
+                    "Reduced motion sensitivity"
+                ],
+                correct: 1,
+                explanation: "3D acquisition excites a volume rather than individual slices, then uses phase encoding in the slice direction. Advantages: better SNR, thinner slices, no gaps, multiplanar reformats. Disadvantages: longer scan time, more motion sensitive."
+            },
+            {
+                domain: "Image Production",
+                question: "Diffusion-weighted imaging (DWI) is sensitive to:",
+                options: [
+                    "Blood flow velocity",
+                    "Random motion of water molecules",
+                    "Chemical shift",
+                    "Magnetic susceptibility"
+                ],
+                correct: 1,
+                explanation: "DWI uses strong diffusion-sensitizing gradients that cause signal loss where water molecules diffuse freely. Restricted diffusion (e.g., acute stroke, dense cellular tumors) appears bright. Quantified by apparent diffusion coefficient (ADC) maps."
+            },
+            {
+                domain: "Image Production",
+                question: "The b-value in diffusion imaging represents:",
+                options: [
+                    "Blood flow velocity",
+                    "The degree of diffusion weighting",
+                    "T2 relaxation time",
+                    "Flip angle"
+                ],
+                correct: 1,
+                explanation: "The b-value (s/mm²) indicates the strength and duration of diffusion-sensitizing gradients. Higher b-values = more diffusion weighting = more signal loss in areas of free diffusion. Typical values: 0 (reference), 1000 (brain), 800-1000 (body)."
+            },
+            {
+                domain: "Image Production",
+                question: "Time-of-flight (TOF) MR angiography creates bright blood signal by:",
+                options: [
+                    "Using contrast agents",
+                    "Flow-related enhancement from unsaturated spins entering the slice",
+                    "Long TR and TE values",
+                    "Fat saturation"
+                ],
+                correct: 1,
+                explanation: "TOF MRA uses short TR gradient echo sequences that saturate stationary tissue (low signal) while fresh, unsaturated blood flowing into the slice gives bright signal (flow-related enhancement). No contrast needed. Best for arteries perpendicular to slice."
+            },
+
+            // PROCEDURES (30 questions)
+            {
+                domain: "Procedures",
+                question: "The corpus callosum is the largest:",
+                options: [
+                    "Gray matter nucleus",
+                    "White matter commissure connecting the cerebral hemispheres",
+                    "Ventricle in the brain",
+                    "Brainstem structure"
+                ],
+                correct: 1,
+                explanation: "The corpus callosum is the largest white matter commissure (bundle of nerve fibers) connecting the left and right cerebral hemispheres. It consists of the rostrum, genu, body, and splenium from anterior to posterior."
+            },
+            {
+                domain: "Procedures",
+                question: "The thalamus is part of the:",
+                options: [
+                    "Brainstem",
+                    "Cerebellum",
+                    "Diencephalon",
+                    "Cerebral cortex"
+                ],
+                correct: 2,
+                explanation: "The thalamus is the largest component of the diencephalon, serving as a relay station for sensory and motor signals. Other diencephalon structures include the hypothalamus, epithalamus, and subthalamus."
+            },
+            {
+                domain: "Procedures",
+                question: "Which brain structure controls balance and coordination?",
+                options: [
+                    "Cerebrum",
+                    "Cerebellum",
+                    "Pons",
+                    "Medulla oblongata"
+                ],
+                correct: 1,
+                explanation: "The cerebellum, located in the posterior fossa below the tentorium cerebelli, controls balance, coordination, and fine motor control. Cerebellar lesions cause ataxia, dysmetria, and intention tremor."
+            },
+            {
+                domain: "Procedures",
+                question: "CSF is produced in the:",
+                options: [
+                    "Subarachnoid space",
+                    "Choroid plexus",
+                    "Dural sinuses",
+                    "Arachnoid granulations"
+                ],
+                correct: 1,
+                explanation: "CSF is produced primarily by the choroid plexus in the lateral, third, and fourth ventricles (about 500 mL/day). It flows through the ventricular system and subarachnoid space, then is absorbed by arachnoid granulations into venous sinuses."
+            },
+            {
+                domain: "Procedures",
+                question: "The circle of Willis provides:",
+                options: [
+                    "Drainage for cerebrospinal fluid",
+                    "Collateral arterial blood supply to the brain",
+                    "Venous drainage from the brain",
+                    "Lymphatic drainage"
+                ],
+                correct: 1,
+                explanation: "The circle of Willis is an arterial anastomotic ring at the base of the brain providing collateral circulation. It connects the internal carotid and vertebrobasilar systems. Variations and incomplete circles are common (~50% of people)."
+            },
+            {
+                domain: "Procedures",
+                question: "Which liver lobe is divided by the falciform ligament?",
+                options: [
+                    "Right and caudate lobes",
+                    "Left and quadrate lobes",
+                    "Right and left lobes",
+                    "Caudate and quadrate lobes"
+                ],
+                correct: 2,
+                explanation: "The falciform ligament divides the liver into anatomic right and left lobes on the anterior surface. However, functional division (Couinaud classification) uses hepatic veins and portal vein branches, differing from anatomic landmarks."
+            },
+            {
+                domain: "Procedures",
+                question: "The spleen is located in which abdominal quadrant?",
+                options: [
+                    "Right upper quadrant",
+                    "Left upper quadrant",
+                    "Right lower quadrant",
+                    "Left lower quadrant"
+                ],
+                correct: 1,
+                explanation: "The spleen is located in the left upper quadrant (LUQ), posterolateral to the stomach, below the diaphragm, and lateral to the left kidney. It's the largest lymphoid organ, involved in immune function and blood filtration."
+            },
+            {
+                domain: "Procedures",
+                question: "The portal vein is formed by the confluence of which vessels?",
+                options: [
+                    "Superior and inferior mesenteric veins",
+                    "Splenic and superior mesenteric veins",
+                    "Hepatic and splenic veins",
+                    "Gastric and splenic veins"
+                ],
+                correct: 1,
+                explanation: "The portal vein is formed by the union of the splenic vein and superior mesenteric vein behind the neck of the pancreas. It carries nutrient-rich blood from the GI tract to the liver for processing before reaching systemic circulation."
+            },
+            {
+                domain: "Procedures",
+                question: "The kidneys are located in which space?",
+                options: [
+                    "Intraperitoneal",
+                    "Retroperitoneal",
+                    "Subperitoneal",
+                    "Extraperitoneal"
+                ],
+                correct: 1,
+                explanation: "The kidneys are retroperitoneal organs, located behind the peritoneum in the posterior abdomen. Other retroperitoneal structures include the adrenals, pancreas, duodenum (2nd-4th parts), ascending/descending colon, and abdominal aorta."
+            },
+            {
+                domain: "Procedures",
+                question: "Which imaging plane best demonstrates the anterior and posterior cruciate ligaments?",
+                options: [
+                    "Axial",
+                    "Coronal",
+                    "Sagittal",
+                    "Oblique axial"
+                ],
+                correct: 2,
+                explanation: "Sagittal images best demonstrate the ACL and PCL in the knee. The ACL runs anterolaterally from the tibia to the femur, while the PCL runs posteromedially. Coronal images show collateral ligaments and menisci."
+            },
+            {
+                domain: "Procedures",
+                question: "The rotator cuff consists of which four muscles?",
+                options: [
+                    "Deltoid, biceps, triceps, pectoralis",
+                    "Supraspinatus, infraspinatus, teres minor, subscapularis",
+                    "Supraspinatus, teres major, subscapularis, deltoid",
+                    "Infraspinatus, biceps, subscapularis, teres major"
+                ],
+                correct: 1,
+                explanation: "The rotator cuff muscles are supraspinatus, infraspinatus, teres minor, and subscapularis (SITS). They stabilize the humeral head in the glenoid. The supraspinatus is most commonly torn, typically at its insertion on the greater tuberosity."
+            },
+            {
+                domain: "Procedures",
+                question: "The knee menisci appear as what signal intensity on MRI?",
+                options: [
+                    "Bright (hyperintense) on all sequences",
+                    "Dark (hypointense) on all sequences",
+                    "Variable depending on tissue hydration",
+                    "Same as muscle"
+                ],
+                correct: 1,
+                explanation: "Normal menisci are uniformly dark (hypointense) on all pulse sequences due to their fibrocartilaginous composition with organized collagen and low water content. Internal signal suggests degeneration or tear (except for normal vascular channels in children)."
+            },
+            {
+                domain: "Procedures",
+                question: "For brain imaging, what slice thickness is typically used?",
+                options: [
+                    "1-2 mm",
+                    "3-5 mm",
+                    "7-10 mm",
+                    "15-20 mm"
+                ],
+                correct: 1,
+                explanation: "Brain MRI typically uses 3-5mm slice thickness for routine T1, T2, and FLAIR sequences. Thinner slices (1-2mm) for 3D acquisitions, diffusion, and high-resolution protocols. Thicker slices increase SNR but reduce resolution."
+            },
+            {
+                domain: "Procedures",
+                question: "The standard brain imaging protocol typically includes:",
+                options: [
+                    "T1, T2, and DWI only",
+                    "T1, T2, FLAIR, and DWI as minimum",
+                    "Only post-contrast T1 images",
+                    "T2 weighted images only"
+                ],
+                correct: 1,
+                explanation: "Standard brain protocols typically include: T1-weighted (anatomy), T2-weighted (pathology), FLAIR (suppresses CSF, shows periventricular lesions), and DWI (acute stroke). Post-contrast T1 added when indicated. Additional sequences based on clinical question."
+            },
+            {
+                domain: "Procedures",
+                question: "For spine imaging, the most important scan plane is typically:",
+                options: [
+                    "Axial only",
+                    "Sagittal only",
+                    "Coronal only",
+                    "Sagittal with axial through areas of interest"
+                ],
+                correct: 3,
+                explanation: "Spine protocols always include sagittal T1 and T2 sequences to evaluate alignment, disc spaces, and cord signal. Axial T2 images through disc levels or areas of concern provide detail of neural foramina, cord, and disc herniations."
+            },
+            {
+                domain: "Procedures",
+                question: "The most common plane for abdominal imaging is:",
+                options: [
+                    "Sagittal",
+                    "Coronal",
+                    "Axial",
+                    "Oblique"
+                ],
+                correct: 2,
+                explanation: "Axial (transverse) plane is most common for abdomen/pelvis imaging, providing cross-sectional anatomy familiar to radiologists. Coronal and sagittal sequences often added for specific indications. MRCP uses heavily T2-weighted sequences."
+            },
+            {
+                domain: "Procedures",
+                question: "Cardiac MRI gating is typically performed using:",
+                options: [
+                    "Respiratory gating only",
+                    "ECG triggering or pulse oximetry",
+                    "No gating required",
+                    "Manual triggering by the technologist"
+                ],
+                correct: 1,
+                explanation: "Cardiac MRI uses ECG (preferred) or peripheral pulse oximetry to trigger image acquisition to specific phases of the cardiac cycle. This eliminates motion artifacts and enables functional assessment. Respiratory gating or breath-holding also often required."
+            },
+            {
+                domain: "Procedures",
+                question: "For MR angiography of the neck vessels, the patient should be positioned:",
+                options: [
+                    "Prone with head turned",
+                    "Supine with head in neutral position and neck extended",
+                    "Lateral decubitus",
+                    "Sitting upright"
+                ],
+                correct: 1,
+                explanation: "MRA of neck vessels requires supine positioning with head neutral or slightly extended, using a neurovascular coil. Proper positioning ensures optimal coverage from aortic arch to circle of Willis and reduces patient motion. Padding supports patient comfort."
+            },
+            {
+                domain: "Procedures",
+                question: "When imaging the shoulder, the arm should be positioned:",
+                options: [
+                    "Abducted 90 degrees with external rotation",
+                    "At the patient's side in neutral or slight external rotation",
+                    "Behind the back with internal rotation",
+                    "Overhead with full abduction"
+                ],
+                correct: 1,
+                explanation: "Standard shoulder MRI has the arm at the patient's side in neutral or slight external rotation. This positions the rotator cuff optimally. ABER position (abduction-external rotation) is a special view to evaluate undersurface tears."
+            },
+            {
+                domain: "Procedures",
+                question: "Breast MRI typically requires:",
+                options: [
+                    "Supine positioning with sagittal imaging",
+                    "Prone positioning with dedicated breast coil",
+                    "Sitting position with bilateral coils",
+                    "Lateral decubitus position"
+                ],
+                correct: 1,
+                explanation: "Breast MRI requires prone positioning in a dedicated bilateral breast coil with compression to reduce motion. Axial or sagittal T2 and fat-saturated T1 pre- and post-contrast (dynamic) sequences are performed. High sensitivity for detecting cancer."
+            },
+            {
+                domain: "Procedures",
+                question: "Pediatric patients often require sedation for MRI when:",
+                options: [
+                    "Under 6 months old",
+                    "Between 6 months and 6-8 years old",
+                    "Over 10 years old",
+                    "Never, sedation is contraindicated"
+                ],
+                correct: 1,
+                explanation: "Infants under 6 months can often be scanned naturally sleeping after feeding ('feed and wrap'). Children 6 months to 6-8 years typically require sedation due to inability to remain still. Older children can often cooperate with coaching."
+            },
+            {
+                domain: "Procedures",
+                question: "What is the standard patient position for lumbar spine MRI?",
+                options: [
+                    "Prone, legs extended",
+                    "Supine, knees flexed on bolster",
+                    "Lateral decubitus",
+                    "Sitting upright"
+                ],
+                correct: 1,
+                explanation: "Lumbar spine MRI is performed supine with knees flexed on a bolster to flatten lumbar lordosis and reduce patient discomfort. This positioning opens intervertebral disc spaces and foramina. Spine coil centered at iliac crests."
+            },
+            {
+                domain: "Procedures",
+                question: "Hip imaging typically includes which imaging planes?",
+                options: [
+                    "Axial and sagittal only",
+                    "Coronal, axial, and sagittal oblique",
+                    "Coronal only",
+                    "Axial only"
+                ],
+                correct: 1,
+                explanation: "Hip protocols include coronal (both hips for comparison, evaluates joint space and femoral heads), axial (femoral head-neck relationship), and sagittal oblique (along femoral neck, evaluates labrum and cartilage). Small FOV, high resolution."
+            },
+            {
+                domain: "Procedures",
+                question: "For temporomandibular joint (TMJ) imaging, images should be acquired with:",
+                options: [
+                    "Mouth closed only",
+                    "Mouth open only",
+                    "Both closed and open mouth positions",
+                    "Mouth moving continuously"
+                ],
+                correct: 2,
+                explanation: "TMJ imaging requires both closed-mouth and open-mouth (or graduated opening) positions to evaluate disc position, range of motion, and joint function. Bilateral small surface coils are used. Oblique sagittal and coronal planes perpendicular to condyle."
+            },
+            {
+                domain: "Procedures",
+                question: "Prostate MRI is performed using:",
+                options: [
+                    "Body coil only",
+                    "Surface coil only",
+                    "Endorectal coil alone or combined with surface coil",
+                    "Head coil"
+                ],
+                correct: 2,
+                explanation: "High-resolution prostate MRI uses endorectal coil alone or combined with pelvic phased-array coil for optimal SNR and resolution. Protocol includes T2 (anatomy), DWI, DCE (dynamic contrast-enhanced), and sometimes MR spectroscopy. PI-RADS scoring system used."
+            },
+            {
+                domain: "Procedures",
+                question: "The standard ankle imaging protocol typically includes imaging in which plane(s)?",
+                options: [
+                    "Axial only",
+                    "Sagittal, coronal, and axial",
+                    "Coronal only",
+                    "Oblique sagittal only"
+                ],
+                correct: 1,
+                explanation: "Ankle MRI includes sagittal (ligaments, tendons, bone marrow), coronal (collateral ligaments, syndesmosis, subtalar joint), and axial (tendons around ankle, deltoid and spring ligaments). Small FOV with high resolution. Foot plantar flexed slightly."
+            },
+            {
+                domain: "Procedures",
+                question: "MRCP (MR cholangiopancreatography) uses which type of sequence?",
+                options: [
+                    "T1-weighted gradient echo",
+                    "Heavily T2-weighted sequences",
+                    "Diffusion-weighted imaging",
+                    "T2* gradient echo"
+                ],
+                correct: 1,
+                explanation: "MRCP uses heavily T2-weighted sequences (very long TE) to make fluid-filled structures (bile ducts, pancreatic duct) appear very bright while suppressing other tissues. Thick slab and thin slice acquisitions. Non-invasive alternative to ERCP for duct visualization."
+            },
+            {
+                domain: "Procedures",
+                question: "For rectal cancer staging, MRI should include:",
+                options: [
+                    "Axial sequences only",
+                    "High-resolution T2 in three planes with DWI",
+                    "T1 pre-contrast only",
+                    "Post-contrast only"
+                ],
+                correct: 1,
+                explanation: "Rectal MRI for cancer staging requires high-resolution T2-weighted images in axial (perpendicular to tumor), sagittal, and coronal planes to evaluate mesorectal fascia, sphincters, and local extent. DWI helps detect lymph nodes. Critical for surgical planning."
+            },
+            {
+                domain: "Procedures",
+                question: "Fetal MRI is typically performed after what gestational age?",
+                options: [
+                    "8-12 weeks",
+                    "12-16 weeks",
+                    "18-20 weeks",
+                    "30-32 weeks"
+                ],
+                correct: 2,
+                explanation: "Fetal MRI is typically performed after 18-20 weeks gestational age when organs are developed enough to evaluate. Most common indications include CNS abnormalities, suspected anomalies on ultrasound, or when ultrasound limited by oligohydramnios or maternal body habitus."
+            },
+            {
+                domain: "Procedures",
+                question: "The primary coil selection for brain imaging is:",
+                options: [
+                    "Body coil",
+                    "Head coil or multi-channel brain coil",
+                    "Surface flex coil",
+                    "Extremity coil"
+                ],
+                correct: 1,
+                explanation: "Brain imaging uses dedicated head coil or multi-channel (8, 16, or 32-channel) neurovascular coils for optimal SNR and parallel imaging capability. Proper positioning in coil with head immobilization (pads, straps) is essential. Body coil used for RF transmission."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let showingResults = false;
+
+        function initTest() {
+            renderQuestion();
+            updateProgress();
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('questionsContainer');
+            const question = questions[currentQuestion];
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestion] === index;
+                const isCorrect = index === question.correct;
+                const showAnswer = userAnswers[currentQuestion] !== undefined;
+                
+                let optionClass = 'option';
+                if (showAnswer) {
+                    if (isSelected) {
+                        optionClass += isCorrect ? ' correct' : ' incorrect';
+                    } else if (isCorrect) {
+                        optionClass += ' correct';
+                    }
+                } else if (isSelected) {
+                    optionClass += ' selected';
+                }
+                
+                optionsHTML += `
+                    <label class="${optionClass}">
+                        <input type="radio" name="answer" value="${index}" 
+                               ${isSelected ? 'checked' : ''}
+                               ${showAnswer ? 'disabled' : ''}
+                               onchange="selectAnswer(${index})">
+                        ${String.fromCharCode(65 + index)}. ${option}
+                    </label>
+                `;
+            });
+            
+            const showExplanation = userAnswers[currentQuestion] !== undefined;
+            
+            container.innerHTML = `
+                <div class="question-container active">
+                    <div class="question-header">
+                        <span class="question-number">Question ${currentQuestion + 1} of ${questions.length}</span>
+                        <span class="domain-tag">${question.domain}</span>
+                    </div>
+                    
+                    <div class="question-text">${question.question}</div>
+                    
+                    <div class="options">${optionsHTML}</div>
+                    
+                    <div class="explanation ${showExplanation ? 'show' : ''}">
+                        <h4>💡 Explanation</h4>
+                        <p>${question.explanation}</p>
+                    </div>
+                    
+                    <div class="buttons">
+                        <button class="btn btn-secondary" onclick="previousQuestion()" 
+                                ${currentQuestion === 0 ? 'disabled' : ''}>
+                            ← Previous
+                        </button>
+                        
+                        ${userAnswers[currentQuestion] === undefined ? 
+                            `<button class="btn btn-primary" onclick="checkAnswer()" disabled id="checkBtn">
+                                Check Answer
+                            </button>` :
+                            currentQuestion < questions.length - 1 ?
+                            `<button class="btn btn-primary" onclick="nextQuestion()">
+                                Next →
+                            </button>` :
+                            `<button class="btn btn-primary" onclick="showResults()">
+                                View Results
+                            </button>`
+                        }
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectAnswer(index) {
+            document.getElementById('checkBtn').disabled = false;
+        }
+
+        function checkAnswer() {
+            const selected = document.querySelector('input[name="answer"]:checked');
+            if (!selected) return;
+            
+            const answerIndex = parseInt(selected.value);
+            userAnswers[currentQuestion] = answerIndex;
+            renderQuestion();
+            updateProgress();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                updateProgress();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+                updateProgress();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function showResults() {
+            showingResults = true;
+            let correct = 0;
+            const domainScores = {};
+            
+            questions.forEach((question, index) => {
+                const domain = question.domain;
+                if (!domainScores[domain]) {
+                    domainScores[domain] = { correct: 0, total: 0 };
+                }
+                domainScores[domain].total++;
+                
+                if (userAnswers[index] === question.correct) {
+                    correct++;
+                    domainScores[domain].correct++;
+                }
+            });
+            
+            const percentage = Math.round((correct / questions.length) * 100);
+            
+            document.getElementById('questionsContainer').style.display = 'none';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = 'Outstanding! You\'re well prepared for the registry exam! 🎉';
+            } else if (percentage >= 80) {
+                message = 'Great job! Keep studying to reach that 90%+ goal! 📚';
+            } else if (percentage >= 70) {
+                message = 'Good foundation, but more practice needed. Review weak areas! 💪';
+            } else {
+                message = 'Keep working! Focus on understanding concepts, not just memorizing. 📖';
+            }
+            
+            let breakdownHTML = '';
+            for (const domain in domainScores) {
+                const score = domainScores[domain];
+                const domainPercent = Math.round((score.correct / score.total) * 100);
+                breakdownHTML += `
+                    <div class="category-card">
+                        <h4>${domain}</h4>
+                        <p>${score.correct}/${score.total} (${domainPercent}%)</p>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('scoreCircle').textContent = percentage + '%';
+            document.getElementById('resultMessage').textContent = message;
+            document.getElementById('categoryBreakdown').innerHTML = breakdownHTML;
+            document.getElementById('results').classList.add('show');
+        }
+
+        function restartTest() {
+            currentQuestion = 0;
+            userAnswers = [];
+            showingResults = false;
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('questionsContainer').style.display = 'block';
+            renderQuestion();
+            updateProgress();
+        }
+
+        function reviewAnswers() {
+            currentQuestion = 0;
+            showingResults = false;
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('questionsContainer').style.display = 'block';
+            renderQuestion();
+            updateProgress();
+        }
+
+        // Initialize the test when page loads
+        initTest();
+    </script>
+</body>
+</html>
