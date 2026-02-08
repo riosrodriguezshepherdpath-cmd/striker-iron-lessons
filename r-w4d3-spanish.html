@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 Log 3: Spanish</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .log-container { max-width: 800px; margin: 0 auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        .progress-bar-bg { background-color: #ddd; border-radius: 10px; margin: 20px 0; overflow: hidden; }
+        .progress-bar-fill { height: 20px; background-color: #27ae60; width: 0%; text-align: center; color: white; font-size: 14px; transition: width 0.3s; }
+        .phase-card { border: 1px solid #eee; padding: 20px; margin-bottom: 15px; border-radius: 5px; background: #fafafa; }
+        .phase-title { font-weight: bold; color: #e67e22; margin-bottom: 10px; }
+        .task-item { margin: 8px 0; }
+    </style>
+</head>
+<body>
+
+<div class="log-container">
+    <h1>Week 4, Day 3: Spanish</h1>
+    
+    <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill">0%</div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-title">Phase 1: Concepts ($e \rightarrow ie$)</div>
+        <div class="task-item"><input type="checkbox" onclick="calcProg()"> <label>Review video on stem-changing verbs</label></div>
+        <div class="task-item"><input type="checkbox" onclick="calcProg()"> <label>Define stem change for "querer"</label></div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-title">Phase 2: Conjugation Practice</div>
+        <div class="task-item"><input type="checkbox" onclick="calcProg()"> <label>Complete conjugation chart for "querer"</label></div>
+        <div class="task-item"><input type="checkbox" onclick="calcProg()"> <label>Identify "boot" forms</label></div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-title">Phase 3: Contextual Use</div>
+        <div class="task-item"><input type="checkbox" onclick="calcProg()"> <label>Complete "entender" sentence</label></div>
+        <div class="task-item"><input type="checkbox" onclick="calcProg()"> <label>Translate "preferir" sentence</label></div>
+    </div>
+
+    <div class="phase-card">
+        <div class="phase-title">Phase 4: Output</div>
+        <div class="task-item"><input type="checkbox" onclick="calcProg()"> <label>Write restaurant dialogue</label></div>
+        <div class="task-item"><input type="checkbox" onclick="updateProgress()"> <label>Final review</label></div>
+    </div>
+</div>
+
+<script>
+    function calcProg() {
+        const cbs = document.querySelectorAll('input[type="checkbox"]');
+        let checked = 0;
+        cbs.forEach(cb => { if (cb.checked) checked++; });
+        
+        const percent = Math.round((checked / cbs.length) * 100);
+        const fill = document.getElementById('progressFill');
+        fill.style.width = percent + '%';
+        fill.innerText = percent + '%';
+    }
+</script>
+
+</body>
+</html>
