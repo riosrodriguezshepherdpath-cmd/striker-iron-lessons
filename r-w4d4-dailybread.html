@@ -3,65 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 4 Day 4 Log</title>
+    <title>IRON LEGION - Week 4 Log 4: Daily Bread</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f0f0; padding: 20px; }
-        .main-container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { color: #333; text-align: center; }
-        .progress-container { background-color: #e0e0e0; border-radius: 10px; margin: 20px 0; overflow: hidden; }
-        .progress-bar { height: 25px; background-color: #2ecc71; width: 0%; text-align: center; color: white; line-height: 25px; transition: width 0.3s; }
-        .phase-box { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
-        .phase-title { font-weight: bold; font-size: 1.2em; margin-bottom: 10px; color: #2c3e50; }
-        .check-item { margin: 10px 0; }
-        label { margin-left: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Courier New', monospace; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #333; padding: 20px; line-height: 1.8; }
+        .container { max-width: 1000px; margin: 0 auto; background: #f5f5f5; border: 3px solid #000; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #000000 0%, #333333 100%); color: #fff; padding: 40px; text-align: center; border-bottom: 5px solid #ff0000; }
+        .header h1 { font-size: 2.8em; text-transform: uppercase; letter-spacing: 5px; font-weight: bold; margin-bottom: 10px; }
+        .header h2 { font-size: 1.3em; font-weight: normal; letter-spacing: 3px; opacity: 0.9; }
+        .progress-tracker { background: #8B0000; color: white; padding: 20px 30px; text-align: center; font-size: 1.3em; border-bottom: 3px solid #000; }
+        .progress-bar { width: 100%; height: 30px; background: #4a0000; border: 2px solid #000; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ff0000, #cc0000); width: 0%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em; transition: width 0.3s ease; }
+        .commander-script { background: #1a1a1a; color: #fff; border-left: 5px solid #ff0000; padding: 30px; margin: 30px; font-size: 1.2em; }
+        .commander-script strong { color: #ff0000; font-size: 1.3em; display: block; margin-bottom: 15px; letter-spacing: 2px; }
+        .time-estimate { background: #333; color: #ff0000; padding: 12px 20px; border: 2px solid #ff0000; display: inline-block; margin: 15px 30px; font-size: 1.1em; font-weight: bold; }
+        .phase { background: white; margin: 30px; padding: 35px; border: 3px solid #000; position: relative; }
+        .phase-number { position: absolute; top: -20px; left: 30px; background: #ff0000; color: white; width: 60px; height: 60px; border: 4px solid #000; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: bold; }
+        .phase-header { background: #000; color: #fff; padding: 18px 25px 18px 90px; margin: -35px -35px 25px -35px; font-size: 1.5em; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; border-bottom: 3px solid #ff0000; }
+        .lesson-chunk { background: #f9f9f9; padding: 20px; margin-bottom: 18px; border-left: 5px solid #333; font-size: 1.15em; }
+        .critical-principle { background: #FFEBEE; border: 3px solid #ff0000; padding: 18px; margin: 20px 0; font-size: 1.25em; }
+        .critical-principle::before { content: "⚠ FAITH PRINCIPLE: "; color: #ff0000; font-weight: bold; }
+        .break-reminder { background: #333; color: #ff0000; padding: 15px; margin: 20px 0; border: 2px solid #ff0000; text-align: center; font-size: 1.2em; font-weight: bold; }
+        .checklist { background: #2d2d2d; padding: 20px; margin: 20px 0; border: 3px solid #000; }
+        .checklist h4 { color: #ff0000; margin-bottom: 15px; font-size: 1.3em; text-transform: uppercase; }
+        .checkbox-item { background: #1a1a1a; padding: 12px; margin: 8px 0; border: 2px solid #ff0000; display: flex; align-items: center; cursor: pointer; }
+        .checkbox-item:hover { background: #333; }
+        .checkbox-item input { width: 25px; height: 25px; margin-right: 15px; accent-color: #ff0000; cursor: pointer; }
+        .checkbox-item label { font-size: 1.1em; color: #fff; flex-grow: 1; cursor: pointer; }
+        .mission-complete { background: linear-gradient(135deg, #8B0000, #4a0000); color: white; padding: 25px; text-align: center; font-size: 1.6em; font-weight: bold; margin: 20px 0; border: 4px solid #000; text-transform: uppercase; }
+        .next-steps { background: #1a1a1a; color: white; padding: 50px; text-align: center; border-top: 5px solid #ff0000; }
+        .next-steps h2 { font-size: 2.2em; margin-bottom: 25px; color: #ff0000; text-transform: uppercase; }
+        .next-steps .instruction { background: #ff0000; padding: 25px; margin: 25px 0; font-size: 1.3em; font-weight: bold; border: 3px solid #000; }
     </style>
 </head>
 <body>
-
-<div class="main-container">
-    <h1>Mission Log: Week 4 Day 4</h1>
-    
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar">0%</div>
-    </div>
-
-    <div class="phase-box">
-        <div class="phase-title">Phase 1: Stewardship Theory</div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Read Luke 16</label></div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Analyze Luke 16:10</label></div>
-    </div>
-
-    <div class="phase-box">
-        <div class="phase-title">Phase 2: Tactical Analysis</div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Reflect on Proverbs 11:3</label></div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Journal on Trust/Integrity</label></div>
-    </div>
-
-    <div class="phase-box">
-        <div class="phase-title">Phase 3: Parable Analysis</div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Review "Unjust Steward" Parable</label></div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Define Shrewdness</label></div>
-    </div>
-
-    <div class="phase-box">
-        <div class="phase-title">Phase 4: Resource Management</div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Inventory 3 resources</label></div>
-        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Create stewardship plan</label></div>
-    </div>
-</div>
-
-<script>
-    function updateProgress() {
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        let checkedCount = 0;
-        checkboxes.forEach(cb => { if (cb.checked) checkedCount++; });
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 4 LOG 4: DAILY BREAD</h2>
+        </div>
         
-        const percentage = Math.round((checkedCount / checkboxes.length) * 100);
-        const bar = document.getElementById('progressBar');
-        bar.style.width = percentage + '%';
-        bar.innerText = percentage + '%';
-    }
-</script>
-
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 35 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, faith requires action. Today's mission is to analyze biblical stewardship and integrity. True strength lies in being trustworthy with what you are given, no matter how small.
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">Context of Stewardship</div>
+            <div class="time-estimate">⏱ 7 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                <strong>Read Luke 16:10.</strong> Jesus highlights a fundamental principle of character: "Whoever can be trusted with very little can also be trusted with much."<br><br>
+                <em>Analysis:</em> Stewardship isn't about the <em>size</em> of the resource, but the <em>integrity</em> of the manager. If you cannot manage your time for a 30-minute task, you will likely mismanage a 30-hour project.
+                
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Read Luke 16:10.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Define "very little".</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Tactical Trust Analysis</div>
+            <div class="time-estimate">⏱ 8 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                <strong>Read Proverbs 11:3</strong> - "The integrity of the upright guides them, but the unfaithful are destroyed by their duplicity."<br><br>
+                <em>Analysis:</em> Integrity acts as a compass. In professional settings, consistent honesty builds a reputation that creates opportunities. In personal relationships, it builds a security that allows for deep connection. Duplicity (being two-faced) eventually causes relationships and reputations to collapse.
+                
+            </div>
+            
+            <div class="critical-principle">
+                Integrity is the foundation of trust; without it, influence crumbles.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Read Proverbs 11:3.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Complete journal prompt.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HALFWAY POINT - 90-SECOND BREAK
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">The Unjust Steward</div>
+            <div class="time-estimate">⏱ 7 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                <strong>Reflect on Luke 16:1-9.</strong><br><br>
+                <em>Analysis:</em> The master praises the steward not for being dishonest, but for his <strong>shrewdness</strong>—he acted quickly and decisively to secure his future. The main lesson is not to act dishonestly, but to use earthly resources wisely to secure eternal outcomes (by serving others).
+                
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Read Luke 16:1-9.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Define "shrewdness".</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Resource Inventory</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                List three resources God has entrusted to you (time, talent, money, possessions). How can you use one of these specifically to serve others today?<br><br>
+                <em>Prompt:</em> Do not just list them; define a specific action. For example: "I have extra time; I will spend 15 minutes helping my sibling with their homework."
+                
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>List 3 resources.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Create usage plan.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready for Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Steward vs. Owner</div>
+            <div class="time-estimate">⏱ 7 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                How does viewing yourself as a "steward" rather than an "owner" of your possessions change how you use them?<br><br>
+                <em>Explanation:</em> An owner asks, "What do I want to do with <em>my</em> stuff?" A steward asks, "What does the owner want me to do with <em>His</em> stuff?" This shifts focus from selfishness to service.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Write reflection.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Review integrity goals.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Mission accomplished</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - LOG SUBMITTED
+        </div>
+        
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: SUBMISSION ⚡</h2>
+            
+            <div class="instruction">
+                📝 ACCESS GOOGLE CLASSROOM<br>
+                LOCATE: "Week 4 Log 4 - Daily Bread Worksheet"<br>
+                SUBMIT BEFORE 23:59 HOURS
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                Excellent work, officer. 💪<br>
+                Integrity maintained.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            // Map total checkboxes to completed phases (5 phases total, 3 items each)
+            const completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' OF 5 COMPLETE';
+        }
+    </script>
 </body>
 </html>
