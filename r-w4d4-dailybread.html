@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 Day 4 Log</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f0f0; padding: 20px; }
+        .main-container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .progress-container { background-color: #e0e0e0; border-radius: 10px; margin: 20px 0; overflow: hidden; }
+        .progress-bar { height: 25px; background-color: #2ecc71; width: 0%; text-align: center; color: white; line-height: 25px; transition: width 0.3s; }
+        .phase-box { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        .phase-title { font-weight: bold; font-size: 1.2em; margin-bottom: 10px; color: #2c3e50; }
+        .check-item { margin: 10px 0; }
+        label { margin-left: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <h1>Mission Log: Week 4 Day 4</h1>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar">0%</div>
+    </div>
+
+    <div class="phase-box">
+        <div class="phase-title">Phase 1: Stewardship Theory</div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Read Luke 16</label></div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Analyze Luke 16:10</label></div>
+    </div>
+
+    <div class="phase-box">
+        <div class="phase-title">Phase 2: Tactical Analysis</div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Reflect on Proverbs 11:3</label></div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Journal on Trust/Integrity</label></div>
+    </div>
+
+    <div class="phase-box">
+        <div class="phase-title">Phase 3: Parable Analysis</div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Review "Unjust Steward" Parable</label></div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Define Shrewdness</label></div>
+    </div>
+
+    <div class="phase-box">
+        <div class="phase-title">Phase 4: Resource Management</div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Inventory 3 resources</label></div>
+        <div class="check-item"><input type="checkbox" onclick="updateProgress()"> <label>Create stewardship plan</label></div>
+    </div>
+</div>
+
+<script>
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        let checkedCount = 0;
+        checkboxes.forEach(cb => { if (cb.checked) checkedCount++; });
+        
+        const percentage = Math.round((checkedCount / checkboxes.length) * 100);
+        const bar = document.getElementById('progressBar');
+        bar.style.width = percentage + '%';
+        bar.innerText = percentage + '%';
+    }
+</script>
+
+</body>
+</html>
