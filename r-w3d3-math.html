@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON LEGION - Week 3 Log 3: Mathematics</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Courier New', monospace; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: #333; padding: 20px; line-height: 2; }
+        .container { max-width: 1000px; margin: 0 auto; background: #f5f5f5; border: 3px solid #000; box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #000000 0%, #333333 100%); color: #fff; padding: 40px; text-align: center; border-bottom: 5px solid #ff0000; }
+        .header h1 { font-size: 2.8em; text-transform: uppercase; letter-spacing: 5px; font-weight: bold; margin-bottom: 10px; }
+        .header h2 { font-size: 1.3em; font-weight: normal; letter-spacing: 3px; opacity: 0.9; }
+        .progress-tracker { background: #8B0000; color: white; padding: 20px 30px; text-align: center; font-size: 1.3em; border-bottom: 3px solid #000; }
+        .progress-bar { width: 100%; height: 30px; background: #4a0000; border: 2px solid #000; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ff0000, #cc0000); width: 0%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9em; transition: width 0.3s ease; }
+        .commander-script { background: #1a1a1a; color: #fff; border-left: 5px solid #ff0000; padding: 30px; margin: 30px; font-size: 1.2em; line-height: 2.2; }
+        .commander-script strong { color: #ff0000; font-size: 1.3em; display: block; margin-bottom: 15px; letter-spacing: 2px; }
+        .time-estimate { background: #333; color: #ff0000; padding: 12px 20px; border: 2px solid #ff0000; display: inline-block; margin: 15px 30px; font-size: 1.1em; font-weight: bold; }
+        .phase { background: white; margin: 30px; padding: 35px; border: 3px solid #000; position: relative; }
+        .phase-number { position: absolute; top: -20px; left: 30px; background: #ff0000; color: white; width: 60px; height: 60px; border: 4px solid #000; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: bold; }
+        .phase-header { background: #000; color: #fff; padding: 18px 25px 18px 90px; margin: -35px -35px 25px -35px; font-size: 1.5em; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; border-bottom: 3px solid #ff0000; }
+        .lesson-chunk { background: #f9f9f9; padding: 20px; margin-bottom: 18px; border-left: 5px solid #333; font-size: 1.25em; line-height: 2.2; }
+        .critical-principle { background: #FFEBEE; border: 3px solid #ff0000; padding: 18px; margin: 20px 0; font-size: 1.25em; line-height: 2; }
+        .critical-principle::before { content: "⚠ CRITICAL PRINCIPLE: "; color: #ff0000; font-weight: bold; }
+        .break-reminder { background: #333; color: #ff0000; padding: 15px; margin: 20px 0; border: 2px solid #ff0000; text-align: center; font-size: 1.2em; font-weight: bold; }
+        .example-box { background: #E8F5E9; padding: 20px; border: 3px solid #000; margin: 20px 0; font-size: 1.2em; line-height: 2; }
+        .checklist { background: #2d2d2d; padding: 20px; margin: 20px 0; border: 3px solid #000; }
+        .checklist h4 { color: #ff0000; margin-bottom: 15px; font-size: 1.3em; text-transform: uppercase; }
+        .checkbox-item { background: #1a1a1a; padding: 12px; margin: 8px 0; border: 2px solid #ff0000; display: flex; align-items: center; cursor: pointer; }
+        .checkbox-item:hover { background: #333; }
+        .checkbox-item input { width: 25px; height: 25px; margin-right: 15px; accent-color: #ff0000; cursor: pointer; }
+        .checkbox-item label { font-size: 1.1em; color: #fff; flex-grow: 1; cursor: pointer; }
+        .mission-complete { background: linear-gradient(135deg, #8B0000, #4a0000); color: white; padding: 25px; text-align: center; font-size: 1.6em; font-weight: bold; margin: 20px 0; border: 4px solid #000; text-transform: uppercase; }
+        .physical-mission { background: linear-gradient(135deg, #8B0000 0%, #4a0000 100%); color: white; margin: 30px; padding: 35px; border: 3px solid #000; }
+        .physical-mission h3 { font-size: 2.2em; margin-bottom: 25px; text-transform: uppercase; border-bottom: 3px solid #fff; padding-bottom: 15px; }
+        .physical-mission p { font-size: 1.3em; line-height: 2.2; margin-bottom: 20px; }
+        .bible-verse-mission { background: rgba(255,255,255,0.1); padding: 20px; border-left: 5px solid white; margin-top: 20px; font-style: italic; font-size: 1.2em; }
+        .next-steps { background: #1a1a1a; color: white; padding: 50px; text-align: center; border-top: 5px solid #ff0000; }
+        .next-steps h2 { font-size: 2.2em; margin-bottom: 25px; color: #ff0000; text-transform: uppercase; }
+        .next-steps .instruction { background: #ff0000; padding: 25px; margin: 25px 0; font-size: 1.3em; font-weight: bold; border: 3px solid #000; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ IRON LEGION ⚡</h1>
+            <h2>WEEK 3 LOG 3: MATHEMATICS - SYSTEMS OF LINEAR EQUATIONS</h2>
+        </div>
+        
+        <div class="progress-tracker">
+            OPERATIONAL PROGRESS
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar">0 OF 5 COMPLETE</div>
+            </div>
+        </div>
+        
+        <div class="time-estimate">
+            ⏱ ESTIMATED COMPLETION TIME: 35 MINUTES
+        </div>
+        
+        <div class="commander-script">
+            <strong>COMMANDER'S BRIEFING:</strong>
+            Officer, maneuvering forces requires anticipating intersection points. Systems of linear equations allow us to find where two distinct paths meet, a crucial skill for logistical coordination and strategic positioning.
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">1</div>
+            <div class="phase-header">System Fundamentals</div>
+            <div class="time-estimate">⏱ 7 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                A system of linear equations involves two or more equations with the same variables.
+                The solution is the set of values that satisfies all equations simultaneously.
+                Graphically, this is the point of intersection.
+                
+            </div>
+            
+            <div class="critical-principle">
+                One solution exists if lines intersect; no solution if lines are parallel; infinite solutions if lines are identical.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 1 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Define "System of Equations".</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Identify intersection as the solution point.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 2</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: 60-SECOND BREAK AUTHORIZED
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">2</div>
+            <div class="phase-header">Algebraic Interception</div>
+            <div class="time-estimate">⏱ 8 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Solve by Substitution:
+                1. Solve one equation for one variable.
+                2. Substitute into the other equation.
+                3. Solve for the remaining variable.
+                
+            </div>
+            
+            <div class="example-box">
+                <strong>TACTICAL EXAMPLE:</strong> Drone A: $y = 2x + 1$; Drone B: $y = -x + 7$.
+                Substitute $-x + 7$ for $y$ in Equation A:
+                $-x + 7 = 2x + 1 \Rightarrow 6 = 3x \Rightarrow x = 2$.
+                Substitute $x=2$ back to find $y=5$. Solution: $(2, 5)$.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 2 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Execute substitution method.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Verify solution in both equations.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 3</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: HALFWAY POINT - 90-SECOND BREAK
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">3</div>
+            <div class="phase-header">Graphical Verification</div>
+            <div class="time-estimate">⏱ 7 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Graphing provides a visual confirmation of the algebraic solution.
+                Limitations: Precision errors with fractional solutions and scale limitations.
+            </div>
+            
+            <div class="critical-principle">
+                Algebraic methods yield exact solutions; graphing methods provide immediate visual context.
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 3 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Graph both lines correctly.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Mark intersection point.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 4</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">4</div>
+            <div class="phase-header">Logistical Modeling</div>
+            <div class="time-estimate">⏱ 6 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Translate real-world parameters into systems.
+                Example: Two convoys, differing start times and speeds, meeting at a destination.
+            </div>
+            
+            <div class="example-box">
+                <strong>TACTICAL EXAMPLE:</strong> Convoy X travel time $t_x$, Distance $d = 2 \times t_x$.
+                Convoy Y travel time $t_y = t_x - 1$, Distance $d = 3 \times t_y$.
+                System: $\begin{cases} d = 2t_x \\ d = 3(t_x - 1) \end{cases}$
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 4 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Translate scenario to variables.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Construct the system of equations.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to proceed to Phase 5</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="break-reminder">
+            ⚠ PROTOCOL: FINAL PHASE APPROACHING
+        </div>
+        
+        <div class="phase">
+            <div class="phase-number">5</div>
+            <div class="phase-header">Special Solutions & Mission</div>
+            <div class="time-estimate">⏱ 7 MINUTES</div>
+            
+            <div class="lesson-chunk">
+                Parallel lines ($m_1 = m_2$, $b_1 \neq b_2$) result in **No Solution**.
+                Identical lines ($m_1 = m_2$, $b_1 = b_2$) result in **Infinite Solutions**.
+                
+
+[Image of parallel lines on a coordinate plane]
+
+            </div>
+            
+            <div class="physical-mission" style="margin: 20px 0;">
+                <h3>⚙ MATHEMATICAL MISSION: Interception Analysis</h3>
+                <p>
+                    <strong>OBJECTIVE:</strong> Solve a complex logistical intersection problem.
+                </p>
+                <p>
+                    <strong>EXECUTION:</strong> Two patrol vehicles:
+                    Vehicle 1: $y = 0.5x + 3$
+                    Vehicle 2: $y = -0.5x + 9$
+                </p>
+                <p>
+                    <strong>SUBMISSION:</strong> 
+                    1. Calculate the intersection point $(x, y)$.
+                    2. Graph both vehicles.
+                    3. Define the tactical significance of this point.
+                </p>
+                <div class="bible-verse-mission">
+                    <strong>THEOLOGICAL FOUNDATION:</strong> Ecclesiastes 4:9 - "Two are better than one, because they have a good return for their labor." Analysis: Cooperative systems are more effective than isolated efforts, just as solving a system of equations requires utilizing both equations together for a complete solution.
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>✓ PHASE 5 PROTOCOL CHECKLIST:</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Solve intersection point.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Graph intersection.</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" onclick="updateProgress()">
+                    <label>Ready to complete worksheet submission</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mission-complete">
+            ✓ ALL 5 PHASES COMPLETE - MISSION ACCOMPLISHED
+        </div>
+        
+        <div class="next-steps">
+            <h2>⚡ NEXT STEP: WORKSHEET SUBMISSION ⚡</h2>
+            
+            <div class="instruction">
+                📝 ACCESS GOOGLE CLASSROOM<br>
+                LOCATE: "Week 3 Log 3 - Math Worksheet"<br>
+                COMPLETE ALL FIELDS<br>
+                SUBMIT WHEN READY
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em;">
+                Excellent work, officer. 💪<br>
+                Coordination is victory.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const totalCheckboxes = checkboxes.length;
+            let checkedCount = 0;
+            
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) checkedCount++;
+            });
+            
+            const progressPercent = (checkedCount / totalCheckboxes) * 100;
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = progressPercent + '%';
+            
+            const completedPhases = Math.floor(checkedCount / 3);
+            progressBar.textContent = completedPhases + ' OF 5 COMPLETE';
+        }
+    </script>
+</body>
+</html>
