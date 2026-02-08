@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Striker Academy - W2D4 Spanish</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f4f4; color: #333; line-height: 1.8; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #FF6600; text-align: center; }
+        h2 { color: #2a5298; border-bottom: 2px solid #FF6600; padding-bottom: 10px; }
+        .coach-script { background-color: #FFE5CC; padding: 15px; border-left: 5px solid #FF6600; border-radius: 5px; margin-bottom: 20px; font-size: 1.1em; }
+        .phase { margin-bottom: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 5px; }
+        .checklist { list-style-type: none; padding: 0; }
+        .checklist li { margin-bottom: 15px; font-size: 1.1em; }
+        .break-reminder { text-align: center; font-weight: bold; color: #FF6600; margin: 25px 0; font-size: 1.2em; }
+        .physical-mission { background-color: #E8F5E9; padding: 20px; border-left: 5px solid #4CAF50; border-radius: 5px; }
+        .simplified-note { background-color: #E3F2FD; padding: 15px; border-radius: 5px; border-left: 5px solid #2196F3; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚽ Striker Academy ⚽</h1>
+        <h2>Week 2 Day 4: Spanish - Sentence Building</h2>
+
+        <div class="coach-script">
+            <p><strong>Coach's Script:</strong> What's up striker! Today we are learning how to put words together in Spanish to make full sentences. Imagine you are playing on a team in Spain and need to call for the ball or talk to the referee!</p>
+        </div>
+
+        <div class="phase">
+            <h2>Phase 1: Saying "I play"</h2>
+            <p>To say "I play soccer", we say:</p>
+            <p><strong>"Yo juego al fútbol."</strong></p>
+            
+            <div class="simplified-note">
+                <strong>💡 SIMPLE IDEA:</strong> Yo = I, Juego = I play, Fútbol = Soccer.
+            </div>
+
+            <ul class="checklist">
+                <li><input type="checkbox"> I can say "Yo juego".</li>
+                <li><input type="checkbox"> I know "Fútbol" is soccer.</li>
+            </ul>
+        </div>
+
+        <div class="break-reminder">🏃‍♂️ QUICK BREAK: 10 Jumping Jacks! GO!</div>
+
+        <div class="phase">
+            <h2>Phase 2: Describing the Ball</h2>
+            <p>Colors come AFTER the noun in Spanish!</p>
+            <p>The ball is blue: <strong>"El balón es azul."</strong></p>
+            <p>The ball is red: <strong>"El balón es rojo."</strong></p>
+            
+            <div class="simplified-note">
+                <strong>💡 SIMPLE IDEA:</strong> English: Blue ball -> Spanish: Balón azul.
+            </div>
+
+            <ul class="checklist">
+                <li><input type="checkbox"> I can say "El balón es...".</li>
+                <li><input type="checkbox"> I know colors go after the noun.</li>
+            </ul>
+        </div>
+
+        <div class="break-reminder">🏃‍♂️ QUICK BREAK: High Knees for 30 seconds!</div>
+
+        <div class="phase">
+            <h2>Phase 3: Command Words</h2>
+            <p>Need to call for the ball? Shout:</p>
+            <p><strong>"¡Pasa el balón!"</strong> (Pass the ball!)</p>
+            <p>Or shout to the referee:</p>
+            <p><strong>"¡Árbitro!"</strong> (Referee!)</p>
+
+            <ul class="checklist">
+                <li><input type="checkbox"> I can say "¡Pasa el balón!".</li>
+                <li><input type="checkbox"> I know "Árbitro" is referee.</li>
+            </ul>
+        </div>
+
+        <div class="phase">
+            <h2>Phase 4: Practice Sentence</h2>
+            <p>Put it all together:</p>
+            <p><strong>"¡Árbitro, yo juego al fútbol!"</strong></p>
+            <p>(Referee, I play soccer!)</p>
+
+            <ul class="checklist">
+                <li><input type="checkbox"> I practiced saying the sentence aloud.</li>
+                <li><input type="checkbox"> I feel confident saying it.</li>
+            </ul>
+        </div>
+
+        <div class="break-reminder">🏃‍♂️ QUICK BREAK: Sprint in place for 10 seconds!</div>
+
+        <div class="phase physical-mission">
+            <h2>Phase 5: Physical Mission - Soccer Sentence</h2>
+            <p>Dribble your ball to three different spots.</p>
+            <p>Spot 1: Shout "¡Pasa el balón!"</p>
+            <p>Spot 2: Shout "¡Árbitro!"</p>
+            <p>Spot 3: Shout "Yo juego al fútbol!"</p>
+            
+            <p><strong>📖 Bible Connection:</strong> We can speak in different languages to share God's word with everyone (Acts 2:4-6).</p>
+
+            <ul class="checklist">
+                <li><input type="checkbox"> I dribbled to three spots.</li>
+                <li><input type="checkbox"> I shouted all three phrases.</li>
+                <li><input type="checkbox"> I completed the Bible Connection.</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; font-size: 1.2em; font-weight: bold;">
+            <p>🏆 AWESOME WORK, STRIKER! 🏆</p>
+            <p>GO TO GOOGLE CLASSROOM → Find Week 2 Day 4 - Spanish Worksheet → Submit</p>
+        </div>
+    </div>
+</body>
+</html>
