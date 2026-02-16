@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRI Registry Exam Study Guide - Complete Interactive Version</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; 
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .subtitle {
+            text-align: center;
+            color: #764ba2;
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .toc {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        .toc h2 { 
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid white;
+            padding-bottom: 10px;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .toc li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        .toc a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: all 0.3s;
+        }
+        .toc a:hover {
+            padding-left: 10px;
+            font-weight: bold;
+        }
+        .section {
+            margin: 60px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #764ba2;
+        }
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.8em;
+            margin: 30px 0 20px 0;
+            padding-left: 20px;
+            border-left: 5px solid #667eea;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        .image-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+        .image-placeholder.has-image img {
+            display: block;
+        }
+        .image-placeholder.has-image .placeholder-text {
+            display: none;
+        }
+        .placeholder-text {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+        }
+        .upload-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .upload-btn:hover {
+            background: #764ba2;
+        }
+        .image-label {
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .instructions h3 {
+            color: #856404;
+            margin: 0 0 10px 0;
+            padding: 0;
+            border: none;
+            font-size: 1.3em;
+        }
+        .instructions p {
+            margin: 10px 0;
+            color: #856404;
+        }
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            .subtitle { font-size: 1.2em; }
+            .image-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 MRI Registry Exam Study Guide</h1>
+        <div class="subtitle">Complete Interactive Anatomy Reference</div>
+
+        <div class="instructions">
+            <h3>📸 How to Use This Study Guide:</h3>
+            <p><strong>1. Click on any gray box</strong> below to select the corresponding image from your computer</p>
+            <p><strong>2. Your images stay loaded</strong> as long as you keep this page open</p>
+            <p><strong>3. Bookmark this page</strong> or keep the browser tab open to save your work</p>
+            <p><strong>4. Match the image labels</strong> to your uploaded files for organized studying</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar">0 of 106 images loaded (0%)</div>
+        </div>
+
+        <div class="toc">
+            <h2>📋 Table of Contents</h2>
+            <ul>
+                <li><a href="#brain">1. Brain & Neuroradiology (16 images)</a></li>
+                <li><a href="#spine">2. Spine & Spinal Cord (5 images)</a></li>
+                <li><a href="#vascular">3. Vascular & Angiography (14 images)</a></li>
+                <li><a href="#body">4. Body Imaging (22 images)</a></li>
+                <li><a href="#msk">5. Musculoskeletal (46 images)</a></li>
+                <li><a href="#cardiac">6. Cardiac Imaging (3 images)</a></li>
+            </ul>
+        </div>
+
+        <!-- ========== BRAIN SECTION ========== -->
+        <div class="section" id="brain">
+            <h2>🧠 1. Brain & Neuroradiology</h2>
+            
+            <h3>Brain Anatomy - Standard Three Planes</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img1').click()">
+                        <img id="preview1">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img1" accept="image/*" onchange="loadImage(this, 'preview1')">
+                    <div class="image-label">Brain - Axial View (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img2').click()">
+                        <img id="preview2">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img2" accept="image/*" onchange="loadImage(this, 'preview2')">
+                    <div class="image-label">Brain - Coronal View (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img3').click()">
+                        <img id="preview3">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img3" accept="image/*" onchange="loadImage(this, 'preview3')">
+                    <div class="image-label">Brain - Sagittal View (Labeled)</div>
+                </div>
+            </div>
+
+            <h3>Brain Axial - Additional Views</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img4').click()">
+                        <img id="preview4">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img4" accept="image/*" onchange="loadImage(this, 'preview4')">
+                    <div class="image-label">Brain Axial - Small FOV</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img5').click()">
+                        <img id="preview5">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img5" accept="image/*" onchange="loadImage(this, 'preview5')">
+                    <div class="image-label">Brain Axial - T2 Weighted</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img6').click()">
+                        <img id="preview6">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img6" accept="image/*" onchange="loadImage(this, 'preview6')">
+                    <div class="image-label">Brain Axial - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>Brain Coronal - Additional Views</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img7').click()">
+                        <img id="preview7">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img7" accept="image/*" onchange="loadImage(this, 'preview7')">
+                    <div class="image-label">Brain Coronal - Small FOV</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img8').click()">
+                        <img id="preview8">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img8" accept="image/*" onchange="loadImage(this, 'preview8')">
+                    <div class="image-label">Brain - Coronal View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img9').click()">
+                        <img id="preview9">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img9" accept="image/*" onchange="loadImage(this, 'preview9')">
+                    <div class="image-label">Brain Coronal - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>Specialized Brain Imaging</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img10').click()">
+                        <img id="preview10">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img10" accept="image/*" onchange="loadImage(this, 'preview10')">
+                    <div class="image-label">Internal Auditory Canal - Axial</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img11').click()">
+                        <img id="preview11">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img11" accept="image/*" onchange="loadImage(this, 'preview11')">
+                    <div class="image-label">Internal Auditory Canal - Coronal</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img12').click()">
+                        <img id="preview12">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img12" accept="image/*" onchange="loadImage(this, 'preview12')">
+                    <div class="image-label">Paranasal Sinuses - Axial</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img13').click()">
+                        <img id="preview13">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img13" accept="image/*" onchange="loadImage(this, 'preview13')">
+                    <div class="image-label">Orbits - Coronal View</div>
+                </div>
+            </div>
+
+            <h3>Brain Practice Questions</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img14').click()">
+                        <img id="preview14">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img14" accept="image/*" onchange="loadImage(this, 'preview14')">
+                    <div class="image-label">Registry Question - Axial Brain</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img15').click()">
+                        <img id="preview15">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img15" accept="image/*" onchange="loadImage(this, 'preview15')">
+                    <div class="image-label">Registry Question - Sagittal Brain</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img16').click()">
+                        <img id="preview16">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img16" accept="image/*" onchange="loadImage(this, 'preview16')">
+                    <div class="image-label">Registry Question - Posterior Fossa</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SPINE SECTION ========== -->
+        <div class="section" id="spine">
+            <h2>🦴 2. Spine & Spinal Cord</h2>
+            
+            <h3>Cervical Spine</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img17').click()">
+                        <img id="preview17">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img17" accept="image/*" onchange="loadImage(this, 'preview17')">
+                    <div class="image-label">C-Spine - Axial with FOV</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img18').click()">
+                        <img id="preview18">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img18" accept="image/*" onchange="loadImage(this, 'preview18')">
+                    <div class="image-label">C-Spine - Axial View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img19').click()">
+                        <img id="preview19">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img19" accept="image/*" onchange="loadImage(this, 'preview19')">
+                    <div class="image-label">C-Spine - Sagittal View</div>
+                </div>
+            </div>
+
+            <h3>Thoracic & Lumbar Spine</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img20').click()">
+                        <img id="preview20">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img20" accept="image/*" onchange="loadImage(this, 'preview20')">
+                    <div class="image-label">T-Spine - Axial View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img21').click()">
+                        <img id="preview21">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img21" accept="image/*" onchange="loadImage(this, 'preview21')">
+                    <div class="image-label">L-Spine - Axial View</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== VASCULAR SECTION ========== -->
+        <div class="section" id="vascular">
+            <h2>🫀 3. Vascular & Angiography (MRA)</h2>
+            
+            <h3>Intracranial Vessels - Circle of Willis</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img22').click()">
+                        <img id="preview22">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img22" accept="image/*" onchange="loadImage(this, 'preview22')">
+                    <div class="image-label">Brain MRA - Unlabeled</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img23').click()">
+                        <img id="preview23">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img23" accept="image/*" onchange="loadImage(this, 'preview23')">
+                    <div class="image-label">Brain MRA - Labeled (Axial)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img24').click()">
+                        <img id="preview24">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img24" accept="image/*" onchange="loadImage(this, 'preview24')">
+                    <div class="image-label">Circle of Willis - FOV View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img25').click()">
+                        <img id="preview25">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img25" accept="image/*" onchange="loadImage(this, 'preview25')">
+                    <div class="image-label">Circle of Willis - Sagittal</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img26').click()">
+                        <img id="preview26">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img26" accept="image/*" onchange="loadImage(this, 'preview26')">
+                    <div class="image-label">Circle of Willis</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img27').click()">
+                        <img id="preview27">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img27" accept="image/*" onchange="loadImage(this, 'preview27')">
+                    <div class="image-label">MRA - Cerebral Circulation</div>
+                </div>
+            </div>
+
+            <h3>Neck Vessels</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img28').click()">
+                        <img id="preview28">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img28" accept="image/*" onchange="loadImage(this, 'preview28')">
+                    <div class="image-label">CE-MRA - Neck Vessels</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img29').click()">
+                        <img id="preview29">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img29" accept="image/*" onchange="loadImage(this, 'preview29')">
+                    <div class="image-label">MRA Neck - Labeled</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img30').click()">
+                        <img id="preview30">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img30" accept="image/*" onchange="loadImage(this, 'preview30')">
+                    <div class="image-label">MRA - Neck Vessels</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img31').click()">
+                        <img id="preview31">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img31" accept="image/*" onchange="loadImage(this, 'preview31')">
+                    <div class="image-label">CE-MRA - Aortic Arch</div>
+                </div>
+            </div>
+
+            <h3>Body Vessels</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img32').click()">
+                        <img id="preview32">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img32" accept="image/*" onchange="loadImage(this, 'preview32')">
+                    <div class="image-label">Abdominal Aorta MRA</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img33').click()">
+                        <img id="preview33">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img33" accept="image/*" onchange="loadImage(this, 'preview33')">
+                    <div class="image-label">Pelvic Vessels - CE-MRA</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img34').click()">
+                        <img id="preview34">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img34" accept="image/*" onchange="loadImage(this, 'preview34')">
+                    <div class="image-label">Abdominal Vessels - Practice Question</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img35').click()">
+                        <img id="preview35">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img35" accept="image/*" onchange="loadImage(this, 'preview35')">
+                    <div class="image-label">Lower Extremity CE-MRA</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== BODY SECTION ========== -->
+        <div class="section" id="body">
+            <h2>🫁 4. Body Imaging (Abdomen/Pelvis/Chest)</h2>
+            
+            <h3>Abdomen - Axial Plane</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img36').click()">
+                        <img id="preview36">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img36" accept="image/*" onchange="loadImage(this, 'preview36')">
+                    <div class="image-label">Abdomen Axial - Upper Level</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img37').click()">
+                        <img id="preview37">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img37" accept="image/*" onchange="loadImage(this, 'preview37')">
+                    <div class="image-label">Abdomen Axial - Mid Level</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img38').click()">
+                        <img id="preview38">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img38" accept="image/*" onchange="loadImage(this, 'preview38')">
+                    <div class="image-label">Abdomen Axial - Study Image</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img39').click()">
+                        <img id="preview39">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img39" accept="image/*" onchange="loadImage(this, 'preview39')">
+                    <div class="image-label">Abdomen Axial - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>Abdomen - Coronal Plane</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img40').click()">
+                        <img id="preview40">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img40" accept="image/*" onchange="loadImage(this, 'preview40')">
+                    <div class="image-label">Abdomen - Coronal View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img41').click()">
+                        <img id="preview41">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img41" accept="image/*" onchange="loadImage(this, 'preview41')">
+                    <div class="image-label">Abdomen Coronal - Study Image</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img42').click()">
+                        <img id="preview42">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img42" accept="image/*" onchange="loadImage(this, 'preview42')">
+                    <div class="image-label">Abdomen Coronal - View 2</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img43').click()">
+                        <img id="preview43">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img43" accept="image/*" onchange="loadImage(this, 'preview43')">
+                    <div class="image-label">Abdomen Coronal - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>MRCP & Urography</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img44').click()">
+                        <img id="preview44">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img44" accept="image/*" onchange="loadImage(this, 'preview44')">
+                    <div class="image-label">MRCP - Biliary Tree Anatomy</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img45').click()">
+                        <img id="preview45">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img45" accept="image/*" onchange="loadImage(this, 'preview45')">
+                    <div class="image-label">MRCP - Study Image</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img46').click()">
+                        <img id="preview46">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img46" accept="image/*" onchange="loadImage(this, 'preview46')">
+                    <div class="image-label">MR Urogram</div>
+                </div>
+            </div>
+
+            <h3>Male Pelvis</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img47').click()">
+                        <img id="preview47">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img47" accept="image/*" onchange="loadImage(this, 'preview47')">
+                    <div class="image-label">Male Pelvis - Sagittal</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img48').click()">
+                        <img id="preview48">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img48" accept="image/*" onchange="loadImage(this, 'preview48')">
+                    <div class="image-label">Male Pelvis - Axial</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img49').click()">
+                        <img id="preview49">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img49" accept="image/*" onchange="loadImage(this, 'preview49')">
+                    <div class="image-label">Male Pelvis - Coronal</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img50').click()">
+                        <img id="preview50">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img50" accept="image/*" onchange="loadImage(this, 'preview50')">
+                    <div class="image-label">Male Pelvis - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>Female Pelvis</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img51').click()">
+                        <img id="preview51">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img51" accept="image/*" onchange="loadImage(this, 'preview51')">
+                    <div class="image-label">Female Pelvis - Sagittal T2</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img52').click()">
+                        <img id="preview52">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img52" accept="image/*" onchange="loadImage(this, 'preview52')">
+                    <div class="image-label">Female Pelvis - Axial</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img53').click()">
+                        <img id="preview53">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img53" accept="image/*" onchange="loadImage(this, 'preview53')">
+                    <div class="image-label">Female Pelvis - Coronal</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img54').click()">
+                        <img id="preview54">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img54" accept="image/*" onchange="loadImage(this, 'preview54')">
+                    <div class="image-label">Female Pelvis - Coronal FOV</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img55').click()">
+                        <img id="preview55">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img55" accept="image/*" onchange="loadImage(this, 'preview55')">
+                    <div class="image-label">Female Pelvis - Coronal View 2</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img56').click()">
+                        <img id="preview56">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img56" accept="image/*" onchange="loadImage(this, 'preview56')">
+                    <div class="image-label">Female Pelvis - Sagittal Study</div>
+                </div>
+            </div>
+
+            <h3>Thorax</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img57').click()">
+                        <img id="preview57">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img57" accept="image/*" onchange="loadImage(this, 'preview57')">
+                    <div class="image-label">Thorax - Sagittal View</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== MSK SECTION ========== -->
+        <div class="section" id="msk">
+            <h2>💪 5. Musculoskeletal System</h2>
+            
+            <h3>Shoulder Joint</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img58').click()">
+                        <img id="preview58">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img58" accept="image/*" onchange="loadImage(this, 'preview58')">
+                    <div class="image-label">Shoulder - Sagittal Oblique (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img59').click()">
+                        <img id="preview59">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img59" accept="image/*" onchange="loadImage(this, 'preview59')">
+                    <div class="image-label">Shoulder - Axial (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img60').click()">
+                        <img id="preview60">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img60" accept="image/*" onchange="loadImage(this, 'preview60')">
+                    <div class="image-label">Shoulder - Sagittal Oblique 2</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img61').click()">
+                        <img id="preview61">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img61" accept="image/*" onchange="loadImage(this, 'preview61')">
+                    <div class="image-label">Shoulder - Axial Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img62').click()">
+                        <img id="preview62">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img62" accept="image/*" onchange="loadImage(this, 'preview62')">
+                    <div class="image-label">Shoulder - Coronal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img63').click()">
+                        <img id="preview63">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img63" accept="image/*" onchange="loadImage(this, 'preview63')">
+                    <div class="image-label">Shoulder - Sagittal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img64').click()">
+                        <img id="preview64">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img64" accept="image/*" onchange="loadImage(this, 'preview64')">
+                    <div class="image-label">Shoulder - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>Elbow Joint</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img65').click()">
+                        <img id="preview65">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img65" accept="image/*" onchange="loadImage(this, 'preview65')">
+                    <div class="image-label">Elbow - Coronal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img66').click()">
+                        <img id="preview66">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img66" accept="image/*" onchange="loadImage(this, 'preview66')">
+                    <div class="image-label">Elbow - Sagittal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img67').click()">
+                        <img id="preview67">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img67" accept="image/*" onchange="loadImage(this, 'preview67')">
+                    <div class="image-label">Elbow - Axial Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img68').click()">
+                        <img id="preview68">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img68" accept="image/*" onchange="loadImage(this, 'preview68')">
+                    <div class="image-label">Elbow - Coronal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img69').click()">
+                        <img id="preview69">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img69" accept="image/*" onchange="loadImage(this, 'preview69')">
+                    <div class="image-label">Elbow - Sagittal Study</div>
+                </div>
+            </div>
+
+            <h3>Wrist & Hand</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img70').click()">
+                        <img id="preview70">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img70" accept="image/*" onchange="loadImage(this, 'preview70')">
+                    <div class="image-label">Wrist - Axial (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img71').click()">
+                        <img id="preview71">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img71" accept="image/*" onchange="loadImage(this, 'preview71')">
+                    <div class="image-label">Wrist - Coronal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img72').click()">
+                        <img id="preview72">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img72" accept="image/*" onchange="loadImage(this, 'preview72')">
+                    <div class="image-label">Wrist - Axial Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img73').click()">
+                        <img id="preview73">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img73" accept="image/*" onchange="loadImage(this, 'preview73')">
+                    <div class="image-label">Wrist - Coronal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img74').click()">
+                        <img id="preview74">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img74" accept="image/*" onchange="loadImage(this, 'preview74')">
+                    <div class="image-label">Wrist - Sagittal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img75').click()">
+                        <img id="preview75">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img75" accept="image/*" onchange="loadImage(this, 'preview75')">
+                    <div class="image-label">Hand - Coronal View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img76').click()">
+                        <img id="preview76">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img76" accept="image/*" onchange="loadImage(this, 'preview76')">
+                    <div class="image-label">Hand - Practice Question</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img77').click()">
+                        <img id="preview77">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img77" accept="image/*" onchange="loadImage(this, 'preview77')">
+                    <div class="image-label">Wrist - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>Hip Joint</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img78').click()">
+                        <img id="preview78">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img78" accept="image/*" onchange="loadImage(this, 'preview78')">
+                    <div class="image-label">Hip - Axial (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img79').click()">
+                        <img id="preview79">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img79" accept="image/*" onchange="loadImage(this, 'preview79')">
+                    <div class="image-label">Hip - Coronal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img80').click()">
+                        <img id="preview80">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img80" accept="image/*" onchange="loadImage(this, 'preview80')">
+                    <div class="image-label">Hip - Practice Question</div>
+                </div>
+            </div>
+
+            <h3>Knee Joint</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img81').click()">
+                        <img id="preview81">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img81" accept="image/*" onchange="loadImage(this, 'preview81')">
+                    <div class="image-label">Knee - Coronal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img82').click()">
+                        <img id="preview82">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img82" accept="image/*" onchange="loadImage(this, 'preview82')">
+                    <div class="image-label">Knee - Sagittal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img83').click()">
+                        <img id="preview83">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img83" accept="image/*" onchange="loadImage(this, 'preview83')">
+                    <div class="image-label">Knee - Coronal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img84').click()">
+                        <img id="preview84">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img84" accept="image/*" onchange="loadImage(this, 'preview84')">
+                    <div class="image-label">Knee - Sagittal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img85').click()">
+                        <img id="preview85">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img85" accept="image/*" onchange="loadImage(this, 'preview85')">
+                    <div class="image-label">Knee - Sagittal Study 2</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img86').click()">
+                        <img id="preview86">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img86" accept="image/*" onchange="loadImage(this, 'preview86')">
+                    <div class="image-label">Knee - Practice Question</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img87').click()">
+                        <img id="preview87">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img87" accept="image/*" onchange="loadImage(this, 'preview87')">
+                    <div class="image-label">Knee - Practice Question 2</div>
+                </div>
+            </div>
+
+            <h3>Ankle & Foot</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img88').click()">
+                        <img id="preview88">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img88" accept="image/*" onchange="loadImage(this, 'preview88')">
+                    <div class="image-label">Ankle - Coronal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img89').click()">
+                        <img id="preview89">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img89" accept="image/*" onchange="loadImage(this, 'preview89')">
+                    <div class="image-label">Ankle - Sagittal (Labeled)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img90').click()">
+                        <img id="preview90">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img90" accept="image/*" onchange="loadImage(this, 'preview90')">
+                    <div class="image-label">Ankle - Coronal Study</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img91').click()">
+                        <img id="preview91">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img91" accept="image/*" onchange="loadImage(this, 'preview91')">
+                    <div class="image-label">Ankle - Sagittal Study</div>
+                </div>
+            </div>
+
+            <h3>Long Bones & Additional MSK</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img92').click()">
+                        <img id="preview92">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img92" accept="image/*" onchange="loadImage(this, 'preview92')">
+                    <div class="image-label">Femur - Coronal View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img93').click()">
+                        <img id="preview93">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img93" accept="image/*" onchange="loadImage(this, 'preview93')">
+                    <div class="image-label">Tibia - Coronal View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img94').click()">
+                        <img id="preview94">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img94" accept="image/*" onchange="loadImage(this, 'preview94')">
+                    <div class="image-label">Brachial Plexus - Coronal</div>
+                </div>
+
+                <!-- Additional slots for extra MSK images -->
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img95').click()">
+                        <img id="preview95">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img95" accept="image/*" onchange="loadImage(this, 'preview95')">
+                    <div class="image-label">Extra MSK Image 1</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img96').click()">
+                        <img id="preview96">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img96" accept="image/*" onchange="loadImage(this, 'preview96')">
+                    <div class="image-label">Extra MSK Image 2</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img97').click()">
+                        <img id="preview97">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img97" accept="image/*" onchange="loadImage(this, 'preview97')">
+                    <div class="image-label">Extra MSK Image 3</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img98').click()">
+                        <img id="preview98">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img98" accept="image/*" onchange="loadImage(this, 'preview98')">
+                    <div class="image-label">Extra MSK Image 4</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img99').click()">
+                        <img id="preview99">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img99" accept="image/*" onchange="loadImage(this, 'preview99')">
+                    <div class="image-label">Extra MSK Image 5</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img100').click()">
+                        <img id="preview100">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img100" accept="image/*" onchange="loadImage(this, 'preview100')">
+                    <div class="image-label">Extra MSK Image 6</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img101').click()">
+                        <img id="preview101">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img101" accept="image/*" onchange="loadImage(this, 'preview101')">
+                    <div class="image-label">Extra MSK Image 7</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img102').click()">
+                        <img id="preview102">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img102" accept="image/*" onchange="loadImage(this, 'preview102')">
+                    <div class="image-label">Extra MSK Image 8</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img103').click()">
+                        <img id="preview103">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img103" accept="image/*" onchange="loadImage(this, 'preview103')">
+                    <div class="image-label">Extra MSK Image 9</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== CARDIAC SECTION ========== -->
+        <div class="section" id="cardiac">
+            <h2>❤️ 6. Cardiac Imaging</h2>
+            
+            <h3>Heart - Standard Cardiac Views</h3>
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img104').click()">
+                        <img id="preview104">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img104" accept="image/*" onchange="loadImage(this, 'preview104')">
+                    <div class="image-label">Heart - Horizontal Long Axis (4-Chamber)</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img105').click()">
+                        <img id="preview105">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img105" accept="image/*" onchange="loadImage(this, 'preview105')">
+                    <div class="image-label">Heart - Short Axis View</div>
+                </div>
+
+                <div class="image-card">
+                    <div class="image-placeholder" onclick="document.getElementById('img106').click()">
+                        <img id="preview106">
+                        <div class="placeholder-text">Click to add<br><span class="upload-btn">Browse Files</span></div>
+                    </div>
+                    <input type="file" id="img106" accept="image/*" onchange="loadImage(this, 'preview106')">
+                    <div class="image-label">Cardiac - Practice Question</div>
+                </div>
+            </div>
+        </div>
+
+        <footer style="text-align: center; padding: 30px; margin-top: 60px; border-top: 3px solid #764ba2; color: #667eea;">
+            <strong style="font-size: 1.3em;">🌟 MRI Registry Exam Study Guide 🌟</strong>
+            <br><br>
+            <em>Complete Interactive Reference - 106 Image Slots</em>
+            <br><br>
+            <strong style="font-size: 1.2em;">Good luck on your exam! 🎓</strong>
+        </footer>
+    </div>
+
+    <script>
+        let loadedCount = 0;
+        const totalImages = 106;
+
+        function loadImage(input, previewId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    const placeholder = img.parentElement;
+                    
+                    // Check if this is a new image (not replacing)
+                    const isNewImage = !placeholder.classList.contains('has-image');
+                    
+                    img.src = e.target.result;
+                    placeholder.classList.add('has-image');
+                    
+                    if (isNewImage) {
+                        loadedCount++;
+                        updateProgress();
+                    }
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function updateProgress() {
+            const percentage = Math.round((loadedCount / totalImages) * 100);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = `${loadedCount} of ${totalImages} images loaded (${percentage}%)`;
+        }
+    </script>
+</body>
+</html>
